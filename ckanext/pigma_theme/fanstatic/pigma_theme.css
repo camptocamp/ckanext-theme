@@ -1,0 +1,153 @@
+
+.dataset-heading {
+    border-bottom: dotted 1px #ddd;
+    padding-bottom: 0px;
+    font-size: 15px;
+}
+
+.dataset-item {
+    border-bottom: none;
+    border-left: 2px solid #0072bc;
+    padding: 10px 10px !important;
+    margin-bottom: 35px;
+    border-radius: 3px;
+    background: #f9f9f9;
+    position: relative;
+}
+
+.dataset-item-content {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.dataset-item-content .dataset-heading {
+    text-overflow:ellipsis;
+    overflow-x:hidden;
+    white-space:nowrap;
+    width: calc(100% - 50px);
+}
+
+.dataset-item-content.text {
+    width: calc(100% - 145px);
+    padding-left: 20px;
+}
+
+.secondary .nav-facet, .secondary .module-content {
+    background: #ffffff;
+}
+
+
+.secondary .nav-facet .nav-item a:hover {
+    background-color: #0072bc26;
+    color: #0072bc;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.nav-item.active>a span, .nav-aside li.active a span {
+    display: inline;
+    white-space: normal;
+}
+
+
+.nav-item.active>a:before, .nav-aside li.active a:before {
+    background-image: none;
+}
+
+
+.search-form .search-input.search-giant button {
+    margin-top: -14px;
+    right: 10px;
+}
+
+/*** Image dataset  ***/
+.dataset-item-content.image {
+    height: 140px;
+    width: 140px;
+	text-align: center;
+    white-space: nowrap;
+    margin-left: auto;
+    margin-right: auto;
+}
+.dataset-item-content.image:before {
+	content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+.dataset-item-content.image img.dataset-thematic {
+    clip-path: inset(0px 0px 130px 0px);
+    margin-top: 25%;
+}
+.dataset-item-content.image img.dataset-thumbnail {
+    vertical-align: middle;    
+    max-height: 100%;
+}
+
+/*** Tags clickables - Type de donnees ***/
+.label[data-format=donnees-ouvertes] {
+    background-color: #FF6660;
+}
+.label[data-format=donnees-geographiques] {
+    background-color: #0072bc;
+}
+.label[data-format=donnees-intelligentes] {
+    background-color: #FFBA13;
+}
+
+.dataset-format a {
+    background: #999999 !important;
+}
+
+
+/*** Tag tracking_summary - Ressources ***/
+.label.label-tracking {
+    background: #fbb900;
+    color: #000000;
+}
+
+/*** Bandeau lateral - Support ***/
+.banner-support-wrap {
+    position: absolute;
+    right: 0;
+    top: 0;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    cursor: default;
+}
+
+
+.banner-support {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-transform-origin: top left;
+    -moz-transform-origin: top left;
+    -ms-transform-origin: top left;
+    -o-transform-origin: top left;
+    transform-origin: top left;
+    position: absolute;
+    right: 0;
+    width: 120px;
+    height: 21px;
+    line-height: 22px;
+    text-align: center;
+    top: -18px;
+    right: -54px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    background-color: transparent;
+}
+
+.banner-support[data-format=region-paca] {
+    background-color: #fc7300;
+}
+.banner-support[data-format=crige-paca] {
+    background-color: #6e53b2;
+}
+
+

@@ -1,0 +1,113 @@
+{#
+Displays a single of dataset.
+
+package        - A package to display.
+item_class     - The class name to use on the list item.
+hide_resources - If true hides the resources (default: false).
+banner         - If true displays a popular banner (default: false).
+truncate       - The length to trucate the description to (default: 180)
+truncate_title - The length to truncate the title to (default: 80).
+
+Example:
+
+  {% snippet 'snippets/package_item.html', package=c.datasets[0] %}
+
+#}
+{% set truncate = truncate or 180 %}
+{% set truncate_title = truncate_title or 80 %}
+{% set title = package.title or package.name %}
+{% set notes = h.markdown_extract(package.notes, extract_length=truncate) %}
+
+{% block package_item %}
+  <li class="{{ item_class or "dataset-item" }}">
+    <div class="dataset-item-content image">
+      {% if package.thumbnail %}
+      <img class="dataset-thumbnail" src="{{ package.thumbnail }}">
+      {% elif package.groups %}
+        <img class="dataset-thematic" src="{{ package.groups[0].image_display_url }}">
+      {% else %}
+        <img class="dataset-thumbnail" src="">
+      {% endif %}
+    </div>
+    <div class="dataset-item-content text">
+    {% block content %}
+      <div class="dataset-content">
+        {% block heading %}
+          <h3 class="dataset-heading">
+            {% block heading_private %}
+              {% if package.private %}
+                <span class="dataset-private label label-inverse">
+                  <i class="fa fa-lock"></i>
+                  {{ _('Private') }}
+                </span>
+              {% endif %}
+            {% endblock %}
+            {% block heading_title %}
+              {{ h.link_to(h.truncate(title, truncate_title), h.url_for(controller='package', action='read', id=package.name)) }}
+            {% endblock %}
+            {% block heading_meta %}
+              {% if package.get('state', '').startswith('draft') %}
+                <span class="label label-info">{{ _('Draft') }}</span>
+              {% elif package.get('state', '').startswith('deleted') %}
+                <span class="label label-important">{{ _('Deleted') }}</span>
+              {% endif %}
+              {{ h.popular('recent views', package.tracking_summary.recent, min=10) if package.tracking_summary }}
+            {% endblock %}
+            {% if package.organization.title %}
+              <div class="dataset-item-organization-title">
+                  <i class="fa fa-building-o" aria-hidden="true"></i> {{ package.organization.title }}
+              </div>
+            {% endif %}
+          </h3>
+        {% endblock %}
+        {% block banner %}
+          {% if banner %}
+            <span class="banner">{{ _('Popular') }}</span>
+          {% endif %}
+        {% endblock %}
+        {% block notes %}
+          {% if notes %}
+            <div>{{ notes|urlize }}</div>
+          {% else %}
+            <p class="empty">{{ _("This dataset has no description") }}</p>
+          {% endif %}
+        {% endblock %}
+      </div>
+      {% block resources %}
+        {% if package.resources and not hide_resources %}
+          {% block resources_outer %}
+            <ul class="dataset-resources unstyled">
+                {% for resource in h.dict_list_reduce(package.resources, 'format') %}
+                <li class="dataset-format">
+                  <a href="{{ h.url_for(controller='package', action='read', id=package.name) }}" class="label" data-format="{{ resource.lower() }}">{{ resource }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+          {% endblock %}
+        {% endif %}
+      {% endblock %}
+      <ul class="dataset-resources unstyled">
+        {% for resource in package.datatype %}
+          {% set schema = h.scheming_get_dataset_schema('dataset') %}
+          <li class="dataset-datatype">
+            <a href="{{ h.url_for(controller='package', action='read', id=package.name) }}" class="label" data-format="{{ resource.lower() }}">
+            {% for field in schema.dataset_fields if field.field_name == 'datatype' %}
+              {% for choice in field.choices if choice.value == resource %}
+                {{ choice.label }}
+              {% endfor %}
+            {% endfor %}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endblock %}
+
+	  <div class="banner-support-wrap">
+		<span class="banner-support" data-format="region-paca">
+      test
+		</span>
+	  </div>
+	</div>
+  </li>
+{% endblock %}
+
