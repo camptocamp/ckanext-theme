@@ -76,7 +76,7 @@
     vertical-align: middle;
 }
 .dataset-item-content.image img.dataset-thematic {
-    clip-path: inset(0px 0px 130px 0px);
+    /* clip-path: inset(0px 0px 130px 0px); */
     margin-top: 25%;
 }
 .dataset-item-content.image img.dataset-thumbnail {
