@@ -1,0 +1,417 @@
+{
+	"scheming_version": 1,
+	"dataset_type": "dataset",
+	"dataset_fields": [
+	{
+		"field_name": "title",
+		"label": "Titre",
+		"preset": "title"
+	},
+	{
+		"field_name": "thumbnail",
+		"label": "Imagette",
+		"display_snippet": null
+	},
+	{
+		"field_name": "name",
+		"label": "URL",
+		"preset": "dataset_slug"
+	},
+	{
+		"field_name": "notes",
+		"label": "Description",
+		"form_snippet": "markdown.html"
+	},
+	{
+		"field_name": "inspire_url",
+		"label": "URL de la fiche INSPIRE",
+		"display_property": "foaf:homepage",
+		"display_snippet": "default_link.html"
+	},
+	{
+		"field_name": "tag_string",
+		"label": "Tags",
+		"preset": "tag_string_autocomplete"
+	},
+	{
+		"field_name": "geocover",
+		"label": "Couverture géographique",
+		"preset": "select",
+		"form_include_blank_choice": false,
+		"required": false,
+		"choices": [
+		{
+			"value": null,
+			"label": "Indéfinie"
+		},
+		{
+			"value": "regionale",
+			"label": "Régionale"
+		},
+		{
+			"value": "jurisdiction",
+			"label": "Territoire de compétence"
+		}]
+	},
+	{
+		"field_name": "granularity",
+		"label": "Granularité de la couverture territoriale",
+		"preset": "select",
+		"form_include_blank_choice": false,
+		"required": false,
+		"choices": [{
+			"value": "indefinie",
+			"label": "Indéfinie"
+		}, {
+			"value": "region",
+			"label": "Région"
+		}, {
+			"value": "departement",
+			"label": "Département"
+		}, {
+			"value": "epci",
+			"label": "Intercommunalité (EPCI)"
+		}, {
+			"value": "commune",
+			"label": "Commune"
+		}, {
+			"value": "iris",
+			"label": "IRIS (quartiers INSEE)"
+		}, {
+			"value": "parcelle-cadastrale",
+			"label": "Parcelle cadastrale"
+		}, {
+			"value": "poi",
+			"label": "Point d’interêt (POI)"
+		}]
+	},
+	{
+		"field_name": "dataset_creation_date",
+		"label": "Date de création",
+		"preset": "date"
+	},
+	{
+		"field_name": "dataset_publication_date",
+		"label": "Date de publication",
+		"preset": "date"
+	},
+	{
+		"field_name": "dataset_modification_date",
+		"label": "Date de dernière modification",
+		"preset": "date"
+	},
+	{
+		"field_name": "update_frequency",
+		"label": "Fréquence de mise à jour",
+		"preset": "select",
+		"form_include_blank_choice": false,
+		"required": true,
+		"choices": [
+		{
+			"value": "asneeded",
+			"label": "Lorsque nécessaire"
+		},
+		{
+			"value": "never",
+			"label": "Non planifiée"
+		},
+		{
+			"value": "intermittently",
+			"label": "Irrégulière"
+		},
+		{
+			"value": "continuously",
+			"label": "Continue"
+		},
+		{
+			"value": "realtime",
+			"label": "Temps réel"
+		},
+		{
+			"value": "daily",
+			"label": "Journalière"
+		},
+		{
+			"value": "weekly",
+			"label": "Hebdomadaire"
+		},
+		{
+			"value": "fortnightly",
+			"label": "Bi-mensuelle"
+		},
+		{
+			"value": "monthly",
+			"label": "Mensuelle"
+		},
+		{
+			"value": "quarterly",
+			"label": "Trimestrielle"
+		},
+		{
+			"value": "semiannual",
+			"label": "Bi-annuelle"
+		},
+		{
+			"value": "annual",
+			"label": "Annuelle"
+		},
+		{
+			"value": "unknow",
+			"label": "Inconnue"
+		}]
+	},
+	{
+		"field_name": "datatype",
+		"label": "Type de données",
+		"preset": "multiple_checkbox",
+		"choices": [
+		{
+			"value": "donnees-ouvertes",
+			"label": "Données ouvertes"
+		},
+		{
+			"value": "donnees-intelligentes",
+			"label": "Données intelligentes"
+		},
+		{
+			"value": "donnees-geographiques",
+			"label": "Données géographiques"
+		},
+		{
+			"value": "donnees-moissonnees",
+			"label": "Données moissonnées"
+		}]
+	},
+	{
+		"field_name": "support",
+		"label": "Support Technique",
+		"form_include_blank_choice": true,
+		"preset": "select",
+		"require": false,
+		"choices": [
+		{
+			"value": "crige-paca",
+			"label": "CRIGE PACA"
+		},
+		{
+			"value": "region-paca",
+			"label": "Région Sud"
+		}]
+	},
+	{
+		"field_name": "license_id",
+		"label": "License",
+		"form_snippet": "license.html"
+	},
+	{
+		"field_name": "owner_org",
+		"label": "Organisation",
+		"preset": "dataset_organization"
+	},
+	{
+		"field_name": "author",
+		"label": "Propriétaire",
+		"form_placeholder": "Joe Bloggs",
+		"display_property": "dc:creator"
+	},
+	{
+		"field_name": "author_email",
+		"label": "E-mail du propriétaire",
+		"display_property": "dc:creator",
+		"display_snippet": "default_email.html",
+		"display_email_name_field": "author"
+	},
+	{
+		"field_name": "maintainer",
+		"label": "Diffuseur",
+		"form_placeholder": "Joe Bloggs",
+		"display_property": "dc:contributor"
+	},
+	{
+		"field_name": "maintainer_email",
+		"label": "E-mail du diffuseur",
+		"form_placeholder": "contact@datasud.fr",
+		"display_property": "dc:contributor",
+		"display_snippet": "default_email.html",
+		"display_email_name_field": "maintainer"
+	},
+	{
+		"field_name": "ows",
+		"label": "Service Web OGC",
+		"preset": "select",
+		"form_include_blank_choice": false,
+		"required": false,
+		"display_snippet": null,
+		"choices": [
+		{
+			"value": "True",
+			"label": "Oui"
+		},
+		{
+			"value": "False",
+			"label": "Non"
+		}]
+	},
+	{
+		"field_name": "spatial",
+		"label": "Étendue géographique",
+		"display_snippet": null
+	},
+	{
+		"field_name": "remote_ckan_url",
+		"label": "Catalogue d'origine si différent",
+		"display_property": "foaf:homepage",
+		"display_snippet": "default_link.html"
+	}],
+	"resource_fields": [
+	{
+		"field_name": "url",
+		"label": "URL",
+		"preset": "resource_url_upload"
+	},
+	{
+		"field_name": "name",
+		"label": "Nom"
+	},
+	{
+		"field_name": "description",
+		"label": "Description",
+		"form_snippet": "markdown.html"
+	},
+	{
+		"field_name": "data_type",
+		"label": "Type de données",
+		"preset": "select",
+		"form_include_blank_choice": false,
+		"required": true,
+		"choices": [
+		{
+			"value": "raw",
+			"label": "Données brutes"
+		},
+		{
+			"value": "annexe",
+			"label": "Documentation associée"
+		},
+		{
+			"value": "service",
+			"label": "Service"
+		}]
+	},
+	{
+		"field_name": "lang",
+		"label": "Langue",
+		"preset": "select",
+		"form_include_blank_choice": false,
+		"required": true,
+		"choices": [
+		{
+			"value": "french",
+			"label": "Français"
+		},
+		{
+			"value": "english",
+			"label": "Anglais"
+		},
+		{
+			"value": "italian",
+			"label": "Italien"
+		},
+		{
+			"value": "german",
+			"label": "Allemand"
+		},
+		{
+			"value": "other",
+			"label": "Autre"
+		}]
+	},
+	{
+		"field_name": "format",
+		"label": "Format",
+		"preset": "resource_format_autocomplete"
+	},
+	{
+		"field_name": "crs",
+		"label": "CRS"
+	},
+	{
+		"field_name": "restricted",
+		"label": "Restriction d'accès",
+		"preset": "composite",
+		"subfields": [
+		{
+			"field_name": "level",
+			"label": "Niveau",
+			"preset": "select",
+			"form_include_blank_choice": false,
+			"required": true,
+			"choices": [
+			{
+				"value": "public",
+				"label": "Accès public"
+			},
+			{
+				"value": "registered",
+				"label": "Accès aux utilisateurs enregistrés"
+			},
+			{
+				"value": "any_organization",
+				"label": "Accès aux membres d'un organisme"
+			},
+			{
+				"value": "same_organization",
+				"label": "Accès aux membres de cet organisme."
+			},
+			{
+				"value": "only_allowed_users",
+				"label": "Utilisateurs spécifiés uniquement"
+			}]
+		},
+		{
+			"field_name": "allowed_users",
+			"label": "Utilisateurs autorisés",
+			"preset": "tag_string_autocomplete",
+			"data-module-source": "/api/2/util/user/autocomplete?q=?"
+		}]
+	},
+	{
+		"field_name": "restricted_by_jurisdiction",
+		"label": "Restriction d'accès au territoire de compétence",
+		"preset": "select",
+		"form_include_blank_choice": false,
+		"required": false,
+		"display_snippet": null,
+		"choices": [
+		{
+			"value": "True",
+			"label": "Oui"
+		},
+		{
+			"value": "False",
+			"label": "Non"
+		}]
+	},
+	{
+		"field_name": "extracting_service",
+		"label": "Service d'extraction",
+		"preset": "select",
+		"form_include_blank_choice": false,
+		"required": false,
+		"display_snippet": null,
+		"choices": [
+		{
+			"value": "True",
+			"label": "Oui"
+		},
+		{
+			"value": "False",
+			"label": "Non"
+		}]
+	},
+	{
+		"field_name": "getlegendgraphic",
+		"label": "Légende",
+		"display_snippet": null
+	}]
+}

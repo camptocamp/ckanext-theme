@@ -1,0 +1,130 @@
+{
+    "about": "these are the default scheming field presets",
+    "about_url": "http://github.com/ckan/ckanext-scheming#preset",
+    "presets": [
+        {
+            "preset_name": "title",
+            "values": {
+                "form_attrs": {
+                    "data-module": "slug-preview-target"
+                },
+                "form_snippet": "large_text.html",
+                "validators": "if_empty_same_as(name) unicode"
+            }
+        },
+        {
+            "preset_name": "dataset_slug",
+            "values": {
+                "form_snippet": "slug.html",
+                "validators": "not_empty unicode name_validator package_name_validator"
+            }
+        },
+        {
+            "preset_name": "tag_string_autocomplete",
+            "values": {
+                "form_attrs": {
+                    "data-module": "autocomplete",
+                    "data-module-source": "/api/2/util/tag/autocomplete?incomplete=?",
+                    "data-module-tags": ""
+                },
+                "validators": "ignore_missing tag_string_convert"
+            }
+        },
+        {
+            "preset_name": "dataset_organization",
+            "values": {
+                "form_snippet": "organization.html",
+                "validators": "owner_org_validator unicode"
+            }
+        },
+        {
+            "preset_name": "resource_url_upload",
+            "values": {
+                "form_placeholder": "http://example.com/my-data.csv",
+                "form_snippet": "upload.html",
+                "upload_clear": "clear_upload",
+                "upload_field": "upload",
+                "upload_label": "File",
+                "validators": "not_empty unicode remove_whitespace"
+            }
+        },
+        {
+            "preset_name": "resource_format_autocomplete",
+            "values": {
+                "form_attrs": {
+                    "data-module": "autocomplete",
+                    "data-module-source": "/api/2/util/resource/format_autocomplete?incomplete=?"
+                },
+                "form_placeholder": "eg. CSV, XML or JSON",
+                "validators": "if_empty_guess_format ignore_missing clean_format unicode"
+            }
+        },
+        {
+            "preset_name": "select",
+            "values": {
+                "display_snippet": "select.html",
+                "form_snippet": "select.html",
+                "validators": "scheming_required scheming_choices"
+            }
+        },
+        {
+            "preset_name": "multiple_checkbox",
+            "values": {
+                "display_snippet": "multiple_choice.html",
+                "form_snippet": "multiple_checkbox.html",
+                "output_validators": "scheming_multiple_choice_output",
+                "validators": "scheming_multiple_choice"
+            }
+        },
+        {
+            "preset_name": "multiple_select",
+            "values": {
+                "display_snippet": "multiple_choice.html",
+                "form_snippet": "multiple_select.html",
+                "output_validators": "scheming_multiple_choice_output",
+                "validators": "scheming_multiple_choice"
+            }
+        },
+        {
+            "preset_name": "date",
+            "values": {
+                "display_snippet": "date.html",
+                "form_snippet": "date.html",
+                "validators": "scheming_required isodate convert_to_json_if_date"
+            }
+        },
+        {
+            "preset_name": "datetime",
+            "values": {
+                "display_snippet": "datetime.html",
+                "form_snippet": "datetime.html",
+                "validators": "scheming_isodatetime convert_to_json_if_datetime"
+            }
+        },
+        {
+            "preset_name": "datetime_tz",
+            "values": {
+                "display_snippet": "datetime_tz.html",
+                "form_snippet": "datetime_tz.html",
+                "validators": "scheming_isodatetime_tz convert_to_json_if_datetime"
+            }
+        },
+        {
+            "preset_name": "composite",
+            "values": {
+                "display_snippet": "composite.html",
+                "form_snippet": "composite.html",
+                "validators": "composite_group2json"
+            }
+        },
+        {
+            "preset_name": "composite_repeating",
+            "values": {
+                "display_snippet": "composite_repeating.html",
+                "form_snippet": "composite_repeating.html",
+                "validators": "composite_repeating_group2json"
+            }
+        }
+    ],
+    "scheming_presets_version": 1
+}
