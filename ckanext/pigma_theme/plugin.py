@@ -1,6 +1,7 @@
 # coding: utf8
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
+from ckan.plugins.toolkit import _
 
 from collections import OrderedDict
 from json import loads
@@ -19,17 +20,16 @@ class Pigma_ThemePlugin(plugins.SingletonPlugin):
 
     # IFacets
     def dataset_facets(self, facets_dict, package_type):
-        # Ajouter les filtres, dans l'ordre d'affichage sur la page
         return OrderedDict([
-            ('organization', u'Organisations'),
-            ('groups', u'Thématiques'),
-            ('datatype', u'Types'),
-            ('support', u'Supports'),
-            ('res_format', u'Formats'),
-            ('license_id', u'Licences'),
-            ('tags', u'Mots-clés'),
-            ('update_frequency', u'Fréquence de mise à jour'),
-            ('granularity', u'Granularité de la couverture territoriale'),
+            ('organization', _(u'Organisations')),
+            ('groups', _(u'Thématiques')),
+            ('datatype', _(u'Types')),
+            ('support', _(u'Supports')),
+            ('res_format', _(u'Formats')),
+            ('license_id', _(u'Licences')),
+            ('tags', _(u'Mots-clés')),
+            ('update_frequency', _(u'Fréquence de mise à jour')),
+            ('granularity', _(u'Granularité de la couverture territoriale')),
             ])
 
     # IPackageController
