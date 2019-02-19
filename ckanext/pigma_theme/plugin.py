@@ -3,11 +3,13 @@ import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 
 from collections import OrderedDict
+from json import loads
 
 
 class Pigma_ThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IFacets, inherit=True)
+    plugins.implements(plugins.IPackageController, inherit=True)
 
     # IConfigurer
     def update_config(self, config_):
@@ -29,3 +31,8 @@ class Pigma_ThemePlugin(plugins.SingletonPlugin):
             ('update_frequency', u'Fréquence de mise à jour'),
             ('granularity', u'Granularité de la couverture territoriale'),
             ])
+
+    # IPackageController
+    def before_index(self, pkg_dict):
+        pkg_dict['datatype'] = loads(pkg_dict.get('datatype', '[]'))
+        return pkg_dict
