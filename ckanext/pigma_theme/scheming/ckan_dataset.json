@@ -97,7 +97,7 @@
 	},
 	{
 		"field_name": "dataset_modification_date",
-		"label": "Date de dernière modification",
+		"label": "Date de mise à jour",
 		"preset": "date"
 	},
 	{
@@ -106,22 +106,14 @@
 		"preset": "select",
 		"form_include_blank_choice": false,
 		"required": true,
-		"choices": [
-		{
-			"value": "asneeded",
-			"label": "Lorsque nécessaire"
-		},
-		{
-			"value": "never",
-			"label": "Non planifiée"
-		},
+    "choices": [
+    {
+      "value": "unknow",
+      "label": "Inconnue"
+    },
 		{
 			"value": "intermittently",
-			"label": "Irrégulière"
-		},
-		{
-			"value": "continuously",
-			"label": "Continue"
+			"label": "Ponctuelle"
 		},
 		{
 			"value": "realtime",
@@ -129,19 +121,19 @@
 		},
 		{
 			"value": "daily",
-			"label": "Journalière"
+			"label": "Quotidienne"
 		},
 		{
 			"value": "weekly",
 			"label": "Hebdomadaire"
 		},
 		{
-			"value": "fortnightly",
-			"label": "Bi-mensuelle"
-		},
-		{
 			"value": "monthly",
 			"label": "Mensuelle"
+		},
+		{
+			"value": "fortnightly",
+			"label": "Bi-mensuelle"
 		},
 		{
 			"value": "quarterly",
@@ -149,16 +141,13 @@
 		},
 		{
 			"value": "semiannual",
-			"label": "Bi-annuelle"
+			"label": "Semestrielle"
 		},
 		{
 			"value": "annual",
 			"label": "Annuelle"
-		},
-		{
-			"value": "unknow",
-			"label": "Inconnue"
-		}]
+		}
+		]
 	},
 	{
 		"field_name": "datatype",
