@@ -224,4 +224,35 @@
     padding: .4em .6em;
     font-size: 1em;
     line-height: 1em;
+}élément {
+
+}
+.module:first-child .module-heading {
+
+    border-radius: 3px 0 0 0;
+    border-top-width: 0;
+
+}
+.module-narrow .module-heading, .module-narrow .module-content, .module-narrow .module-footer {
+
+    padding-left: 15px;
+    padding-right: 15px;
+
+}
+.module-heading {
+
+    margin: 0;
+    padding: 10px 25px;
+        padding-right: 25px;
+        padding-left: 25px;
+    font-size: 14px;
+    line-height: 1.3;
+    background-color: #f6f6f6;
+    border-top: 1px solid #dddddd;
+        border-top-width: 1px;
+    border-bottom: 1px solid #dddddd;
+
+}
+h2 {
+    font-weight: 700;
 }
