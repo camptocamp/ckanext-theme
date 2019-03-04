@@ -1,3 +1,8 @@
+.wrapper {
+    background: none;
+    border: 0;
+    box-shadow: 0 0 0;
+}
 
 .dataset-heading {
     border-bottom: dotted 1px #ddd;
