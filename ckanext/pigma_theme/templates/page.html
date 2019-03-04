@@ -51,7 +51,6 @@
             rendering of the main content columns of the page.
             #}
             {% block pre_primary %}
-                {% include "ckan_search.html" %}
             {% endblock %}
 
             {% block secondary %}
@@ -86,6 +85,7 @@
                   {% endblock %}
                 #}
                 {% block primary_content %}
+                  {% include "ckan_search.html" %}
                   <article class="module">
                     {% block page_header %}
                       <header class="module-content page-header">
