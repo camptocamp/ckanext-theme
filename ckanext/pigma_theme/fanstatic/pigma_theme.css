@@ -197,3 +197,6 @@
     border: 0;
 }
 
+.module-heading .action:hover {
+    color: #0072bc;
+}
