@@ -1,3 +1,8 @@
+.wrapper {
+    background: none;
+    border: 0;
+    box-shadow: 0 0 0;
+}
 
 .dataset-heading {
     border-bottom: dotted 1px #ddd;
@@ -34,7 +39,6 @@
 
 .secondary .nav-facet, .secondary .module-content {
     background: #ffffff;
-    padding: 0 30px 30px;
 }
 
 
@@ -158,4 +162,8 @@
 }
 .banner-support[data-format=gironde-numerique] {
     background-color: #EC6574;
+}
+
+.module-content {
+    padding: 0 30px 30px;
 }
