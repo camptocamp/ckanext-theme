@@ -200,3 +200,10 @@
 .module-heading .action:hover {
     color: #0072bc;
 }
+
+.badge {
+    margin-left: 5px;
+}
+.dataset-item-organization-title {
+    margin-bottom: 8px;
+}
