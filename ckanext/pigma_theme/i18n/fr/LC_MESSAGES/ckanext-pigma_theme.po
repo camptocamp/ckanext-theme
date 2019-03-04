@@ -1,0 +1,80 @@
+# French translations for ckanext-pigma_theme.
+# Copyright (C) 2019 ORGANIZATION
+# This file is distributed under the same license as the ckanext-pigma_theme
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ckanext-pigma_theme 0.0.1\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2019-02-20 16:33+0100\n"
+"PO-Revision-Date: 2019-02-20 16:33+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: fr\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+
+#: ckanext/pigma_theme/plugin.py:24
+msgid "Themes"
+msgstr "Thèmes"
+
+#: ckanext/pigma_theme/plugin.py:25
+msgid "Keywords"
+msgstr "Mot clefs"
+
+#: ckanext/pigma_theme/plugin.py:26
+msgid "Types"
+msgstr ""
+
+#: ckanext/pigma_theme/plugin.py:27
+msgid "Update frequency"
+msgstr "Fréquence de la mise à jour"
+
+#: ckanext/pigma_theme/plugin.py:28
+msgid "Granularity"
+msgstr "Granularité de la couverture territoriale"
+
+#: ckanext/pigma_theme/plugin.py:29
+msgid "Organizations"
+msgstr "Organisations"
+
+#: ckanext/pigma_theme/templates/snippets/facet_list.html:83
+msgid "Show More {facet_type}"
+msgstr ""
+
+#: ckanext/pigma_theme/templates/snippets/facet_list.html:86
+msgid "Show Only Popular {facet_type}"
+msgstr ""
+
+#: ckanext/pigma_theme/templates/snippets/facet_list.html:90
+msgid "There are no {facet_type} that match this search"
+msgstr ""
+
+#: ckanext/pigma_theme/templates/snippets/package_item.html:41
+msgid "Private"
+msgstr ""
+
+#: ckanext/pigma_theme/templates/snippets/package_item.html:50
+msgid "Draft"
+msgstr ""
+
+#: ckanext/pigma_theme/templates/snippets/package_item.html:52
+msgid "Deleted"
+msgstr ""
+
+#: ckanext/pigma_theme/templates/snippets/package_item.html:65
+msgid "Popular"
+msgstr ""
+
+#: ckanext/pigma_theme/templates/snippets/package_item.html:72
+msgid "This dataset has no description"
+msgstr ""
+
+msgid "donnees-ouvertes"
+msgstr "Données ouvertes"
+
