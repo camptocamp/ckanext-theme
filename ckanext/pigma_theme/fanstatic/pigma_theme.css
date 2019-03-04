@@ -201,20 +201,25 @@
     color: #0072bc;
 }
 .module-narrow .nav-item a {
+    display: flex;
+    /*! height: auto; */
+    /*! line-height: 1em; */
+}
+.module-narrow .nav-item a span {
+    /*! float: left; */
 }
 .badge {
     background-color: #0072bc;
-    margin-left: 5px;
     font-style: normal;
-    line-height: 1.2em;
+    line-height: 1em;
     font-size: 1em;
-    padding: 0;
+    padding: 0 0 2px 0;
     display: flex;
-    margin: 0;
+    margin: 0 0 0 10px;
     width:1.2em;
     align-items: center;
     justify-content: center;
-    float: right;
+    height: 1.2em;
 }
 .dataset-item-organization-title {
     margin-top: 8px;
