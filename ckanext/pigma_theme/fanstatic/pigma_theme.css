@@ -165,7 +165,7 @@
 }
 
 #recherche .form_search {
-    background-color: none;
+    background: none;
 }
 
 .wrapper::before {
