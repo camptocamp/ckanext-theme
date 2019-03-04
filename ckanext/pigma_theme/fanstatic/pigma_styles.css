@@ -200,11 +200,13 @@ footer {
 }
 #recherche .form_search #searchsubmit {
     background-color: #0072bc;
+    /*
     background-image: url(../images/svg/loupe.svg);
     background-repeat: no-repeat;
     background-position: center;
     box-shadow: none;
     color: transparent;
+    */
     height: auto;
     width: 85px;
     border: 0;
@@ -213,6 +215,10 @@ footer {
     -moz-transition: all 0.4s ease;
     -o-transition: all 0.4s ease;
     transition: all 0.4s ease;
+}
+#recherche .form_search #searchsubmit i {
+    color: #fff;
+    font-size: 28px;
 }
 #recherche .form_search #searchsubmit:hover{
     opacity: 0.9;
