@@ -207,3 +207,9 @@
 .dataset-item-organization-title {
     margin-top: 8px;
 }
+.label {
+    display: inline-block;
+    padding: .2em .6em;
+    font-size: 1em;
+    line-height: 1em;
+}
