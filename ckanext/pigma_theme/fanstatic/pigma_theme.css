@@ -167,3 +167,7 @@
 .module-content {
     padding: 0 30px 30px;
 }
+
+#dataset-map {
+    margin-bottom: 15px;
+}
