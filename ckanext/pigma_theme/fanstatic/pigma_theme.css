@@ -166,6 +166,8 @@
 
 #recherche .form_search {
     background: none;
+    margin: 0;
+    padding: 0; 
 }
 
 .wrapper::before {
