@@ -167,14 +167,13 @@
 #recherche .form_search {
     background: none;
     margin: 0;
-    padding: 0; 
 }
 
 .wrapper::before {
     display: none;
 }
 
-.module-content {
+.module-content, #recherche .form_search  {
     padding: 0 30px 30px;
 }
 
