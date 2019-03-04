@@ -200,10 +200,21 @@
 .module-heading .action:hover {
     color: #0072bc;
 }
-
+.module-narrow .nav-item a {
+}
 .badge {
+    background-color: #0072bc;
     margin-left: 5px;
     font-style: normal;
+    line-height: 1.2em;
+    font-size: 1em;
+    padding: 0;
+    display: flex;
+    margin: 0;
+    width:1.2em;
+    align-items: center;
+    justify-content: center;
+    float: right;
 }
 .dataset-item-organization-title {
     margin-top: 8px;
