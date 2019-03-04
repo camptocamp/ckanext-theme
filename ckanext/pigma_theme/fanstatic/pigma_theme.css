@@ -189,9 +189,11 @@
 .btn {
     padding: 1.4rem 6rem;
     font-size: 1.2em;
+    border: 0;
 }
 .btn:hover, .btn:focus {
     background-color: #0072bc;
     color: white;
+    border: 0;
 }
 
