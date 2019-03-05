@@ -37,6 +37,10 @@
     padding-left: 20px;
 }
 
+.filters .nav-facet {
+  flex-flow: column nowrap;
+}
+
 .secondary .nav-facet, .secondary .module-content {
     background: #ffffff;
 }
