@@ -41,7 +41,7 @@
   flex-flow: column nowrap;
 }
 
-.secondary .nav-facet, .secondary .module-content {
+.secondary .nav-facet, .secondary .module-content, .primary article.module {
     background: #ffffff;
 }
 
