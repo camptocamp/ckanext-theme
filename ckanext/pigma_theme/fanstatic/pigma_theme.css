@@ -265,3 +265,8 @@
 h2 {
     font-weight: 700;
 }
+
+.select2-container {
+  padding: 0;
+  border: 0;
+}
