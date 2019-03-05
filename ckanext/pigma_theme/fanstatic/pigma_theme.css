@@ -205,6 +205,12 @@
 .btn:after {
   display: none;
 }
+.btn-xs {
+  padding: 1px 5px;
+  text-transform: none;
+  font-weight: normal;
+  font-size: 85%;
+}
 
 .module-heading .action:hover {
     color: #0072bc;
