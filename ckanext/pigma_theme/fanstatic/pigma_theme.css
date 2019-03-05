@@ -270,3 +270,7 @@ h2 {
   padding: 0;
   border: 0;
 }
+
+[role=main] header .nav li a {
+  white-space: nowrap;
+}
