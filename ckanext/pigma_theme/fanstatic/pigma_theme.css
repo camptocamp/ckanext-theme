@@ -285,3 +285,7 @@ h2 {
 [role=main] header .nav li a {
   white-space: nowrap;
 }
+
+fieldset.checkboxes label input[type=checkbox] {
+  width: 1em;
+}
