@@ -196,6 +196,7 @@
     font-size: 1.2em;
     border: 0;
     display: inline-block;
+    font-size: 1.2rem;
 }
 .btn:hover, .btn:focus {
     background-color: #0072bc;
