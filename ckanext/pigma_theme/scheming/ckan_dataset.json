@@ -191,23 +191,23 @@
 		"choices": [
 		{
 			"value": "alpi",
-			"label": "Agence Landaise Pour l'Informatique"
+			"label": "ALPI"
 		},
 		{
 			"value": "na-mobilites",
-			"label": "Nouvelle-Aquitaine Mobilités"
+			"label": "N-A Mobilités"
 		},
 		{
 			"value": "cdg-47",
-			"label": "Centre de Gestion de la Fonction Publique Territoriale 47"
+			"label": "CDG 47"
 		},
 		{
 			"value": "atd-24",
-			"label": "Agence Technique Départementale 24"
+			"label": "ATD 24"
 		},
 		{
 			"value": "gironde-numerique",
-			"label": "Gironde Numérique"
+			"label": "Gironde Num."
 		}]
 	},
 	{
