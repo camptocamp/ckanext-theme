@@ -21,16 +21,18 @@ class Pigma_ThemePlugin(plugins.SingletonPlugin):
     # IFacets
     def dataset_facets(self, facets_dict, package_type):
         return OrderedDict([
-            ('organization', _(u'Organisations')),
-            ('groups', _(u'Thématiques')),
+            ('groups', _(u'Themes')),
+            ('keywords', _(u'Keywords')),
             ('datatype', _(u'Types')),
-            ('support', _(u'Supports')),
-            ('res_format', _(u'Formats')),
-            ('license_id', _(u'Licences')),
-            ('tags', _(u'Mots-clés')),
-            ('update_frequency', _(u'Fréquence de mise à jour')),
-            ('granularity', _(u'Granularité de la couverture territoriale')),
-            ])
+            ('update_frequency', _(u'Update frequency')),
+            ('granularity', _(u'Granularity')),
+            ('organization', _(u'Organizations')),
+            # ('support', _(u'Supports')),
+            # ('res_format', _(u'Formats')),
+            # ('license_id', _(u'Licences')),
+            # ('tags', _(u'Mots-clés')),
+              ])
+
 
     # IPackageController
     def before_index(self, pkg_dict):
