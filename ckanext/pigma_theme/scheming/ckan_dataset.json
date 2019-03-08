@@ -190,12 +190,24 @@
 		"require": false,
 		"choices": [
 		{
-			"value": "crige-paca",
-			"label": "CRIGE PACA"
+			"value": "alpi",
+			"label": "Agence Landaise Pour l'Informatique"
 		},
 		{
-			"value": "region-paca",
-			"label": "Région Sud"
+			"value": "na-mobilites",
+			"label": "Nouvelle-Aquitaine Mobilités"
+		},
+		{
+			"value": "cdg-47",
+			"label": "Centre de Gestion de la Fonction Publique Territoriale 47"
+		},
+		{
+			"value": "atd-24",
+			"label": "Agence Technique Départementale 24"
+		},
+		{
+			"value": "gironde-numerique",
+			"label": "Gironde Numérique"
 		}]
 	},
 	{

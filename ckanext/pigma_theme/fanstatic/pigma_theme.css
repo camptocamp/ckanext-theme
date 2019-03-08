@@ -80,7 +80,7 @@
     margin-top: 25%;
 }
 .dataset-item-content.image img.dataset-thumbnail {
-    vertical-align: middle;    
+    vertical-align: middle;
     max-height: 100%;
 }
 
@@ -143,11 +143,18 @@
     background-color: transparent;
 }
 
-.banner-support[data-format=region-paca] {
-    background-color: #fc7300;
+.banner-support[data-format=alpi] {
+    background-color: #2376A5;
 }
-.banner-support[data-format=crige-paca] {
-    background-color: #6e53b2;
+.banner-support[data-format=na-mobilites] {
+    background-color: #4B2B74;
 }
-
-
+.banner-support[data-format=cdg-47] {
+    background-color: #4F1C4E;
+}
+.banner-support[data-format=atd-24] {
+    background-color: #7C9A22;
+}
+.banner-support[data-format=gironde-numerique] {
+    background-color: #EC6574;
+}
