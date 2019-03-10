@@ -169,7 +169,7 @@
     background-color: #EC6574;
 }
 
-#recherche .form_search, #recherche .form_search .field {
+#dataset-search-form .form_search, #dataset-search-form .form_search .field {
     background: none;
     margin: 0;
 }
@@ -178,7 +178,7 @@
     display: none;
 }
 
-.module-content, #recherche .form_search  {
+.module-content, #dataset-search-form .form_search  {
     padding: 0 30px 30px;
 }
 
@@ -291,6 +291,9 @@ fieldset.checkboxes label input[type=checkbox] {
 }
 .search-form::before, .search-form::after {
     display: none;
+}
+.search-form .btn .fa-search {
+    font-size: 22px;
 }
 .search-form {
     display: block;
