@@ -289,3 +289,16 @@ h2 {
 fieldset.checkboxes label input[type=checkbox] {
   width: 1em;
 }
+
+.search-form {
+    display: block;
+    position: relative;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0;
+    background-color: none;
+    -webkit-transform: none;
+    transform: none;
+    z-index: 1;
+}
