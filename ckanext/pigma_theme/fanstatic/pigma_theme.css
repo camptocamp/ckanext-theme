@@ -289,7 +289,9 @@ h2 {
 fieldset.checkboxes label input[type=checkbox] {
   width: 1em;
 }
-
+.search-form::before, .search-form::after {
+    display: none;
+}
 .search-form {
     display: block;
     position: relative;
@@ -297,8 +299,10 @@ fieldset.checkboxes label input[type=checkbox] {
     right: 0;
     bottom: 0;
     padding: 0;
-    background-color: none;
+    background-color: transparent;
     -webkit-transform: none;
     transform: none;
     z-index: 1;
+    border: 0;
+    margin: 0;
 }
