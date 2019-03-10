@@ -292,9 +292,6 @@ fieldset.checkboxes label input[type=checkbox] {
 .search-form::before, .search-form::after {
     display: none;
 }
-.search-form .btn .fa-search {
-    font-size: 22px;
-}
 .search-form {
     display: block;
     position: relative;
@@ -308,4 +305,10 @@ fieldset.checkboxes label input[type=checkbox] {
     z-index: 1;
     border: 0;
     margin: 0;
+}
+.search-form .btn  {
+    padding: 1.2rem 2rem;
+}
+.search-form .btn .fa-search {
+    font-size: 22px;
 }
