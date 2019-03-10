@@ -224,7 +224,7 @@
 .module-narrow .nav-item a span {
     /*! float: left; */
 }
-.badge {
+.filters .badge {
     background-color: #0072bc;
     font-style: normal;
     line-height: 1em;
