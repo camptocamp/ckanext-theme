@@ -240,7 +240,7 @@
 .dataset-item-organization-title {
     margin-top: 8px;
 }
-.label {
+.dataset-format .label {
     display: inline-block;
     padding: .4em .6em;
     font-size: 1em;
