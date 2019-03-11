@@ -268,12 +268,6 @@
             "display_snippet": null,
             "field_name": "spatial",
             "label": "\u00c9tendue g\u00e9ographique"
-        },
-        {
-            "display_property": "foaf:homepage",
-            "display_snippet": "default_link.html",
-            "field_name": "remote_ckan_url",
-            "label": "Catalogue d'origine si diff\u00e9rent"
         }
     ],
     "dataset_type": "dataset",
