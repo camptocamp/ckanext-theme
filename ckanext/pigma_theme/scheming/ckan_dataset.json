@@ -268,12 +268,6 @@
 		"field_name": "spatial",
 		"label": "Étendue géographique",
 		"display_snippet": null
-	},
-	{
-		"field_name": "remote_ckan_url",
-		"label": "Catalogue d'origine si différent",
-		"display_property": "foaf:homepage",
-		"display_snippet": "default_link.html"
 	}],
 	"resource_fields": [
 	{
