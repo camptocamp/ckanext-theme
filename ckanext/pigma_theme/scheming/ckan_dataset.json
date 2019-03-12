@@ -141,6 +141,10 @@
                 {
                     "label": "Annuelle",
                     "value": "annual"
+                },
+                {
+                    "label": "Sans r\u00e9gularit\u00e9",
+                    "value": "irregularly"
                 }
             ],
             "field_name": "update_frequency",
