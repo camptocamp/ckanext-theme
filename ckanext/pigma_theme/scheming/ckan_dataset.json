@@ -3,7 +3,8 @@
         {
             "field_name": "title",
             "label": "Titre",
-            "preset": "title"
+            "preset": "title",
+            "required": true
         },
         {
             "display_snippet": null,
@@ -18,7 +19,8 @@
         {
             "field_name": "notes",
             "form_snippet": "markdown.html",
-            "label": "Description"
+            "label": "Description",
+            "required": true
         },
         {
             "display_property": "foaf:homepage",
@@ -30,27 +32,6 @@
             "field_name": "tag_string",
             "label": "Tags",
             "preset": "tag_string_autocomplete"
-        },
-        {
-            "choices": [
-                {
-                    "label": "Ind\u00e9finie",
-                    "value": null
-                },
-                {
-                    "label": "R\u00e9gionale",
-                    "value": "regionale"
-                },
-                {
-                    "label": "Territoire de comp\u00e9tence",
-                    "value": "jurisdiction"
-                }
-            ],
-            "field_name": "geocover",
-            "form_include_blank_choice": false,
-            "label": "Couverture g\u00e9ographique",
-            "preset": "select",
-            "required": false
         },
         {
             "choices": [
@@ -84,11 +65,6 @@
             "label": "Granularit\u00e9 de la couverture territoriale",
             "preset": "select",
             "required": false
-        },
-        {
-            "field_name": "dataset_creation_date",
-            "label": "Date de cr\u00e9ation",
-            "preset": "date"
         },
         {
             "field_name": "dataset_publication_date",
@@ -174,7 +150,8 @@
             ],
             "field_name": "datatype",
             "label": "Type de donn\u00e9es",
-            "preset": "multiple_checkbox"
+            "preset": "multiple_checkbox",
+            "required": true
         },
         {
             "choices": [
@@ -203,18 +180,19 @@
             "form_include_blank_choice": true,
             "label": "Support Technique",
             "preset": "select",
-            "require": false
+            "required": false
         },
         {
             "field_name": "license_id",
             "form_snippet": "license.html",
             "label": "License",
-            "require": true
+            "required": true
         },
         {
             "field_name": "owner_org",
             "label": "Organisation",
-            "preset": "dataset_organization"
+            "preset": "dataset_organization",
+            "required": true
         },
         {
             "display_property": "dc:creator",
@@ -262,12 +240,14 @@
         },
         {
             "field_name": "name",
-            "label": "Nom"
+            "label": "Nom",
+            "required": true
         },
         {
             "field_name": "description",
             "form_snippet": "markdown.html",
-            "label": "Description"
+            "label": "Description",
+            "required": true
         },
         {
             "choices": [
