@@ -317,35 +317,6 @@
             "required": true
         },
         {
-            "choices": [
-                {
-                    "label": "Fran\u00e7ais",
-                    "value": "french"
-                },
-                {
-                    "label": "Anglais",
-                    "value": "english"
-                },
-                {
-                    "label": "Italien",
-                    "value": "italian"
-                },
-                {
-                    "label": "Allemand",
-                    "value": "german"
-                },
-                {
-                    "label": "Autre",
-                    "value": "other"
-                }
-            ],
-            "field_name": "lang",
-            "form_include_blank_choice": false,
-            "label": "Langue",
-            "preset": "select",
-            "required": true
-        },
-        {
             "field_name": "format",
             "label": "Format(s)",
             "help_text": "Choisissez un ou plusieurs formats en maintenant la touche CTRL enfoncée",
