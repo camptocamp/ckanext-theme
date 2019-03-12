@@ -347,8 +347,116 @@
         },
         {
             "field_name": "format",
-            "label": "Format",
-            "preset": "resource_format_autocomplete"
+            "label": "Format(s)",
+            "help_text": "Choisissez un ou plusieurs formats en maintenant la touche CTRL enfoncée",
+            "required": true,
+            "preset": "multiple_select",
+            "choices": [
+                {
+                   "value": "csv",
+                   "label": "CSV"
+                },
+                {
+                   "value": "ecw",
+                   "label": "ECW"
+                },
+                {
+                   "value": "geojson",
+                   "label": "GeoJSON"
+                },
+                {
+                   "value": "geotiff",
+                   "label": "GeoTiff"
+                },
+                {
+                   "value": "gml",
+                   "label": "GML"
+                },
+                {
+                   "value": "gtfs",
+                   "label": "GTFS"
+                },
+                {
+                   "value": "html",
+                   "label": "HTML"
+                },
+                {
+                   "value": "jpeg",
+                   "label": "JPEG"
+                },
+                {
+                   "value": "jp2k",
+                   "label": "JP2K"
+                },
+                {
+                   "value": "kml",
+                   "label": "KML"
+                },
+                {
+                   "value": "mif",
+                   "label": "MIF/MID"
+                },
+                {
+                   "value": "tab",
+                   "label": "TAB"
+                },
+                {
+                   "value": "owscontext",
+                   "label": "OGC OWSContext"
+                },
+                {
+                   "value": "wmc",
+                   "label": "OGC WMC"
+                },
+                {
+                   "value": "wms",
+                   "label": "OGC WMS"
+                },
+                {
+                   "value": "wfs",
+                   "label": "OGC WFS"
+                },
+                {
+                   "value": "wmts",
+                   "label": "OGC WMTS"
+                },
+                {
+                   "value": "pdf",
+                   "label": "PDF"
+                },
+                {
+                   "value": "png",
+                   "label": "PNG"
+                },
+                {
+                   "value": "shp",
+                   "label": "Shapefile"
+                },
+                {
+                   "value": "text",
+                   "label": "Texte"
+                },
+                {
+                   "value": "tiff",
+                   "label": "TIFF"
+                },
+                {
+                   "value": "xlsx",
+                   "label": "XLSX"
+                },
+                {
+                   "value": "xml",
+                   "label": "XML"
+                },
+                {
+                   "value": "zip",
+                   "label": "ZIP"
+                },
+                {
+                   "value": "other",
+                   "label": "Autre"
+                }
+            ]
         }
     ],
     "scheming_version": 1
