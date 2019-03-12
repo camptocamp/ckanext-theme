@@ -285,16 +285,28 @@
         {
             "choices": [
                 {
-                    "label": "Donn\u00e9es brutes",
-                    "value": "raw"
+                    "label": "Fichier principal",
+                    "value": "file"
                 },
                 {
-                    "label": "Documentation associ\u00e9e",
-                    "value": "annexe"
+                    "label": "Documentation",
+                    "value": "doc"
                 },
                 {
-                    "label": "Service",
-                    "value": "service"
+                    "label": "Mise \u00e0 jour",
+                    "value": "maj"
+                },
+                {
+                    "label": "API",
+                    "value": "api"
+                },
+                {
+                    "label": "D\u00e9p\u00f4t de code",
+                    "value": "repository"
+                },
+                {
+                    "label": "Autre",
+                    "value": "other"
                 }
             ],
             "field_name": "data_type",
