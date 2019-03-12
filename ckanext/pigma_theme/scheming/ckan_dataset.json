@@ -59,6 +59,10 @@
                     "value": "indefinie"
                 },
                 {
+                    "label": "Pays",
+                    "value": "pays"
+                },
+                {
                     "label": "R\u00e9gion",
                     "value": "region"
                 },
@@ -73,18 +77,6 @@
                 {
                     "label": "Commune",
                     "value": "commune"
-                },
-                {
-                    "label": "IRIS (quartiers INSEE)",
-                    "value": "iris"
-                },
-                {
-                    "label": "Parcelle cadastrale",
-                    "value": "parcelle-cadastrale"
-                },
-                {
-                    "label": "Point d\u2019inter\u00eat (POI)",
-                    "value": "poi"
                 }
             ],
             "field_name": "granularity",
