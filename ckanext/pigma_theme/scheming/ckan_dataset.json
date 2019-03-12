@@ -239,7 +239,7 @@
             "display_property": "dc:contributor",
             "display_snippet": "default_email.html",
             "field_name": "maintainer_email",
-            "form_placeholder": "contact@datasud.fr",
+            "form_placeholder": "contact@gipatgeri.fr",
             "label": "E-mail du diffuseur"
         },
         {
