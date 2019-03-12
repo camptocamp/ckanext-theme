@@ -208,24 +208,6 @@
             "label": "E-mail du contact"
         },
         {
-            "choices": [
-                {
-                    "label": "Oui",
-                    "value": "True"
-                },
-                {
-                    "label": "Non",
-                    "value": "False"
-                }
-            ],
-            "display_snippet": null,
-            "field_name": "ows",
-            "form_include_blank_choice": false,
-            "label": "Service Web OGC",
-            "preset": "select",
-            "required": false
-        },
-        {
             "display_snippet": null,
             "field_name": "spatial",
             "label": "\u00c9tendue g\u00e9ographique"
