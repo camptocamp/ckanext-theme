@@ -168,8 +168,8 @@
                     "value": "donnees-geographiques"
                 },
                 {
-                    "label": "Donn\u00e9es moissonn\u00e9es",
-                    "value": "donnees-moissonnees"
+                    "label": "Rapports et \u00e9tudes",
+                    "value": "rapports-etudes"
                 }
             ],
             "field_name": "datatype",
