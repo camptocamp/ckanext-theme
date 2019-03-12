@@ -219,7 +219,7 @@
         {
             "display_property": "dc:creator",
             "field_name": "author",
-            "form_placeholder": "Joe Bloggs",
+            "form_placeholder": "Jean Dupont",
             "label": "Propri\u00e9taire"
         },
         {
@@ -232,7 +232,7 @@
         {
             "display_property": "dc:contributor",
             "field_name": "maintainer",
-            "form_placeholder": "Joe Bloggs",
+            "form_placeholder": "Pierre Dupond",
             "label": "Diffuseur"
         },
         {
