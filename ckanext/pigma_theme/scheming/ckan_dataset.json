@@ -208,7 +208,8 @@
         {
             "field_name": "license_id",
             "form_snippet": "license.html",
-            "label": "License"
+            "label": "License",
+            "require": true
         },
         {
             "field_name": "owner_org",
