@@ -220,28 +220,14 @@
             "display_property": "dc:creator",
             "field_name": "author",
             "form_placeholder": "Jean Dupont",
-            "label": "Propri\u00e9taire"
+            "label": "Contact"
         },
         {
             "display_email_name_field": "author",
             "display_property": "dc:creator",
             "display_snippet": "default_email.html",
             "field_name": "author_email",
-            "label": "E-mail du propri\u00e9taire"
-        },
-        {
-            "display_property": "dc:contributor",
-            "field_name": "maintainer",
-            "form_placeholder": "Pierre Dupond",
-            "label": "Diffuseur"
-        },
-        {
-            "display_email_name_field": "maintainer",
-            "display_property": "dc:contributor",
-            "display_snippet": "default_email.html",
-            "field_name": "maintainer_email",
-            "form_placeholder": "contact@gipatgeri.fr",
-            "label": "E-mail du diffuseur"
+            "label": "E-mail du contact"
         },
         {
             "choices": [
