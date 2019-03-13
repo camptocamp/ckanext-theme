@@ -281,9 +281,15 @@ h2 {
   padding: 0;
   border: 0;
 }
-
+[role=main] .nav li a {
+  text-transform: none;
+}
 [role=main] header .nav li a {
   white-space: nowrap;
+  text-transform: uppercase;
+}
+h1 {
+  text-transform: none;
 }
 
 fieldset.checkboxes label input[type=checkbox] {
