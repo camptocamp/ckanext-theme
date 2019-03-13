@@ -302,6 +302,12 @@ h1 {
 .resource-list .btn {
   padding: 0.7em 1em;
 }
+.module-resource .actions {
+ top: 1em;
+}
+.media-grid {
+  clear: both;
+}
 
 
 fieldset.checkboxes label input[type=checkbox] {
