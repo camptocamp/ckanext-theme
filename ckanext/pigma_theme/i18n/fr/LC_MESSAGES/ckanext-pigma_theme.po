@@ -96,6 +96,32 @@ msgstr "Réinit."
 msgid "unknow"
 msgstr "Inconnu"
 
-msgid "weekly"
+msgid "intermittently",
+msgstr "Ponctuelle"
+
+msgid "realtime",
+msgstr "Temps réel"
+
+msgid "daily",
+msgstr "Quotidienne"
+
+msgid "weekly",
 msgstr "Hebdomadaire"
 
+msgid "monthly",
+msgstr "Mensuelle"
+
+msgid "fortnightly",
+msgstr "Bi-mensuelle"
+
+msgid "quarterly",
+msgstr "Trimestrielle"
+
+msgid "semiannual",
+msgstr "Semestrielle"
+
+msgid "annual",
+msgstr "Annuelle"
+
+msgid "irregularly",
+msgstr "Sans régularité"
