@@ -309,6 +309,14 @@ h1 {
   clear: both;
 }
 
+.resources .nav {
+  flex-flow: column;
+}
+
+.module-content {
+  /* padding-top: 1em; */
+}
+
 
 fieldset.checkboxes label input[type=checkbox] {
   width: 1em;
