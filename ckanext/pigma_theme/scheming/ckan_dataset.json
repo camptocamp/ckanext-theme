@@ -40,6 +40,11 @@
             "required": true
         },
         {
+            "field_name": "hyperlink",
+            "display_snippet": "default_link.html",
+            "label": "Lien web"
+        },
+        {
             "display_property": "foaf:homepage",
             "display_snippet": "default_link.html",
             "field_name": "inspire_url",
