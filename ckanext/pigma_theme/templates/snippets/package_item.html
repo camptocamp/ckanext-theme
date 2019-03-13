@@ -78,9 +78,11 @@ Example:
           {% block resources_outer %}
             <ul class="dataset-resources unstyled">
                 {% for resource in h.dict_list_reduce(package.resources, 'format') %}
+                {% if resource[0] %}
                 <li class="dataset-format">
-                  <a href="{{ h.url_for(controller='package', action='read', id=package.name) }}" class="label" data-format="{{ resource.lower() }}">{{ resource }}</a>
+                  <a href="{{ h.url_for(controller='package', action='read', id=package.name) }}" class="label" data-format="{{ resource[0].lower() }}">{{ resource[0] }}</a>
                 </li>
+                {% endif %}
                 {% endfor %}
             </ul>
           {% endblock %}
