@@ -292,6 +292,12 @@ h1 {
   text-transform: none;
 }
 
+
+.resource-list .btn {
+  padding: 0.7em 1em;
+}
+
+
 fieldset.checkboxes label input[type=checkbox] {
   width: 1em;
 }
