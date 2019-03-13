@@ -44,6 +44,11 @@
 
 .secondary .nav-facet, .secondary .module-content, .primary article.module {
     background: #ffffff;
+    padding-top: 2em;
+}
+
+.primary article.module .page-header.module-content {
+  margin-top: -2em;
 }
 
 
@@ -312,11 +317,6 @@ h1 {
 .resources .nav {
   flex-flow: column;
 }
-
-.module-content {
-  /* padding-top: 1em; */
-}
-
 
 fieldset.checkboxes label input[type=checkbox] {
   width: 1em;
