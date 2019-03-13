@@ -78,3 +78,24 @@ msgstr ""
 msgid "donnees-ouvertes"
 msgstr "Données ouvertes"
 
+msgid "donnees-geographiques"
+msgstr "Données géographiques"
+
+msgid "donnees-intelligentes"
+msgstr "Données intelligentes"
+
+msgid "rapports-etudes"
+msgstr "Rapports & études"
+
+msgid "Filter by location"
+msgstr "Filtre géographique"
+
+msgid "Clear"
+msgstr "Réinit."
+
+msgid "unknow"
+msgstr "Inconnu"
+
+msgid "weekly"
+msgstr "Hebdomadaire"
+
