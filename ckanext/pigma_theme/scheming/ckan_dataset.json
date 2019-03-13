@@ -7,14 +7,31 @@
             "required": true
         },
         {
-            "display_snippet": null,
-            "field_name": "thumbnail",
-            "label": "Imagette"
-        },
-        {
             "field_name": "name",
             "label": "URL",
             "preset": "dataset_slug"
+        },
+        {
+            "field_name": "tag_string",
+            "label": "Tags",
+            "preset": "tag_string_autocomplete"
+        },
+        {
+            "field_name": "license_id",
+            "form_snippet": "license.html",
+            "label": "License",
+            "required": true
+        },
+        {
+            "field_name": "owner_org",
+            "label": "Organisation",
+            "preset": "dataset_organization",
+            "required": true
+        },
+        {
+            "display_snippet": null,
+            "field_name": "thumbnail",
+            "label": "Imagette"
         },
         {
             "field_name": "notes",
@@ -27,11 +44,6 @@
             "display_snippet": "default_link.html",
             "field_name": "inspire_url",
             "label": "URL de la fiche INSPIRE"
-        },
-        {
-            "field_name": "tag_string",
-            "label": "Tags",
-            "preset": "tag_string_autocomplete"
         },
         {
             "choices": [
@@ -181,18 +193,6 @@
             "label": "Support Technique",
             "preset": "select",
             "required": false
-        },
-        {
-            "field_name": "license_id",
-            "form_snippet": "license.html",
-            "label": "License",
-            "required": true
-        },
-        {
-            "field_name": "owner_org",
-            "label": "Organisation",
-            "preset": "dataset_organization",
-            "required": true
         },
         {
             "display_property": "dc:creator",
