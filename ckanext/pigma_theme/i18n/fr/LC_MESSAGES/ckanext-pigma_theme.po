@@ -93,35 +93,41 @@ msgstr "Filtre géographique"
 msgid "Clear"
 msgstr "Réinit."
 
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Apply"
+msgstr "Appliquer"
+
 msgid "unknow"
 msgstr "Inconnu"
 
-msgid "intermittently",
+msgid "intermittently"
 msgstr "Ponctuelle"
 
-msgid "realtime",
+msgid "realtime"
 msgstr "Temps réel"
 
-msgid "daily",
+msgid "daily"
 msgstr "Quotidienne"
 
-msgid "weekly",
+msgid "weekly"
 msgstr "Hebdomadaire"
 
-msgid "monthly",
+msgid "monthly"
 msgstr "Mensuelle"
 
-msgid "fortnightly",
+msgid "fortnightly"
 msgstr "Bi-mensuelle"
 
-msgid "quarterly",
+msgid "quarterly"
 msgstr "Trimestrielle"
 
-msgid "semiannual",
+msgid "semiannual"
 msgstr "Semestrielle"
 
-msgid "annual",
+msgid "annual"
 msgstr "Annuelle"
 
-msgid "irregularly",
+msgid "irregularly"
 msgstr "Sans régularité"
