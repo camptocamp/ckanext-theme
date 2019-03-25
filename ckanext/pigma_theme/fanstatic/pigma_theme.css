@@ -44,6 +44,8 @@
 
 .secondary .nav-facet, .secondary .module-content, .primary article.module {
     background: #ffffff;
+}
+.secondary .module-content, .primary article.module {
     padding-top: 2em;
 }
 
