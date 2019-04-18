@@ -23,7 +23,6 @@ class Pigma_ThemePlugin(plugins.SingletonPlugin):
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
-        toolkit.add_resource('fanstatic', 'pigma_theme')
 
     # IFacets
     def dataset_facets(self, facets_dict, package_type):
