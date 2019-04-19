@@ -7,8 +7,8 @@
   {# config object is not propagated to every stuff where base.html is called. Avoiding exception. #}
   {# CSS are loaded anyway. #}
   {% set root_path = config["ckan.root_path"] if config %}
-  <link rel="stylesheet" href="{{root_path}}/css/font.css"/>
-  <link rel="stylesheet" href="{{root_path}}/css/pigma_main.css"/>
-  <link rel="stylesheet" href="{{root_path}}/css/pigma_styles.css"/>
-  <link rel="stylesheet" href="{{root_path}}/css/pigma_theme.css"/>
+  <link rel="stylesheet" href="{{root_path|default('/ckan')}}/css/font.css"/>
+  <link rel="stylesheet" href="{{root_path|default('/ckan')}}/css/pigma_main.css"/>
+  <link rel="stylesheet" href="{{root_path|default('/ckan')}}/css/pigma_styles.css"/>
+  <link rel="stylesheet" href="{{root_path|default('/ckan')}}/css/pigma_theme.css"/>
 {% endblock %}
