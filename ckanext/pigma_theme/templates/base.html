@@ -1,9 +1,14 @@
 {% ckan_extends %}
 
+
+
 {% block styles %}
   {{ super() }}
-  <link rel="stylesheet" href="/css/font.css">
-  <link rel="stylesheet" href="/css/pigma_main.css">
-  <link rel="stylesheet" href="/css/pigma_styles.css">
-  <link rel="stylesheet" href="/css/pigma_theme.css">
+  {# config object is not propagated to every stuff where base.html is called. Avoiding exception. #}
+  {# CSS are loaded anyway. #}
+  {% set root_path = config["ckan.root_path"] if config %}
+  <link rel="stylesheet" href="{{root_path}}/css/font.css"/>
+  <link rel="stylesheet" href="{{root_path}}/css/pigma_main.css"/>
+  <link rel="stylesheet" href="{{root_path}}/css/pigma_styles.css"/>
+  <link rel="stylesheet" href="{{root_path}}/css/pigma_theme.css"/>
 {% endblock %}
