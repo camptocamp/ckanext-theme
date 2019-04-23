@@ -42,7 +42,7 @@ def _groups_from_csv(path):
 
 def _create_groups(dataset_dicts, API_URI, BASE64AUTH):
     """
-    Given en list of dicts defining the groups, creates the group using CKAN's API
+    Given a list of dicts defining the groups, creates the group using CKAN's API
     Since geOrchestra, for now, doesn't let in using the API key, we use basic auth.
     If a group already exists in CKAN, pruges it before creating it again.
     :param dataset_dicts:
