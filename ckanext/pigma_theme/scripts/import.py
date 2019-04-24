@@ -40,7 +40,14 @@ def _groups_from_csv(path):
     return dataset_dicts
 
 
-def _create_groups(dataset_dicts, API_URI, BASE64AUTH):
+def _authenticate_request(request, API_KEY=None, BASE64AUTH=None):
+    if (API_KEY):
+        request.add_header('X-CKAN-API-Key', API_KEY)
+    else:
+        request.add_header("Authorization", "Basic %s" % BASE64AUTH)
+
+
+def _create_groups(dataset_dicts, API_URI, API_KEY=None, BASE64AUTH=None):
     """
     Given a list of dicts defining the groups, creates the group using CKAN's API
     Since geOrchestra, for now, doesn't let in using the API key, we use basic auth.
@@ -57,16 +64,14 @@ def _create_groups(dataset_dicts, API_URI, BASE64AUTH):
     for dataset_dict in dataset_dicts:
         try:
             delete_req = urllib2.Request(API_URI + 'action/group_purge')
-            #delete_req.add_header('Authorization', AUTH_TOKEN)
-            delete_req.add_header("Authorization", "Basic %s" % BASE64AUTH)
+            _authenticate_request(delete_req, API_KEY, BASE64AUTH)
             del_response = urllib2.urlopen(delete_req, urllib.quote(json.dumps(dataset_dict)), context=ctx)
             assert del_response.code == 200
         except:
             print('group {} did not exist before'.format(dataset_dict['id']))
 
         request = urllib2.Request(API_URI + 'action/group_create')
-        #request.add_header('Authorization', AUTH_TOKEN)
-        request.add_header("Authorization", "Basic %s" % BASE64AUTH)
+        _authenticate_request(request, API_KEY, BASE64AUTH)
         response = urllib2.urlopen(request, urllib.quote(json.dumps(dataset_dict)), context=ctx)
         assert response.code == 200
 
@@ -80,8 +85,8 @@ def _create_groups(dataset_dicts, API_URI, BASE64AUTH):
 def main():
     # Input arguments
     parser = argparse.ArgumentParser(description='''
-    Reads group configuration  in a CSV file dans creates them using CKAN's API. GeOrchestra does not allow API keys, 
-    so we use user/password instead
+    Reads group configuration  in a CSV file dans creates them using CKAN's API. 
+    You can provide your API key or user + password instead
     ''')
     parser.add_argument('ckan_api_url', help='the source name to process')
     parser.add_argument('-c', '--csv',
@@ -90,15 +95,18 @@ def main():
                         help='geOrchestra user name')
     parser.add_argument('-p', '--password',
                         help='geOrchestra user password')
+    parser.add_argument('-k', '--api_key',
+                        help='ckan user\'s API key')
     args = parser.parse_args()
 
     API_URI = args.ckan_api_url
     BASE64AUTH = encodestring('%s:%s' % (args.user, args.password)).replace('\n', '')
+    API_KEY = args.api_key
 
     # Parse CSV
     dataset_dicts = _groups_from_csv(args.csv)
     #Create groups on CKAN
-    _create_groups(dataset_dicts, API_URI, BASE64AUTH)
+    _create_groups(dataset_dicts, API_URI, API_KEY, BASE64AUTH)
 
 
 if __name__ == '__main__':
