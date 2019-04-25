@@ -7,9 +7,18 @@ import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 from ckan.plugins.toolkit import _
 from ckanext.spatial.interfaces import ISpatialHarvester
+from ckan.lib.helpers import dict_list_reduce
 
 import logging
 log = logging.getLogger(__name__)
+
+
+# Template helper functions
+def dict_list_or_dict_reduce(list_, key, unique=True):
+    """Hack to make helpers.dict_list_reduce work also if provided a dict of dicts instead of a list of dicts"""
+    if isinstance(list_, dict):
+        list_ = list_.values()
+    return dict_list_reduce(list_, key, unique)
 
 
 class Pigma_ThemePlugin(plugins.SingletonPlugin):
@@ -18,6 +27,7 @@ class Pigma_ThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.ITranslation)
     plugins.implements(ISpatialHarvester, inherit=True)
+    plugins.implements(plugins.ITemplateHelpers)
 
     # IConfigurer
     def update_config(self, config_):
@@ -71,6 +81,18 @@ class Pigma_ThemePlugin(plugins.SingletonPlugin):
         package_dict['groups'] = list(groups)
 
         return package_dict
+
+    #ITemplateHelper
+    def get_helpers(self):
+        '''Register the most_popular_groups() function above as a template
+        helper function.
+
+        '''
+        # Template helper function names should begin with the name of the
+        # extension they belong to, to avoid clashing with functions from
+        # other extensions.
+        return {'dict_list_or_dict_reduce': dict_list_or_dict_reduce}
+
 
 mapping = {
         "administration": (
