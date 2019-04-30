@@ -39,7 +39,7 @@ class Pigma_ThemePlugin(plugins.SingletonPlugin):
     def dataset_facets(self, facets_dict, package_type):
         return OrderedDict([
             ('groups', _(u'Thèmes')),
-            ('keywords', _(u'Mot-clefs')),
+            ('keywords', _(u'Mots-clés')),
             ('datatype', _(u'Types')),
             ('update_frequency', _(u'Fréquence de mise à jour')),
             ('granularity', _(u'Granularité')),
