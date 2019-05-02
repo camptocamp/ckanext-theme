@@ -344,7 +344,7 @@ fieldset.checkboxes label input[type=checkbox] {
     border: 0;
     margin: 0;
 }
-.search-form .btn  {
+.btn  {
     padding: 10px 15px;
 }
 .search-form .btn .fa-search {
@@ -381,9 +381,4 @@ nav > li > a {
     position: relative !important;
     left: auto !important;
     top: auto !important;
-}
-@media (min-width: 992px) {
-    .search-form .control-order-by {
-        margin-top: 7px;
-    }
 }
