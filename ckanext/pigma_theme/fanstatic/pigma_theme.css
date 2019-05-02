@@ -344,9 +344,6 @@ fieldset.checkboxes label input[type=checkbox] {
     border: 0;
     margin: 0;
 }
-.module .nav {
-    background:#fff;
-}
 .btn  {
     padding: 0.7em 1em;
 }
@@ -387,4 +384,10 @@ fieldset.checkboxes label input[type=checkbox] {
     position: relative !important;
     left: auto !important;
     top: auto !important;
+}
+.module .nav {
+    background:#fff;
+}
+.module.social li a {
+    display: block;
 }
