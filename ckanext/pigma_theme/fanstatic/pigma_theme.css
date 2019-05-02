@@ -385,7 +385,7 @@ fieldset.checkboxes label input[type=checkbox] {
     left: auto !important;
     top: auto !important;
 }
-.module .nav {
+.module.social .nav {
     background:#fff;
 }
 .module.social li a {
