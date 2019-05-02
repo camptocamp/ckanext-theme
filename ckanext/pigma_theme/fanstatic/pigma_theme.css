@@ -345,7 +345,7 @@ fieldset.checkboxes label input[type=checkbox] {
     margin: 0;
 }
 .btn  {
-    padding: 10px 15px;
+    padding: 0.7em 1em;
 }
 .input-group-btn > .btn {
     padding: 12px 15px;
