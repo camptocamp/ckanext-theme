@@ -347,6 +347,9 @@ fieldset.checkboxes label input[type=checkbox] {
 .btn  {
     padding: 10px 15px;
 }
+.input-group-btn > .btn {
+    padding: 12px 15px;
+}
 .search-form .btn .fa-search {
     font-size: 22px;
 }
@@ -361,7 +364,7 @@ fieldset.checkboxes label input[type=checkbox] {
 .dataset-resources {
     padding-left: 0;
 }
-nav > li > a {
+.nav li a {
     padding: 10px 15px;
 }
 
