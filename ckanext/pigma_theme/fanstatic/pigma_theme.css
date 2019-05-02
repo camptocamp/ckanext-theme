@@ -397,3 +397,6 @@ fieldset.checkboxes label input[type=checkbox] {
 .module.social li a i {
     margin-right: 5px;
 }
+.media-heading {
+    color: #005EA3;
+}
