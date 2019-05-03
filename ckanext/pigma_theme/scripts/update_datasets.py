@@ -34,9 +34,10 @@ ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
 
-def fetch(action, api_uri, api_key, data=None):
+def fetch(action, api_uri, api_key, base64auth, data=None):
     req = urllib2.Request(api_uri + action)
     req.add_header('X-CKAN-API-Key', api_key)
+    req.add_header('Authorization', 'Basic %s' % base64auth)
     if data is not None:
         response = urllib2.urlopen(req, urllib.quote(json.dumps(data)), context=ctx)
     else:
@@ -159,22 +160,27 @@ def main():
     parser.add_argument('ckan_api_url', help='the source name to process')
     parser.add_argument('-k', '--api_key',
                         help='CKAN API key')
+    parser.add_argument('-u', '--user',
+            help='geOrchestra user name')
+    parser.add_argument('-p', '--password',
+            help='geOrchestra user password')
     parser.add_argument('--catalog_fields_create',
                         help='Create a catalog of fields. Give the file path as parameter')
     args = parser.parse_args()
 
     api_uri = args.ckan_api_url
     api_key = args.api_key
-    if not (api_uri and api_key):
+    BASE64AUTH = encodestring('%s:%s' % (args.user, args.password)).replace('\n', '')
+    if not (api_uri):
         log.error("You need to provide api parameters")
         return
 
-    packages = fetch('action/package_list', api_uri, api_key)
+    packages = fetch('action/package_list', api_uri, api_key, BASE64AUTH)
     print('Got {} datasets'.format(len(packages)))
 
     for package in packages:
         print('Fetching «{}»'.format(package), end='')
-        pkg = fetch('action/package_show?id={}'.format(package), api_uri, api_key)
+        pkg = fetch('action/package_show?id={}'.format(package), api_uri, api_key, BASE64AUTH)
         if False:
             if args.catalog_fields_create:
                 _catalog_ingest(pkg)
@@ -210,7 +216,7 @@ def main():
             if args.catalog_fields_create:
                 _catalog_ingest(pkg, patch)
             try:
-                updated = fetch('action/package_patch', api_uri, api_key, data=patch)
+                updated = fetch('action/package_patch', api_uri, api_key, BASE64AUTH, data=patch)
                 print(' OK')
             except urllib2.HTTPError as e:
                 print(' FAIL!')
