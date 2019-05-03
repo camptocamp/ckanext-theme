@@ -106,6 +106,10 @@
                 {
                     "label": "Rapports et \u00e9tudes",
                     "value": "rapports-etudes"
+                },
+                {
+                    "label": "Non renseign\u00e9",
+                    "value": "unknown"
                 }
             ],
             "field_name": "datatype",

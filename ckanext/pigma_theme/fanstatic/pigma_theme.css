@@ -287,6 +287,7 @@ h2 {
 .select2-container {
   padding: 0;
   border: 0;
+  height: auto;
 }
 [role=main] .nav li a {
   text-transform: none;
