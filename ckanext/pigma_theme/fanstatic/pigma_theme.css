@@ -113,6 +113,9 @@ h2 {
 }
 
 /*** Tags clickables - Type de donnees ***/
+.label {
+  margin-right: .5em;
+}
 .label[data-format=donnees-ouvertes] {
     background-color: #FF6660;
 }
