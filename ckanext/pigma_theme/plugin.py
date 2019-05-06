@@ -6,20 +6,11 @@ from os.path import join, dirname, abspath
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 from ckan.plugins.toolkit import _
+from ckanext.pigma_theme.template_helpers import filter_orgs, filtered_pager, dict_list_or_dict_reduce
 from ckanext.spatial.interfaces import ISpatialHarvester
-from ckan.lib.helpers import dict_list_reduce
 
 import logging
 log = logging.getLogger(__name__)
-
-
-# Template helper functions
-def dict_list_or_dict_reduce(list_, key, unique=True):
-    """Hack to make helpers.dict_list_reduce work also if provided a dict of dicts instead of a list of dicts"""
-    if isinstance(list_, dict):
-        list_ = list_.values()
-    return dict_list_reduce(list_, key, unique)
-
 
 class Pigma_ThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
@@ -92,7 +83,11 @@ class Pigma_ThemePlugin(plugins.SingletonPlugin):
         # Template helper function names should begin with the name of the
         # extension they belong to, to avoid clashing with functions from
         # other extensions.
-        return {'dict_list_or_dict_reduce': dict_list_or_dict_reduce}
+        return {
+            'dict_list_or_dict_reduce': dict_list_or_dict_reduce,
+            'filter_orgs': filter_orgs,
+            'filtered_pager': filtered_pager
+        }
 
 
 mapping = {
