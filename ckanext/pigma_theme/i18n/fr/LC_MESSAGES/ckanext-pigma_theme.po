@@ -25,11 +25,11 @@ msgstr "Thèmes"
 
 #: ckanext/pigma_theme/plugin.py:25
 msgid "Keywords"
-msgstr "Mot clefs"
+msgstr "Mots clés"
 
 #: ckanext/pigma_theme/plugin.py:26
 msgid "Types"
-msgstr ""
+msgstr "Types"
 
 #: ckanext/pigma_theme/plugin.py:27
 msgid "Update frequency"
@@ -45,35 +45,35 @@ msgstr "Organisations"
 
 #: ckanext/pigma_theme/templates/snippets/facet_list.html:83
 msgid "Show More {facet_type}"
-msgstr ""
+msgstr "Afficher plus de {facet_type}"
 
 #: ckanext/pigma_theme/templates/snippets/facet_list.html:86
 msgid "Show Only Popular {facet_type}"
-msgstr ""
+msgstr "Afficher uniquement les {facet_type} les plus utilisés"
 
 #: ckanext/pigma_theme/templates/snippets/facet_list.html:90
 msgid "There are no {facet_type} that match this search"
-msgstr ""
+msgstr "Il n'y a aucun/e {facet_type} correspondant à la recherche"
 
 #: ckanext/pigma_theme/templates/snippets/package_item.html:41
 msgid "Private"
-msgstr ""
+msgstr "Privé"
 
 #: ckanext/pigma_theme/templates/snippets/package_item.html:50
 msgid "Draft"
-msgstr ""
+msgstr "Brouillon"
 
 #: ckanext/pigma_theme/templates/snippets/package_item.html:52
 msgid "Deleted"
-msgstr ""
+msgstr "Supprimé"
 
 #: ckanext/pigma_theme/templates/snippets/package_item.html:65
 msgid "Popular"
-msgstr ""
+msgstr "Populaire"
 
 #: ckanext/pigma_theme/templates/snippets/package_item.html:72
 msgid "This dataset has no description"
-msgstr ""
+msgstr "Ce jeu de données n'a pas de description"
 
 msgid "donnees-ouvertes"
 msgstr "Données ouvertes"
