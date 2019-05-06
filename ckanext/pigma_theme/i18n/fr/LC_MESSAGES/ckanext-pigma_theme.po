@@ -27,10 +27,6 @@ msgstr "Thèmes"
 msgid "Keywords"
 msgstr "Mot clefs"
 
-#: ckanext/pigma_theme/plugin.py:26
-msgid "Types"
-msgstr ""
-
 #: ckanext/pigma_theme/plugin.py:27
 msgid "Update frequency"
 msgstr "Fréquence de la mise à jour"
@@ -42,38 +38,6 @@ msgstr "Granularité de la couverture territoriale"
 #: ckanext/pigma_theme/plugin.py:29
 msgid "Organizations"
 msgstr "Organisations"
-
-#: ckanext/pigma_theme/templates/snippets/facet_list.html:83
-msgid "Show More {facet_type}"
-msgstr ""
-
-#: ckanext/pigma_theme/templates/snippets/facet_list.html:86
-msgid "Show Only Popular {facet_type}"
-msgstr ""
-
-#: ckanext/pigma_theme/templates/snippets/facet_list.html:90
-msgid "There are no {facet_type} that match this search"
-msgstr ""
-
-#: ckanext/pigma_theme/templates/snippets/package_item.html:41
-msgid "Private"
-msgstr ""
-
-#: ckanext/pigma_theme/templates/snippets/package_item.html:50
-msgid "Draft"
-msgstr ""
-
-#: ckanext/pigma_theme/templates/snippets/package_item.html:52
-msgid "Deleted"
-msgstr ""
-
-#: ckanext/pigma_theme/templates/snippets/package_item.html:65
-msgid "Popular"
-msgstr ""
-
-#: ckanext/pigma_theme/templates/snippets/package_item.html:72
-msgid "This dataset has no description"
-msgstr ""
 
 msgid "donnees-ouvertes"
 msgstr "Données ouvertes"
