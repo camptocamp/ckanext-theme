@@ -395,6 +395,9 @@ fieldset.checkboxes label input[type=checkbox] {
     max-width: 174px;
     text-align: center;
 }
+.media-item .img-responsive {
+   display: inline-block;
+}
 .module.social .nav {
     background:#fff;
 }
