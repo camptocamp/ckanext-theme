@@ -8,6 +8,10 @@ h2 {
     box-shadow: 0 0 0;
 }
 
+.no-nav > .col-sm-9 {
+  width: 100%;
+}
+
 .dataset-heading {
     border-bottom: dotted 1px #ddd;
     padding-bottom: 8px;
