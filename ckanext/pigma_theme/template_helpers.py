@@ -12,7 +12,7 @@ def dict_list_or_dict_reduce(list_, key, unique=True):
 
 def filter_orgs(orgs_list):
     """
-    filter org list of dict based on a critierd, default, orgs with at least one datatset
+    filter org list of dict based on a critiera: orgs with at least one dataset
     """
     return list(filter(lambda x: x['package_count'] > 0, orgs_list))
 
