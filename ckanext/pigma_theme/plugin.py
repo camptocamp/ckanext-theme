@@ -28,12 +28,7 @@ class Pigma_ThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.ITranslation)
     plugins.implements(ISpatialHarvester, inherit=True)
     plugins.implements(plugins.ITemplateHelpers)
-    plugins.implements(plugins.IRoutes, inherit=True)
 
-    # IRoutes
-    def before_map(self, m):
-        m.redirect('/', '/dataset')
-        return m
 
     # IConfigurer
     def update_config(self, config_):
