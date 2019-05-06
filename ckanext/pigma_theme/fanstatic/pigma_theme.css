@@ -7,6 +7,10 @@ h2 {
     border: 0;
     box-shadow: 0 0 0;
 }
+.icon-globe:after {
+  content: '\f23a';
+  font: normal normal normal 14px/1 FontAwesome;
+}
 
 .no-nav > .col-sm-9 {
   width: 100%;
