@@ -410,4 +410,6 @@ fieldset.checkboxes label input[type=checkbox] {
 }
 .media-heading {
     color: #005EA3;
+    word-break: normal;
+    hyphens: none;
 }
