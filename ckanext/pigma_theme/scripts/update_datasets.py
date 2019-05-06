@@ -181,6 +181,9 @@ def main():
     for package in packages:
         print('Fetching «{}»'.format(package), end='')
         pkg = fetch('action/package_show?id={}'.format(package), api_uri, api_key, BASE64AUTH)
+        if 'update_frequency' in pkg:
+            print('… skipping')
+            continue
         if False:
             if args.catalog_fields_create:
                 _catalog_ingest(pkg)
