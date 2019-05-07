@@ -50,6 +50,12 @@ class Pigma_ThemePlugin(plugins.SingletonPlugin):
         pkg_dict['datatype'] = loads(pkg_dict.get('datatype', '[]'))
         return pkg_dict
 
+    # IPackageController
+    def before_search(self, search_param):
+        search_param['qf'] = 'title^2 text'
+        return search_param
+
+
     # ITranslation
     def i18n_locales(self):
         return ('fr')
