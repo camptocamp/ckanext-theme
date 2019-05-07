@@ -6,14 +6,17 @@ from os.path import join, dirname, abspath
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 from ckan.plugins.toolkit import _
-from ckanext.pigma_theme.template_helpers import filter_orgs, filtered_pager, dict_list_or_dict_reduce
+from ckanext.pigma_theme.template_helpers import dict_list_or_dict_reduce
 from ckanext.spatial.interfaces import ISpatialHarvester
 
 import logging
+
 log = logging.getLogger(__name__)
+
 
 class Pigma_ThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
+    plugins.implements(plugins.IRoutes)
     plugins.implements(plugins.IFacets, inherit=True)
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.ITranslation)
@@ -40,7 +43,7 @@ class Pigma_ThemePlugin(plugins.SingletonPlugin):
             # ('res_format', _(u'Formats')),
             # ('license_id', _(u'Licences')),
             # ('tags', _(u'Mots-clés')),
-            ])
+        ])
 
     # IPackageController
     def before_index(self, pkg_dict):
@@ -74,7 +77,7 @@ class Pigma_ThemePlugin(plugins.SingletonPlugin):
 
         return package_dict
 
-    #ITemplateHelper
+    # ITemplateHelper
     def get_helpers(self):
         '''Register the most_popular_groups() function above as a template
         helper function.
@@ -84,67 +87,78 @@ class Pigma_ThemePlugin(plugins.SingletonPlugin):
         # extension they belong to, to avoid clashing with functions from
         # other extensions.
         return {
-            'dict_list_or_dict_reduce': dict_list_or_dict_reduce,
-            'filter_orgs': filter_orgs,
-            'filtered_pager': filtered_pager
+            'dict_list_or_dict_reduce': dict_list_or_dict_reduce
         }
+
+    # IRoutes
+    def before_map(self, map):
+        map.connect('ckanext-pigma_theme-orgs-list', '/organization',
+                    controller='ckanext.pigma_theme.controllers.organization:OrganizationController',
+                    action='index')
+        return map
+
+    def after_map(self, map):
+        """
+        This is needed in order to overload the router.
+        """
+        return map
 
 
 mapping = {
-        "administration": (
-            u"Services d'utilité publique et services publics"
-            ),
-        "agriculture": (
-            u"Installations agricoles et aquacoles"
-            ),
-        "amenagement": (
-            u"Adresses",
-            u"Zones de gestion, de restriction ou de réglementation et unités de déclaration"
-            ),
-        "economie": (
-            u"Lieux de production et sites industriels"
-            ),
-        "energie": (
-            u"Sources d'énergie"
-            ),
-        "environnement": (
-            u"Régions biogéographiques",
-            u"Habitats et biotopes",
-            u"Répartition des espèces",
-            u"Conditions atmosphériques",
-            u"Caractéristiques géographiques météorologiques",
-            u"Sites protégés",
-            u"Sols",
-            u"Géologie",
-            u"Ressources minérales",
-            u"Zones à risque naturel",
-            u"Altitude",
-            u"Hydrographie"
-            ),
-        "equipement": (
-            u"Bâtiments",
-            u"Installations de suivi environnemental"
-            ),
-        "mer": (
-            u"Régions maritimes",
-            u"Caractéristiques géographiques océanographiques"
-            ),
-        "imagerie": (
-            u"Ortho-imagerie",
-            u"Occupation des terres",
-            u"Parcelles cadastrales",
-            u"Usage des sols"
-            ),
-        "limites-administratives": (
-            u"Unités administratives",
-            u"Unités statistiques",
-            u"Dénominations géographiques"
-            ),
-        "mobilite": (
-            u"Réseaux de transport"
-            ),
-        "sante": (
-            u"Santé et sécurité des personnes",
-            u"Répartition de la population-Démographie"
-            )
-        }
+    "administration": (
+        u"Services d'utilité publique et services publics"
+    ),
+    "agriculture": (
+        u"Installations agricoles et aquacoles"
+    ),
+    "amenagement": (
+        u"Adresses",
+        u"Zones de gestion, de restriction ou de réglementation et unités de déclaration"
+    ),
+    "economie": (
+        u"Lieux de production et sites industriels"
+    ),
+    "energie": (
+        u"Sources d'énergie"
+    ),
+    "environnement": (
+        u"Régions biogéographiques",
+        u"Habitats et biotopes",
+        u"Répartition des espèces",
+        u"Conditions atmosphériques",
+        u"Caractéristiques géographiques météorologiques",
+        u"Sites protégés",
+        u"Sols",
+        u"Géologie",
+        u"Ressources minérales",
+        u"Zones à risque naturel",
+        u"Altitude",
+        u"Hydrographie"
+    ),
+    "equipement": (
+        u"Bâtiments",
+        u"Installations de suivi environnemental"
+    ),
+    "mer": (
+        u"Régions maritimes",
+        u"Caractéristiques géographiques océanographiques"
+    ),
+    "imagerie": (
+        u"Ortho-imagerie",
+        u"Occupation des terres",
+        u"Parcelles cadastrales",
+        u"Usage des sols"
+    ),
+    "limites-administratives": (
+        u"Unités administratives",
+        u"Unités statistiques",
+        u"Dénominations géographiques"
+    ),
+    "mobilite": (
+        u"Réseaux de transport"
+    ),
+    "sante": (
+        u"Santé et sécurité des personnes",
+        u"Répartition de la population-Démographie"
+    )
+}
