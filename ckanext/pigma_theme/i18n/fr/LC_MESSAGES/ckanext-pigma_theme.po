@@ -64,7 +64,7 @@ msgid "Apply"
 msgstr "Appliquer"
 
 msgid "unknow"
-msgstr "Inconnu"
+msgstr "Inconnue"
 
 msgid "intermittently"
 msgstr "Ponctuelle"
