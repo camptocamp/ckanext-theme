@@ -7,6 +7,10 @@ h2 {
     border: 0;
     box-shadow: 0 0 0;
 }
+.icon-globe:after {
+  content: '\f23a';
+  font: normal normal normal 14px/1 FontAwesome;
+}
 
 .no-nav > .col-sm-9 {
   width: 100%;
@@ -113,6 +117,9 @@ h2 {
 }
 
 /*** Tags clickables - Type de donnees ***/
+.label {
+  margin-right: .5em;
+}
 .label[data-format=donnees-ouvertes] {
     background-color: #FF6660;
 }
@@ -395,6 +402,9 @@ fieldset.checkboxes label input[type=checkbox] {
     max-width: 174px;
     text-align: center;
 }
+.media-item .img-responsive {
+   display: inline-block;
+}
 .module.social .nav {
     background:#fff;
 }
@@ -407,4 +417,6 @@ fieldset.checkboxes label input[type=checkbox] {
 }
 .media-heading {
     color: #005EA3;
+    word-break: normal;
+    hyphens: none;
 }
