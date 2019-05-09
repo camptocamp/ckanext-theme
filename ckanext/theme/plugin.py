@@ -6,7 +6,7 @@ from os.path import join, dirname, abspath
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 from ckan.plugins.toolkit import _
-from ckanext.pigma_theme.template_helpers import dict_list_or_dict_reduce
+from ckanext.theme.template_helpers import dict_list_or_dict_reduce
 from ckanext.spatial.interfaces import ISpatialHarvester
 
 import logging
@@ -14,7 +14,7 @@ import logging
 log = logging.getLogger(__name__)
 
 
-class Pigma_ThemePlugin(plugins.SingletonPlugin):
+class ThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IRoutes)
     plugins.implements(plugins.IFacets, inherit=True)
@@ -28,7 +28,7 @@ class Pigma_ThemePlugin(plugins.SingletonPlugin):
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
-        toolkit.add_resource('fanstatic', 'pigma_theme')
+        toolkit.add_resource('fanstatic', 'theme')
 
     # IFacets
     def dataset_facets(self, facets_dict, package_type):
@@ -66,7 +66,7 @@ class Pigma_ThemePlugin(plugins.SingletonPlugin):
 
     # ITranslation
     def i18n_domain(self):
-        return 'ckanext-pigma_theme'
+        return 'ckanext-theme'
 
     # ISpatialHarvester
     def get_package_dict(self, context, data_dict):
@@ -98,8 +98,8 @@ class Pigma_ThemePlugin(plugins.SingletonPlugin):
 
     # IRoutes
     def before_map(self, map):
-        map.connect('ckanext-pigma_theme-orgs-list', '/organization',
-                    controller='ckanext.pigma_theme.controllers.organization:OrganizationController',
+        map.connect('ckanext-theme-orgs-list', '/organization',
+                    controller='ckanext.theme.controllers.organization:OrganizationController',
                     action='index')
         return map
 
