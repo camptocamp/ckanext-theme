@@ -1,0 +1,323 @@
+{
+    "dataset_fields": [
+        {
+            "field_name": "title",
+            "label": "Titre",
+            "preset": "title",
+            "required": true
+        },
+        {
+            "field_name": "name",
+            "label": "URL",
+            "preset": "dataset_slug",
+            "required": true
+        },
+        {
+            "field_name": "tag_string",
+            "label": "Tags",
+            "preset": "tag_string_autocomplete",
+            "required": true
+        },
+        {
+            "field_name": "license_id",
+            "form_snippet": "license.html",
+            "label": "License",
+            "required": true
+        },
+        {
+            "field_name": "owner_org",
+            "label": "Organisation",
+            "preset": "dataset_organization",
+            "required": true
+        },
+        {
+            "field_name": "notes",
+            "form_snippet": "markdown.html",
+            "label": "Description",
+            "required": true
+        },
+        {
+            "choices": [
+                {
+                    "label": "Inconnue",
+                    "value": "unknow"
+                },
+                {
+                    "label": "Ponctuelle",
+                    "value": "intermittently"
+                },
+                {
+                    "label": "Temps r\u00e9el",
+                    "value": "realtime"
+                },
+                {
+                    "label": "Quotidienne",
+                    "value": "daily"
+                },
+                {
+                    "label": "Hebdomadaire",
+                    "value": "weekly"
+                },
+                {
+                    "label": "Mensuelle",
+                    "value": "monthly"
+                },
+                {
+                    "label": "Bi-mensuelle",
+                    "value": "fortnightly"
+                },
+                {
+                    "label": "Trimestrielle",
+                    "value": "quarterly"
+                },
+                {
+                    "label": "Semestrielle",
+                    "value": "semiannual"
+                },
+                {
+                    "label": "Annuelle",
+                    "value": "annual"
+                },
+                {
+                    "label": "Sans r\u00e9gularit\u00e9",
+                    "value": "irregularly"
+                }
+            ],
+            "field_name": "update_frequency",
+            "form_include_blank_choice": false,
+            "label": "Fr\u00e9quence de mise \u00e0 jour",
+            "preset": "select",
+            "required": true
+        },
+        {
+            "choices": [
+                {
+                    "label": "Donn\u00e9es ouvertes",
+                    "value": "donnees-ouvertes"
+                },
+                {
+                    "label": "Donn\u00e9es intelligentes",
+                    "value": "donnees-intelligentes"
+                },
+                {
+                    "label": "Donn\u00e9es g\u00e9ographiques",
+                    "value": "donnees-geographiques"
+                },
+                {
+                    "label": "Rapports et \u00e9tudes",
+                    "value": "rapports-etudes"
+                },
+                {
+                    "label": "Non renseign\u00e9",
+                    "value": "unknown"
+                }
+            ],
+            "field_name": "datatype",
+            "label": "Type de donn\u00e9es",
+            "preset": "multiple_checkbox",
+            "required": true
+        },
+        {
+            "display_snippet": null,
+            "field_name": "thumbnail",
+            "label": "Imagette"
+        },
+        {
+            "field_name": "category",
+            "label": "Catégories",
+            "help_text": "Choisissez une ou plusieurs catégories en maintenant la touche CTRL enfoncée",
+            "preset": "multiple_select",
+            "choices": [
+                {
+                   "value": "foret",
+                   "label": "For\u00eat"
+                },
+                {
+                   "value": "agriculture",
+                   "label": "Agriculture"
+                },
+                {
+                   "value": "viticulture",
+                   "label": "Viticulture"
+                },
+                {
+                   "value": "nafu",
+                   "label": "NAFU"
+                },
+                {
+                   "value": "orrna",
+                   "label": "ORRNA"
+                },
+                {
+                   "value": "recherche",
+                   "label": "Recherche"
+                },
+                {
+                   "value": "services-etat",
+                   "label": "Services de l'\u00e9tat"
+                },
+                {
+                   "value": "socio-eco",
+                   "label": "Socio-\u00e9conomique"
+                }
+            ]
+        },
+        {
+            "field_name": "hyperlink",
+            "display_snippet": "default_link.html",
+            "label": "Lien web"
+        },
+        {
+            "display_property": "foaf:homepage",
+            "display_snippet": "default_link.html",
+            "field_name": "inspire_url",
+            "label": "URL de la fiche INSPIRE"
+        },
+        {
+            "choices": [
+                {
+                    "label": "Ind\u00e9finie",
+                    "value": "indefinie"
+                },
+                {
+                    "label": "Pays",
+                    "value": "pays"
+                },
+                {
+                    "label": "R\u00e9gion",
+                    "value": "region"
+                },
+                {
+                    "label": "D\u00e9partement",
+                    "value": "departement"
+                },
+                {
+                    "label": "Intercommunalit\u00e9 (EPCI)",
+                    "value": "epci"
+                },
+                {
+                    "label": "Commune",
+                    "value": "commune"
+                }
+            ],
+            "field_name": "granularity",
+            "form_include_blank_choice": false,
+            "label": "Granularit\u00e9 de la couverture territoriale",
+            "preset": "select"
+        },
+        {
+            "field_name": "dataset_publication_date",
+            "label": "Date de publication",
+            "preset": "date"
+        },
+        {
+            "field_name": "dataset_modification_date",
+            "label": "Date de mise \u00e0 jour",
+            "preset": "date"
+        },
+        {
+            "choices": [
+                {
+                    "label": "ALPI",
+                    "value": "alpi"
+                },
+                {
+                    "label": "NA Mobilit\u00e9s",
+                    "value": "na-mobilites"
+                },
+                {
+                    "label": "CDG 47",
+                    "value": "cdg-47"
+                },
+                {
+                    "label": "ATD 24",
+                    "value": "atd-24"
+                },
+                {
+                    "label": "Gironde Num",
+                    "value": "gironde-numerique"
+                }
+            ],
+            "field_name": "support",
+            "form_include_blank_choice": true,
+            "label": "Support Technique",
+            "preset": "select"
+        },
+        {
+            "display_property": "dc:creator",
+            "field_name": "author",
+            "form_placeholder": "Jean Dupont",
+            "label": "Contact"
+        },
+        {
+            "display_email_name_field": "author",
+            "display_property": "dc:creator",
+            "display_snippet": "default_email.html",
+            "field_name": "author_email",
+            "label": "E-mail du contact"
+        },
+        {
+            "display_snippet": null,
+            "field_name": "spatial",
+            "label": "\u00c9tendue g\u00e9ographique"
+        }
+    ],
+    "dataset_type": "dataset",
+    "resource_fields": [
+        {
+            "field_name": "url",
+            "label": "URL",
+            "preset": "resource_url_upload"
+        },
+        {
+            "field_name": "name",
+            "label": "Nom",
+            "required": true
+        },
+        {
+            "field_name": "description",
+            "form_snippet": "markdown.html",
+            "label": "Description",
+            "required": true
+        },
+        {
+            "choices": [
+                {
+                    "label": "Fichier principal",
+                    "value": "file"
+                },
+                {
+                    "label": "Documentation",
+                    "value": "doc"
+                },
+                {
+                    "label": "Mise \u00e0 jour",
+                    "value": "maj"
+                },
+                {
+                    "label": "API",
+                    "value": "api"
+                },
+                {
+                    "label": "D\u00e9p\u00f4t de code",
+                    "value": "repository"
+                },
+                {
+                    "label": "Autre",
+                    "value": "other"
+                }
+            ],
+            "field_name": "data_type",
+            "form_include_blank_choice": false,
+            "label": "Type de donn\u00e9es",
+            "preset": "select",
+            "required": true
+        },
+        {
+            "field_name": "format",
+            "label": "Format",
+            "preset": "resource_format_autocomplete"
+        }
+    ],
+    "scheming_version": 1
+}

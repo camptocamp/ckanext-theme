@@ -1,0 +1,13 @@
+{% block header_site_search %}
+<section class="module" id="recherche">
+    <div class="module-content form_search">
+        <form class="section site-search" action="{% url_for controller='package', action='search' %}" method="get">
+            <div class="field">
+                <!--label for="field-sitewide-search">{% block header_site_search_label %}{{ _('Search Datasets') }}{% endblock %}</label-->
+                <input id="field-sitewide-search" type="text" name="q" placeholder="{{ _('Search') }}" />
+                <button id="searchsubmit" type="submit"><i class="fa fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
