@@ -16,7 +16,6 @@ log = logging.getLogger(__name__)
 
 class ThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
-    plugins.implements(plugins.IRoutes)
     plugins.implements(plugins.IFacets, inherit=True)
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.ITranslation)
@@ -95,19 +94,6 @@ class ThemePlugin(plugins.SingletonPlugin):
         return {
             'dict_list_or_dict_reduce': dict_list_or_dict_reduce
         }
-
-    # IRoutes
-    def before_map(self, map):
-        map.connect('ckanext-theme-orgs-list', '/organization',
-                    controller='ckanext.theme.controllers.organization:OrganizationController',
-                    action='index')
-        return map
-
-    def after_map(self, map):
-        """
-        This is needed in order to overload the router.
-        """
-        return map
 
 
 mapping = {
