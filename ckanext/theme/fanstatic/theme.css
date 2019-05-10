@@ -307,6 +307,9 @@ h2 {
     border: 0;
     height: auto;
 }
+.homepage [role=main] {
+  padding: 20vh 0;
+}
 [role=main] .nav li a {
     text-transform: none;
 }
