@@ -38,7 +38,6 @@ class ThemePlugin(plugins.SingletonPlugin):
             ('update_frequency', _(u'Fréquence de mise à jour')),
             ('granularity', _(u'Granularité')),
             ('organization', _(u'Organisations')),
-            # ('support', _(u'Supports')),
             # ('res_format', _(u'Formats')),
             # ('license_id', _(u'Licences')),
             # ('tags', _(u'Mots-clés')),

@@ -137,18 +137,6 @@
                    "label": "Agriculture"
                 },
                 {
-                   "value": "viticulture",
-                   "label": "Viticulture"
-                },
-                {
-                   "value": "nafu",
-                   "label": "NAFU"
-                },
-                {
-                   "value": "orrna",
-                   "label": "ORRNA"
-                },
-                {
                    "value": "recherche",
                    "label": "Recherche"
                 },
@@ -214,34 +202,6 @@
             "field_name": "dataset_modification_date",
             "label": "Date de mise \u00e0 jour",
             "preset": "date"
-        },
-        {
-            "choices": [
-                {
-                    "label": "ALPI",
-                    "value": "alpi"
-                },
-                {
-                    "label": "NA Mobilit\u00e9s",
-                    "value": "na-mobilites"
-                },
-                {
-                    "label": "CDG 47",
-                    "value": "cdg-47"
-                },
-                {
-                    "label": "ATD 24",
-                    "value": "atd-24"
-                },
-                {
-                    "label": "Gironde Num",
-                    "value": "gironde-numerique"
-                }
-            ],
-            "field_name": "support",
-            "form_include_blank_choice": true,
-            "label": "Support Technique",
-            "preset": "select"
         },
         {
             "display_property": "dc:creator",

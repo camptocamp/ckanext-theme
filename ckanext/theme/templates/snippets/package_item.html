@@ -102,16 +102,6 @@ Example:
       </ul>
     {% endblock %}
 
-	  <div class="banner-support-wrap">
-		<span class="banner-support" data-format="{{ package.support }}">
-			{% set schema = h.scheming_get_dataset_schema('dataset') %}
-			{% for field in schema.dataset_fields if field.field_name == 'support' %}
-        {% for choice in field.choices if choice.value == package.support %}
-        	{{ choice.label }}
-		    {% endfor %}
-      {% endfor %}
-		</span>
-	  </div>
 	</div>
   </li>
 {% endblock %}
