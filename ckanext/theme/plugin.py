@@ -32,14 +32,14 @@ class ThemePlugin(plugins.SingletonPlugin):
     # IFacets
     def dataset_facets(self, facets_dict, package_type):
         return OrderedDict([
-            ('groups', _(u'Thèmes')),
-            ('keywords', _(u'Mots-clés')),
-            ('datatype', _(u'Types')),
-            ('update_frequency', _(u'Fréquence de mise à jour')),
-            ('granularity', _(u'Granularité')),
             ('organization', _(u'Organisations')),
-            # ('res_format', _(u'Formats')),
-            # ('license_id', _(u'Licences')),
+            ('groups', _(u'Thématiques')),
+            ('keywords', _(u'Mots-clés')),
+            ('granularity', _(u'Granularité')),
+            ('res_format', _(u'Format')),
+            ('update_frequency', _(u'Fréquence de mise à jour')),
+            ('license_id', _(u'Licence')),
+            # ('datatype', _(u'Types')),
             # ('tags', _(u'Mots-clés')),
         ])
 

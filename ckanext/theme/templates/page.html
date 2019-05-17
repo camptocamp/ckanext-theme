@@ -2,6 +2,8 @@
 
 {%- block page -%}
 
+  <iframe src="https://lb.lb-http.geo2france.caas.camptocamp.com/portail/banner?lang=fr&active=ckan" class="nav-frame" scrolling="no" frameborder="0"></iframe>
+
   {% block skip %}
     <div class="hide"><a href="#content">{{ _('Skip to content') }}</a></div>
   {% endblock %}
@@ -11,9 +13,7 @@
   making sitewide header changes it is preferable to override the header.html
   file.
   #}
-  {%- block header %}
-    {% include "header.html" %}
-  {% endblock -%}
+  {%- block header %}{% endblock -%}
 
   {# The content block allows you to replace the content of the page if needed #}
   {%- block content %}
