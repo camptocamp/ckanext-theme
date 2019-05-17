@@ -32,15 +32,15 @@ class ThemePlugin(plugins.SingletonPlugin):
     # IFacets
     def dataset_facets(self, facets_dict, package_type):
         return OrderedDict([
-            ('organization', _(u'Organisations')),
-            ('groups', _(u'Thématiques')),
-            ('keywords', _(u'Mots-clés')),
+            ('organization', _(u'Organisation')),
+            ('groups', _(u'Thématique')),
+            ('keywords', _(u'Mot-clé')),
             ('granularity', _(u'Granularité')),
             ('res_format', _(u'Format')),
             ('update_frequency', _(u'Fréquence de mise à jour')),
             ('license_id', _(u'Licence')),
-            # ('datatype', _(u'Types')),
-            # ('tags', _(u'Mots-clés')),
+            # ('datatype', _(u'Type')),
+            # ('tags', _(u'Mot-clé')),
         ])
 
     # IPackageController
