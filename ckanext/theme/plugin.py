@@ -95,24 +95,22 @@ class ThemePlugin(plugins.SingletonPlugin):
         }
 
 
+# Note that mapping misses culture & education-formation groups
 mapping = {
-    "administration": (
+    "institutions-partenariats": (
         u"Services d'utilité publique et services publics"
-    ),
-    "agriculture": (
-        u"Installations agricoles et aquacoles"
     ),
     "amenagement": (
         u"Adresses",
         u"Zones de gestion, de restriction ou de réglementation et unités de déclaration"
     ),
-    "economie": (
+    "economie-emploi": (
         u"Lieux de production et sites industriels"
     ),
-    "energie": (
+    "reseaux-energies": (
         u"Sources d'énergie"
     ),
-    "environnement": (
+    "environnement-risques-sante": (
         u"Régions biogéographiques",
         u"Habitats et biotopes",
         u"Répartition des espèces",
@@ -126,30 +124,12 @@ mapping = {
         u"Altitude",
         u"Hydrographie"
     ),
-    "equipement": (
-        u"Bâtiments",
-        u"Installations de suivi environnemental"
-    ),
-    "mer": (
-        u"Régions maritimes",
-        u"Caractéristiques géographiques océanographiques"
-    ),
-    "imagerie": (
-        u"Ortho-imagerie",
-        u"Occupation des terres",
-        u"Parcelles cadastrales",
-        u"Usage des sols"
-    ),
-    "limites-administratives": (
+    "donnees-reference": (
         u"Unités administratives",
         u"Unités statistiques",
         u"Dénominations géographiques"
     ),
-    "mobilite": (
+    "transports-mobilites": (
         u"Réseaux de transport"
-    ),
-    "sante": (
-        u"Santé et sécurité des personnes",
-        u"Répartition de la population-Démographie"
     )
 }
