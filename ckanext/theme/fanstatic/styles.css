@@ -21,6 +21,10 @@
     text-decoration: underline;
 }
 
+.hidden {
+    display:none;
+}
+
 /*overrides main.css*/
 body {
     font-family: "Raleway";
@@ -104,6 +108,7 @@ header.header-home nav .nav::before {
     width: 2.7rem;
     stroke: #005EA3;
 }
+
 
 .button-nav .padlock.link_doc span{
     color: #9f9e8e;
