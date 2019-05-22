@@ -8,6 +8,9 @@ import ckan.plugins.toolkit as toolkit
 from ckan.plugins.toolkit import _
 from ckanext.theme.template_helpers import dict_list_or_dict_reduce
 from ckanext.spatial.interfaces import ISpatialHarvester
+import ckanext.theme.api as api
+import ckanext.theme.config as config
+
 
 import logging
 
@@ -16,12 +19,22 @@ log = logging.getLogger(__name__)
 
 class ThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
+    plugins.implements(plugins.IConfigurable)
+    plugins.implements(plugins.IBlueprint)
     plugins.implements(plugins.IFacets, inherit=True)
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.ITranslation)
     plugins.implements(ISpatialHarvester, inherit=True)
     plugins.implements(plugins.ITemplateHelpers)
 
+    # IBlueprint
+    def get_blueprint(self):
+        return api.theme_api
+
+    # Iconfigurable
+    def configure(self, main_config):
+        theme_config = config.configure(main_config)
+        main_config.update(theme_config)
 
     # IConfigurer
     def update_config(self, config_):

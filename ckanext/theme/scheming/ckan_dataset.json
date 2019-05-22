@@ -217,9 +217,23 @@
             "label": "E-mail du contact"
         },
         {
+            "display_snippet": "text.html",
+            "field_name": "spatial-name",
+            "label": "\u00c9tendue g\u00e9ographique",
+            "preset": "geog_extent_name_autocomplete"
+        },
+        {
             "display_snippet": null,
+            "form_snippet": "text_hidden.html",
+            "field_name": "spatial-text",
+            "label": "\u00c9tendue g\u00e9ographique (id)"
+        },
+        {
+            "display_snippet": null,
+            "form_snippet": "json_hidden.html",
             "field_name": "spatial",
-            "label": "\u00c9tendue g\u00e9ographique"
+            "label": "\u00c9tendue g\u00e9ographique (geojson)",
+            "preset": "json_object"
         }
     ],
     "dataset_type": "dataset",

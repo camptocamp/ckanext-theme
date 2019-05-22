@@ -60,6 +60,20 @@
             }
         },
         {
+            "preset_name": "geog_extent_name_autocomplete",
+            "values": {
+                "form_attrs": {
+                    "data-module": "theme_autocomplete_geog_extent",
+                    "data-module-source": "/theme-api/geoextent/name/autocomplete?incomplete=?",
+                    "data-module-geoextent-service": "/theme-api/geoextent/bbox",
+                    "data-module-key": "id",
+                    "data-module-label": "name"
+                },
+                "form_placeholder": "eg. Nouvelle Aquitaine",
+                "validators": "ignore_missing unicode"
+            }
+        },
+        {
             "preset_name": "select",
             "values": {
                 "display_snippet": "select.html",
