@@ -156,6 +156,7 @@ body, h1, h2, h3, h4, .btn {
     top: auto !important;
     max-width: 174px;
     text-align: center;
+    height: 14em;
 }
 .media-item .img-responsive {
    display: inline-block;
