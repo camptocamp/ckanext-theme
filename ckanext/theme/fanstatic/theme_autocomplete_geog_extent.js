@@ -74,6 +74,7 @@ this.ckan.module('theme_autocomplete_geog_extent', function (jQuery) {
       });
 
       var geoextentService = this.options.geoextentService;
+      var sandbox = this.sandbox
 
       this.el.on('select2-selecting', function(e) {
         // Set the text value on second input element
@@ -87,14 +88,15 @@ this.ckan.module('theme_autocomplete_geog_extent', function (jQuery) {
         data['id'] = id;
         if (geoextentService != null) {
             $.get(
-                 geoextentService,
+                 sandbox.client.url(geoextentService),
                  data,
                  function(responseText) {
-                    if (responseText.status !== 'error') {
                        $('textarea[name="spatial"]').val(responseText);
-                    }
                  }
-            );
+            ).fail( function() {
+                $('textarea[name="spatial"]').val('{}');
+                sandbox.notify('Unable to get geojson extent from API', 'error');
+            });
         }
       });
       this._select2 = select2;
