@@ -1,6 +1,7 @@
 # coding: utf8
 # CSW Harvest helper functions
 import re
+import urllib
 
 def gn_csw_build_inspire_link(harvester_source, iso_values):
     """
@@ -9,13 +10,24 @@ def gn_csw_build_inspire_link(harvester_source, iso_values):
     :param iso_values:
     :return:
     """
-    url = ""
+    url = ''
     if harvester_source.type == u'csw':
         harvester_url = harvester_source.url
-        # extract base URL (should be fine at least with geonetwork catalogs)
+        # Try several strategies:
+        # 1. Try to compute the URL by contenation of the source's base url and the metadata's UUID
+        #    extract base URL (should be fine at least with geonetwork catalogs):
         base_url = re.search('(.*)/csw[\w-]*', harvester_url)
         if base_url.group(1):
             url = u"{}/catalog.search#/metadata/{}".format(base_url.group(1), iso_values.get('guid'))
         #TODO: check if the url is valid and if not try other ways, like for instance the unique-resource-identifier value
         # or try other patterns matching catalogs other than geonetwork
-    return url
+        if urllib.urlopen(url).getcode() == 200:
+            return url
+
+        # 2. Return the value of unique-resource-identifier if valid
+        url = iso_values.get('unique-resource-identifier')
+        if urllib.urlopen(url).getcode() == 200:
+            return url
+
+    # else...
+    return ''
