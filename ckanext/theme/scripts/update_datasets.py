@@ -192,6 +192,8 @@ def main():
         else:
             patch = {}
             patch['id'] = package
+            patch['inspire_url'] = get(pkg, 'inspire-url')
+            #patch['category'] = get(pkg, 'topic-categories')
             patch['author'] = get_sub(pkg, 'responsible-party', 'roles', 'name', 'pointOfContact')
             patch['author_email'] = get(pkg, 'contact-email')
             patch['dataset_modification_date'] = get_sub(pkg, 'dataset-reference-date', 'type', 'value', 'creation')
