@@ -40,15 +40,19 @@
             "choices": [
                 {
                     "label": "Inconnue",
-                    "value": "unknow"
+                    "value": "unknown"
                 },
+//                {
+//                    "label": "Ponctuelle",
+//                    "value": "intermittently"
+//                },
+//                {
+//                    "label": "Temps r\u00e9el",
+//                    "value": "realtime"
+//                },
                 {
-                    "label": "Ponctuelle",
-                    "value": "intermittently"
-                },
-                {
-                    "label": "Temps r\u00e9el",
-                    "value": "realtime"
+                    "label": "Continue",
+                    "value": "continual"
                 },
                 {
                     "label": "Quotidienne",
@@ -59,12 +63,12 @@
                     "value": "weekly"
                 },
                 {
-                    "label": "Mensuelle",
-                    "value": "monthly"
-                },
-                {
                     "label": "Bi-mensuelle",
                     "value": "fortnightly"
+                },
+                {
+                    "label": "Mensuelle",
+                    "value": "monthly"
                 },
                 {
                     "label": "Trimestrielle",
@@ -72,15 +76,23 @@
                 },
                 {
                     "label": "Semestrielle",
-                    "value": "semiannual"
+                    "value": "biannually"
                 },
                 {
                     "label": "Annuelle",
                     "value": "annual"
                 },
                 {
+                    "label": "Lorsque n\u00e9cessaire",
+                    "value": "asNeeded"
+                },
+                {
                     "label": "Sans r\u00e9gularit\u00e9",
                     "value": "irregularly"
+                },
+                {
+                    "label": "Non planifi\u00e9e",
+                    "value": "notPlanned"
                 }
             ],
             "field_name": "update_frequency",
