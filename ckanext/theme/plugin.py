@@ -10,6 +10,7 @@ from ckanext.theme.template_helpers import dict_list_or_dict_reduce
 from ckanext.spatial.interfaces import ISpatialHarvester
 import ckanext.theme.api as api
 import ckanext.theme.config as config
+from ckanext.theme.harvest_helpers import gn_csw_build_inspire_link
 
 
 import logging
@@ -91,6 +92,14 @@ class ThemePlugin(plugins.SingletonPlugin):
                 if keyword in keywords:
                     groups.append({'id': group})
         package_dict['groups'] = list(groups)
+        package_dict['extras'].append(
+            {'key': 'inspire-url', 'value': gn_csw_build_inspire_link(data_dict['harvest_object'].source,
+                                                                      iso_values)}
+        )
+        package_dict['extras'].append(
+            {'key': 'topic-categories', 'value': ', '.join(iso_values.get('topic-category'))}
+        )
+
 
         return package_dict
 
