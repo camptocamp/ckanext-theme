@@ -197,11 +197,6 @@ def main():
             patch['dataset_modification_date'] = get_sub(pkg, 'dataset-reference-date', 'type', 'value', 'creation')
             patch['dataset_publication_date'] = get_sub(pkg, 'dataset-reference-date', 'type', 'value', 'publication')
             patch['datatype'] = infer_datatypes(pkg)
-            # we reset the extras field and restrict it to only the encessary fields because of some known problems with
-            # harvesting the extras. Documented in
-            # https://datawagovau.readthedocs.io/en/latest/operations.html#ckan-to-ckan-harvesting-ckanext-harvest
-            # see 'Known problem' paragraph. Sepcifically, the extra 'spatial' key will cause trouble if kept
-            patch['extras'] = [{u'key': u'frequency', u'value':get(pkg, 'frequency-of-update')}]
             patch['license_id'] = 'other-at'
             patch['maintainer_email'] = get(pkg, 'contact-email')
             patch['metadata_created'] = get(pkg, 'metadata-date')
@@ -211,6 +206,11 @@ def main():
             patch['tags'] = pkg['tags']
             patch['thumbnail'] = get(pkg, 'graphic-preview-file')
             patch['update_frequency'] = get(pkg, 'frequency-of-update', 'unknow')
+            # we reset the extras field and restrict it to only the encessary fields because of some known problems with
+            # harvesting the extras. Documented in
+            # https://datawagovau.readthedocs.io/en/latest/operations.html#ckan-to-ckan-harvesting-ckanext-harvest
+            # see 'Known problem' paragraph. Sepcifically, the extra 'spatial' key will cause trouble if kept
+            patch['extras'] = [{u'key': u'frequency', u'value':patch['update_frequency']}]
 
             for tag in patch['tags']:
                 tag['name'] = slugify(tag['name'])
