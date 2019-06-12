@@ -42,14 +42,6 @@
                     "label": "Inconnue",
                     "value": "unknown"
                 },
-//                {
-//                    "label": "Ponctuelle",
-//                    "value": "intermittently"
-//                },
-//                {
-//                    "label": "Temps r\u00e9el",
-//                    "value": "realtime"
-//                },
                 {
                     "label": "Continue",
                     "value": "continual"
