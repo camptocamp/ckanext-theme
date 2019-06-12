@@ -6,12 +6,19 @@ import six
 log = logging.getLogger(__name__)
 
 def configure(main_config):
+    """
+    Read
+    :param main_config:
+    :return:
+    """
     config = {}
     schema = {
         'ckanext.theme.api.geoextent.name.autocomplete.url': {
             'default': u'https://www.data.gouv.fr/api/1/spatial/zones/suggest?q={}&size={}'},
         'ckanext.theme.api.geoextent.bbox.url': {
             'default': u'https://www.data.gouv.fr/api/1/spatial/zone/{}'},
+        'ckanext.theme.harvest.poc.priority.list': {
+            'default': u'pointOfContact, author, owner, publisher, processor, originator, distributor, resourceProvider, custodian, principalInvestigator, user'},
     }
     errors = []
     for i in schema:
