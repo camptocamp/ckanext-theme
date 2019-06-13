@@ -37,59 +37,10 @@
             "required": true
         },
         {
-            "choices": [
-                {
-                    "label": "Inconnue",
-                    "value": "unknown"
-                },
-                {
-                    "label": "Continue",
-                    "value": "continual"
-                },
-                {
-                    "label": "Quotidienne",
-                    "value": "daily"
-                },
-                {
-                    "label": "Hebdomadaire",
-                    "value": "weekly"
-                },
-                {
-                    "label": "Bi-mensuelle",
-                    "value": "fortnightly"
-                },
-                {
-                    "label": "Mensuelle",
-                    "value": "monthly"
-                },
-                {
-                    "label": "Trimestrielle",
-                    "value": "quarterly"
-                },
-                {
-                    "label": "Semestrielle",
-                    "value": "biannually"
-                },
-                {
-                    "label": "Annuelle",
-                    "value": "annual"
-                },
-                {
-                    "label": "Lorsque n\u00e9cessaire",
-                    "value": "asNeeded"
-                },
-                {
-                    "label": "Sans r\u00e9gularit\u00e9",
-                    "value": "irregularly"
-                },
-                {
-                    "label": "Non planifi\u00e9e",
-                    "value": "notPlanned"
-                }
-            ],
             "field_name": "update_frequency",
-            "form_include_blank_choice": false,
             "label": "Fr\u00e9quence de mise \u00e0 jour",
+            "choices_helper": "theme_update_frequency_etalab_codelist",
+            "form_include_blank_choice": false,
             "preset": "select",
             "required": true
         },
