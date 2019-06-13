@@ -6,7 +6,7 @@ from os.path import join, dirname, abspath
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 from ckan.plugins.toolkit import _
-from ckanext.theme.template_helpers import dict_list_or_dict_reduce
+from ckanext.theme.template_helpers import get_helpers as theme_get_template_helpers
 from ckanext.spatial.interfaces import ISpatialHarvester
 import ckanext.theme.api as api
 import ckanext.theme.config as config
@@ -99,6 +99,9 @@ class ThemePlugin(plugins.SingletonPlugin):
         package_dict['extras'].append(
             {'key': 'topic-categories', 'value': ', '.join(iso_values.get('topic-category'))}
         )
+
+
+        # set a consistent point of contact (name & email match a same entity instead of random-ish)
         poc = harvest_helpers.get_poc(iso_values)
         if poc:
             harvest_helpers.update_or_set_extra(package_dict, 'contact', poc.get('organisation-name',
@@ -109,16 +112,7 @@ class ThemePlugin(plugins.SingletonPlugin):
 
     # ITemplateHelper
     def get_helpers(self):
-        '''Register the most_popular_groups() function above as a template
-        helper function.
-
-        '''
-        # Template helper function names should begin with the name of the
-        # extension they belong to, to avoid clashing with functions from
-        # other extensions.
-        return {
-            'dict_list_or_dict_reduce': dict_list_or_dict_reduce
-        }
+        return theme_get_template_helpers()
 
 
 # Note that mapping misses culture & education-formation groups

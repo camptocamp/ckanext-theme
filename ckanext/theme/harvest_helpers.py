@@ -6,6 +6,83 @@ import urllib
 from ckan.plugins.toolkit import config
 
 
+# codelists used to get correspondence between geonetwork (iso_code) & etalab (eta_code), and also labels
+update_frequencies = [
+    {
+        'iso_code': 'continual',
+        'eta_code': 'continuous',
+        'label_fr': 'Continue',
+        'description_fr': ''
+    },
+    {
+        'iso_code': 'daily',
+        'eta_code': 'daily',
+        'label_fr': 'Quotidienne',
+        'description_fr': ''
+    },
+    {
+        'iso_code': 'weekly',
+        'eta_code': 'weekly',
+        'label_fr': 'Hebdomadaire',
+        'description_fr': ''
+    },
+    {
+        'iso_code': 'fortnightly',
+        'eta_code': 'biweekly',
+        'label_fr': 'Bi-mensuelle',
+        'description_fr': ''
+    },
+    {
+        'iso_code': 'monthly',
+        'eta_code': 'monthly',
+        'label_fr': 'Mensuelle',
+        'description_fr': ''
+    },
+    {
+        'iso_code': 'quarterly',
+        'eta_code': 'quarterly',
+        'label_fr': 'Trimestrielle',
+        'description_fr': ''
+    },
+    {
+        'iso_code': 'biannually',
+        'eta_code': 'semiannual',
+        'label_fr': 'Semestrielle',
+        'description_fr': ''
+    },
+    {
+        'iso_code': 'annually',
+        'eta_code': 'annual',
+        'label_fr': 'Annuelle',
+        'description_fr': ''
+    },
+    {
+        'iso_code': 'asNeeded',
+        'eta_code': 'irregular',
+        'label_fr': 'Lorsque nécessaire',
+        'description_fr': ''
+    },
+    {
+        'iso_code': 'irregular',
+        'eta_code': 'irregular',
+        'label_fr': 'Sans régularité',
+        'description_fr': ''
+    },
+    {
+        'iso_code': 'notPlanned',
+        'eta_code': 'punctual',
+        'label_fr': 'Non plannifié',
+        'description_fr': ''
+    },
+    {
+        'iso_code': 'unknown',
+        'eta_code': 'unknown',
+        'label_fr': 'Inconnue',
+        'description_fr': ''
+    },
+]
+
+
 def gn_csw_build_inspire_link(harvester_source, iso_values):
     """
     Try to produce a geonetwork permalink out of harvester url and metadata uuid
@@ -61,6 +138,7 @@ def update_or_set_extra(package_dict, key, value):
     :param value:
     :return:
     """
+    # get the first entry in the list comprehension
     entry = next((x for x in package_dict['extras'] if x['key'] == key), None)
     if entry:
         entry['value'] = value
