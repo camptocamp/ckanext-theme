@@ -9,76 +9,76 @@ from ckan.plugins.toolkit import config
 # codelists used to get correspondence between geonetwork (iso_code) & etalab (eta_code), and also labels
 update_frequencies = [
     {
-        'iso_code': 'continual',
-        'eta_code': 'continuous',
-        'label_fr': 'Continue',
-        'description_fr': ''
+        'iso_code': u'continual',
+        'eta_code': u'continuous',
+        'label_fr': u'Continue',
+        'description_fr': u''
     },
     {
-        'iso_code': 'daily',
-        'eta_code': 'daily',
-        'label_fr': 'Quotidienne',
-        'description_fr': ''
+        'iso_code': u'daily',
+        'eta_code': u'daily',
+        'label_fr': u'Quotidienne',
+        'description_fr': u''
     },
     {
-        'iso_code': 'weekly',
-        'eta_code': 'weekly',
-        'label_fr': 'Hebdomadaire',
-        'description_fr': ''
+        'iso_code': u'weekly',
+        'eta_code': u'weekly',
+        'label_fr': u'Hebdomadaire',
+        'description_fr': u''
     },
     {
-        'iso_code': 'fortnightly',
-        'eta_code': 'biweekly',
-        'label_fr': 'Bi-mensuelle',
-        'description_fr': ''
+        'iso_code': u'fortnightly',
+        'eta_code': u'biweekly',
+        'label_fr': u'Bi-mensuelle',
+        'description_fr': u''
     },
     {
-        'iso_code': 'monthly',
-        'eta_code': 'monthly',
-        'label_fr': 'Mensuelle',
-        'description_fr': ''
+        'iso_code': u'monthly',
+        'eta_code': u'monthly',
+        'label_fr': u'Mensuelle',
+        'description_fr': u''
     },
     {
-        'iso_code': 'quarterly',
-        'eta_code': 'quarterly',
-        'label_fr': 'Trimestrielle',
-        'description_fr': ''
+        'iso_code': u'quarterly',
+        'eta_code': u'quarterly',
+        'label_fr': u'Trimestrielle',
+        'description_fr': u''
     },
     {
-        'iso_code': 'biannually',
-        'eta_code': 'semiannual',
-        'label_fr': 'Semestrielle',
-        'description_fr': ''
+        'iso_code': u'biannually',
+        'eta_code': u'semiannual',
+        'label_fr': u'Semestrielle',
+        'description_fr': u''
     },
     {
-        'iso_code': 'annually',
-        'eta_code': 'annual',
-        'label_fr': 'Annuelle',
-        'description_fr': ''
+        'iso_code': u'annually',
+        'eta_code': u'annual',
+        'label_fr': u'Annuelle',
+        'description_fr': u''
     },
     {
-        'iso_code': 'asNeeded',
-        'eta_code': 'irregular',
-        'label_fr': 'Lorsque nécessaire',
-        'description_fr': ''
+        'iso_code': u'asNeeded',
+        'eta_code': u'irregular',
+        'label_fr': u'Lorsque nécessaire',
+        'description_fr': u''
     },
     {
-        'iso_code': 'irregular',
-        'eta_code': 'irregular',
-        'label_fr': 'Sans régularité',
-        'description_fr': ''
+        'iso_code': u'irregular',
+        'eta_code': u'irregular',
+        'label_fr': u'Sans régularité',
+        'description_fr': u''
     },
     {
-        'iso_code': 'notPlanned',
-        'eta_code': 'punctual',
-        'label_fr': 'Non plannifié',
-        'description_fr': ''
+        'iso_code': u'notPlanned',
+        'eta_code': u'punctual',
+        'label_fr': u'Non plannifié',
+        'description_fr': u''
     },
     {
-        'iso_code': 'unknown',
-        'eta_code': 'unknown',
-        'label_fr': 'Inconnue',
-        'description_fr': ''
+        'iso_code': u'unknown',
+        'eta_code': u'unknown',
+        'label_fr': u'Inconnue',
+        'description_fr': u''
     },
 ]
 
@@ -144,3 +144,14 @@ def update_or_set_extra(package_dict, key, value):
         entry['value'] = value
     else:
         package_dict['extras'].append({'key': key, 'value': value})
+
+
+def update_frequency_iso_to_eta(freq):
+    """
+    return the eta_code (etalab value) for the given iso_code
+    :param freq:
+    :return:
+    """
+    matches = (x['eta_code'] for x in update_frequencies if freq == x['iso_code'] )
+    # return the first occurrence matching the criteria
+    return next(matches)

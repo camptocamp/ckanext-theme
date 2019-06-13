@@ -6,16 +6,14 @@ import argparse
 import urllib2
 import urllib
 import json
-import pprint
 import ssl
 import re
 from base64 import encodestring
 
-from pygments import highlight
-from pygments.lexers import PythonLexer
-from pygments.formatters import Terminal256Formatter
-from pprint import pformat
 from logging import getLogger
+
+from ckanext.theme.harvest_helpers import update_frequency_iso_to_eta
+
 log = getLogger(__name__)
 
 fields_catalog = {
@@ -166,6 +164,9 @@ def main():
             help='geOrchestra user password')
     parser.add_argument('--catalog_fields_create',
                         help='Create a catalog of fields. Give the file path as parameter')
+    parser.add_argument('-f', '--force',
+                        action="store_true",
+                        help='force update on every dataset')
     args = parser.parse_args()
 
     api_uri = args.ckan_api_url
@@ -181,12 +182,7 @@ def main():
     for package in packages:
         print('Fetching «{}»'.format(package), end='')
         pkg = fetch('action/package_show?id={}'.format(package), api_uri, api_key, BASE64AUTH)
-        if 'update_frequency' in pkg:
-            print('… skipping')
-            continue
-        if False:
-            if args.catalog_fields_create:
-                _catalog_ingest(pkg)
+        if ('update_frequency' in pkg) and not args.force :
             print('… skipping')
             continue
         else:
@@ -207,7 +203,7 @@ def main():
             patch['spatial'] = get(pkg, 'spatial')
             patch['tags'] = pkg['tags']
             patch['thumbnail'] = get(pkg, 'graphic-preview-file')
-            patch['update_frequency'] = get(pkg, 'frequency-of-update', 'unknow')
+            patch['update_frequency'] = update_frequency_iso_to_eta(get(pkg, 'frequency-of-update', 'unknown'))
             # we reset the extras field and restrict it to only the encessary fields because of some known problems with
             # harvesting the extras. Documented in
             # https://datawagovau.readthedocs.io/en/latest/operations.html#ckan-to-ckan-harvesting-ckanext-harvest
