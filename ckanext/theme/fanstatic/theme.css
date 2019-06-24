@@ -61,6 +61,16 @@ body, h1, h2, h3, h4, .btn {
   box-shadow: 0 0 0 4px rgba(15, 67, 149, 0.5);
 }
 
+/* Footer */
+.site-footer {
+  background: #0F4395;
+}
+.site-footer a,
+.site-footer label,
+.site-footer p {
+  color: white;
+}
+
 .dataset-item {
     border: none;
     border-left: 3px solid #82c506;
