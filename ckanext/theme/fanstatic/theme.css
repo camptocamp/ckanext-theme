@@ -34,6 +34,33 @@ body, h1, h2, h3, h4, .btn {
   width: 100%;
 }
 
+/* Home page */
+.homepage .module-search {
+  margin: 0 7em;
+}
+.homepage .tags {
+  display: none;
+}
+.homepage .module-search .module-content {
+  border-radius: 3px;
+  background: #0F4395;
+}
+
+.homepage .media-grid {
+  margin: 3em 7em;
+  border: 0;
+  border-radius: 4px;
+}
+.homepage .media-item {
+  max-width: 12.25em;
+  height: 10em;
+}
+.homepage .media-view:focus,
+.homepage .media-view:hover {
+  border-color: #0F4395;
+  box-shadow: 0 0 0 4px rgba(15, 67, 149, 0.5);
+}
+
 .dataset-item {
     border: none;
     border-left: 3px solid #82c506;
