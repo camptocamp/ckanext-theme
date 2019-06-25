@@ -1,0 +1,23 @@
+{% block header_wrapper %}
+<header class="navbar navbar-static-top masthead">
+  <div class="container">
+    <div class="nav-collapse">
+      {% block header_site_navigation %}
+        <nav class="section navigation">
+          <ul class="nav nav-pills">
+            {% block header_site_navigation_tabs %}
+              {{ h.build_nav_main(
+                ('search', _('Datasets')),
+                ('organizations_index', _('Organizations')),
+                ('group_index', _('Groups')),
+                ('about', _('About'))
+              ) }}
+            {% endblock %}
+          </ul>
+        </nav>
+      {% endblock %}
+    </div>
+  </div>
+</header>
+{% endblock %}
+

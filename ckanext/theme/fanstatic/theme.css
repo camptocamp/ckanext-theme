@@ -61,7 +61,20 @@ body, h1, h2, h3, h4, .btn {
   box-shadow: 0 0 0 4px rgba(15, 67, 149, 0.5);
 }
 
-/* Footer */
+/* Header/Footer */
+.masthead {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+.masthead .nav li a {
+  color: #0F4395;
+}
+.masthead .nav li.active a,
+.masthead .nav li a:hover {
+  color: white;
+  background: #0F4395 !important;
+}
 .site-footer {
   background: #0F4395;
 }
@@ -69,6 +82,9 @@ body, h1, h2, h3, h4, .btn {
 .site-footer label,
 .site-footer p {
   color: white;
+}
+[role=main] {
+  border-top-width: 0;
 }
 
 .dataset-item {
