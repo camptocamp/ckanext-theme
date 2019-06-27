@@ -100,10 +100,6 @@ class ThemePlugin(plugins.SingletonPlugin):
             {'key': 'data-format', 'value': ', '.join(f['name'] for f in iso_values.get('data-format'))},
         ])
 
-        # TODO: check how the harvester identifies the format for the associated resources. Seems not to be very good
-        # (only gets KMZ and HTML, does not get CSV, ESRI, DWG for instance look at layer 'Courbes de niveau (MNT) sur Bordeaux Métropole (La Cub) en 2001')
-        # see code in /home/jean/dev/C2C/docker-ckan/ckan/src/ckanext-spatial/ckanext/spatial/harvesters/base.py L94
-
         # set a consistent point of contact (name & email match a same entity instead of random-ish)
         poc = harvest_helpers.get_poc(iso_values)
         if poc:
