@@ -49,6 +49,7 @@ class ThemePlugin(plugins.SingletonPlugin):
             ('organization', _(u'Organisation')),
             ('groups', _(u'Thématique')),
             ('keywords', _(u'Mot-clé')),
+
             ('granularity', _(u'Granularité')),
             ('res_format', _(u'Format')),
             ('update_frequency', _(u'Fréquence de mise à jour')),
@@ -86,20 +87,22 @@ class ThemePlugin(plugins.SingletonPlugin):
         iso_values = data_dict['iso_values']
         # log.debug(iso_values)
 
-        groups = []
-        for group, keywords in mapping.iteritems():
-            for keyword in iso_values.get('keyword-inspire-theme'):
-                if keyword in keywords:
-                    groups.append({'id': group})
-        package_dict['groups'] = list(groups)
-        package_dict['extras'].append(
-            {'key': 'inspire-url', 'value': harvest_helpers.gn_csw_build_inspire_link(data_dict['harvest_object'].source,
-                                                                      iso_values)}
-        )
-        package_dict['extras'].append(
-            {'key': 'topic-categories', 'value': ', '.join(iso_values.get('topic-category'))}
-        )
+        # Manage themes:
+        #  * if there is [1..n] ISO themes, it is mapped to a pigma theme
+        #  * else, if there is [1..n] inspire theme keywords, we try the mapping with them
+        # Themes are managed as ckan groups
+        package_dict['groups'] = harvest_helpers.get_themes(iso_values)
 
+        package_dict['extras'].extend([
+            {'key': 'inspire-url', 'value': harvest_helpers.gn_csw_build_inspire_link(data_dict['harvest_object'].source,
+                                                                      iso_values)},
+            {'key': 'topic-categories', 'value': ', '.join(iso_values.get('topic-category'))},
+            {'key': 'data-format', 'value': ', '.join(f['name'] for f in iso_values.get('data-format'))},
+        ])
+
+        # TODO: check how the harvester identifies the format for the associated resources. Seems not to be very good
+        # (only gets KMZ and HTML, does not get CSV, ESRI, DWG for instance look at layer 'Courbes de niveau (MNT) sur Bordeaux Métropole (La Cub) en 2001')
+        # see code in /home/jean/dev/C2C/docker-ckan/ckan/src/ckanext-spatial/ckanext/spatial/harvesters/base.py L94
 
         # set a consistent point of contact (name & email match a same entity instead of random-ish)
         poc = harvest_helpers.get_poc(iso_values)
@@ -113,6 +116,7 @@ class ThemePlugin(plugins.SingletonPlugin):
     # ITemplateHelper
     def get_helpers(self):
         return theme_get_template_helpers()
+<<<<<<< HEAD
 
 
 # Note that mapping misses culture & education-formation groups
@@ -153,3 +157,5 @@ mapping = {
         u"Réseaux de transport"
     )
 }
+=======
+>>>>>>> e51e789... [GSKAN-224] Manage Themes + data format tags
