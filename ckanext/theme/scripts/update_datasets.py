@@ -204,11 +204,14 @@ def main():
             patch['tags'] = pkg['tags']
             patch['thumbnail'] = get(pkg, 'graphic-preview-file')
             patch['update_frequency'] = update_frequency_iso_to_eta(get(pkg, 'frequency-of-update', 'unknown'))
-            # we reset the extras field and restrict it to only the encessary fields because of some known problems with
+            # we reset the extras field and restrict it to only the necessary fields because of some known problems with
             # harvesting the extras. Documented in
             # https://datawagovau.readthedocs.io/en/latest/operations.html#ckan-to-ckan-harvesting-ckanext-harvest
             # see 'Known problem' paragraph. Sepcifically, the extra 'spatial' key will cause trouble if kept
-            patch['extras'] = [{u'key': u'frequency', u'value':patch['update_frequency']}]
+            patch['extras'] = [
+                {u'key': u'frequency', u'value':patch['update_frequency']},
+                {u'key': u'data-format', u'value': get(pkg, 'data-format', '') },
+            ]
 
             for tag in patch['tags']:
                 tag['name'] = slugify(tag['name'])

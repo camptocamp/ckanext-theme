@@ -1,5 +1,6 @@
 # coding: utf8
 # CSW Harvest helper functions
+from collections import OrderedDict
 import re
 import urllib
 
@@ -82,6 +83,160 @@ update_frequencies = [
     },
 ]
 
+# dict used to define the CKAN categories list (edit form). also used during harvesting to scan the ISO or INSPIRE
+# categories and transform them to categories in this list.
+# TODO: update the groups.csv file and deduplicate this config. Maybe all in a csv file
+themes = OrderedDict({
+    "administration": {
+        'label_fr': u'Administration et action publique',
+        'iso_themes': (
+            u'utilitiesCommunication'
+        ),
+        'inspire_themes': (
+            u"Services d'utilité publique et services publics"
+        ),
+    },
+    "agriculture": {
+        'label_fr': u'Agriculture, sylviculture et viticulture',
+        'iso_themes': (u'farming'),
+        'inspire_themes': (
+            u"Installations agricoles et aquacoles"
+        ),
+    },
+    "amenagement": {
+        'label_fr': u'Aménagement et urbanisme',
+        'iso_themes': (),
+        'inspire_themes': (
+            u"Adresses",
+            u"Zones de gestion, de restriction ou de réglementation et unités de déclaration"
+        ),
+    },
+    "citoyennete": {
+        'label_fr': u'Citoyenneté et démocratie',
+        'iso_themes': (),
+        'inspire_themes': (),
+    },
+    "culture": {
+        'label_fr': u'Culture, patrimoine et tourisme',
+        'iso_themes': (),
+        'inspire_themes': (),
+    },
+    "economie": {
+        'label_fr': u'Economie et entreprises',
+        'iso_themes': (u'economy'),
+        'inspire_themes': (
+            u"Lieux de production et sites industriels"
+        ),
+    },
+    "energie": {
+        'label_fr': u'Energies et réseaux',
+        'iso_themes': (),
+        'inspire_themes': (
+            u"Sources d'énergie"
+        ),
+    },
+    "environnement": {
+        'label_fr': u'Energies et réseaux',
+        'iso_themes': (
+            u'environment',
+            u'climatologyMeteorologyAtmosphere',
+            u'biota'
+            u'geoscientificInformation',
+            u'inlandWaters',
+            u'elevation'
+        ),
+        'inspire_themes': (
+            u"Régions biogéographiques",
+            u"Habitats et biotopes",
+            u"Répartition des espèces",
+            u"Conditions atmosphériques",
+            u"Caractéristiques géographiques météorologiques",
+            u"Sites protégés",
+            u"Sols",
+            u"Géologie",
+            u"Ressources minérales",
+            u"Zones à risque naturel",
+            u"Altitude",
+            u"Hydrographie"
+        ),
+    },
+    "equipement": {
+        'label_fr': u'Equipements, bâtiments et logement',
+        'iso_themes': (
+            u'structure',
+            u'intelligenceMilitary'
+        ),
+        'inspire_themes': (
+            u"Bâtiments",
+            u"Installations de suivi environnemental"
+        ),
+    },
+    "formation": {
+        'label_fr': u'Formation, éducation et emploi',
+        'iso_themes': (),
+        'inspire_themes': (),
+    },
+    "mer": {
+        'label_fr': u'Mer et littoral',
+        'iso_themes': (
+            u'oceans'
+        ),
+        'inspire_themes': (
+            u"Régions maritimes",
+            u"Caractéristiques géographiques océanographiques"
+        ),
+    },
+    "imagerie": {
+        'label_fr': u'Imagerie et occupation du sol',
+        'iso_themes': (
+            u'imageryBaseMapsEarthCover',
+            u'planningCadastre'
+        ),
+        'inspire_themes': (
+            u"Ortho-imagerie",
+            u"Occupation des terres",
+            u"Parcelles cadastrales",
+            u"Usage des sols"
+        ),
+    },
+    "limites-administratives": {
+        'label_fr': u'Limites administratives et référentiels',
+        'iso_themes': (
+            u'boundaries'
+        ),
+        'inspire_themes': (
+            u"Unités administratives",
+            u"Unités statistiques",
+            u"Dénominations géographiques"
+        ),
+    },
+    "mobilite": {
+        'label_fr': u'Mobilité et transports',
+        'iso_themes': (
+            u'transportation'
+        ),
+        'inspire_themes': (
+            u"Réseaux de transport"
+        ),
+    },
+    "sciences": {
+        'label_fr': u'Sciences, recherche et innovation',
+        'iso_themes': (),
+        'inspire_themes': (),
+    },
+    "sante": {
+        'label_fr': u'Social, santé et sports',
+        'iso_themes': (
+            u'health',
+            u'society'
+        ),
+        'inspire_themes': (
+            u"Santé et sécurité des personnes",
+            u"Répartition de la population-Démographie"
+        )
+    }
+})
+
 
 def gn_csw_build_inspire_link(harvester_source, iso_values):
     """
@@ -128,6 +283,32 @@ def get_poc(iso_values):
         return None
     pocs_ordered = sorted(pocs, key=lambda x: poc_priority_list.index(x.get('role')))
     return pocs_ordered[0]
+
+
+def get_themes(iso_values):
+    """
+    Extract themes
+     * if there is [1..n] ISO themes, it is mapped to a pigma theme
+     * else, if there is [1..n] inspire theme keywords, we try the mapping with them
+    Themes are managed as ckan groups
+    :param iso_values:
+    :return:
+    """
+    #TODO: optimize search (create reverse-mapping dicts, cached so we don't recreate them on the fly for every dataset)
+    groups = []
+    iso_themes = iso_values.get('topic-category')
+    for th in iso_themes:
+        # try to find it in the pigma themes map
+        for group_id, group_def in themes.items():
+            if th in group_def['iso_themes']:
+                groups.append({'id': group_id})
+    if len(groups)==0:
+        # if iso themes don't work, try with inspire themes
+        for group_id, group_def in themes.items():
+            for keyword in iso_values.get('keyword-inspire-theme'):
+                if keyword in group_def['inspire_themes']:
+                    groups.append({'id': group_id})
+    return list(groups)
 
 
 def update_or_set_extra(package_dict, key, value):
