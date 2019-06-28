@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 # coding: utf8
-from __future__ import print_function
-
 import argparse
 import urllib2
 import urllib
@@ -10,11 +8,12 @@ import ssl
 import re
 from base64 import encodestring
 
-from logging import getLogger
+import logging
 
 from ckanext.theme.harvest_helpers import update_frequency_iso_to_eta
 
-log = getLogger(__name__)
+log = logging.getLogger(__name__)
+logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(name)s (%(lineno)s) - %(levelname)s: %(message)s", datefmt='%Y.%m.%d %H:%M:%S')
 
 fields_catalog = {
     'ckan_fields': dict(),
@@ -83,7 +82,7 @@ def infer_datatypes(pkg):
 def slugify(s):
     """
     Simplifies ugly strings into something URL-friendly.
-    >>> print slugify("[Some] _ Article's Title--")
+    >>> log.debug(slugify("[Some] _ Article's Title--"))
     some-articles-title
     """
     # "[Some] _ Article's Title--"
@@ -166,7 +165,7 @@ def main():
                         help='Create a catalog of fields. Give the file path as parameter')
     parser.add_argument('-f', '--force',
                         action="store_true",
-                        help='force update on every dataset')
+                        help='force update on every dataset. Use with caution, since some needed info might not be available anymore')
     args = parser.parse_args()
 
     api_uri = args.ckan_api_url
@@ -177,13 +176,15 @@ def main():
         return
 
     packages = fetch('action/package_list', api_uri, api_key, BASE64AUTH)
-    print('Got {} datasets'.format(len(packages)))
+    log.debug('Got {} datasets'.format(len(packages)))
 
+    # TODO: check the kind of package. Harvest points are stored also as packages. This script could, at some point,
+    #  break some configuration in packages that are not supposed to be modified here, like harvest config.
     for package in packages:
-        print('Fetching «{}»'.format(package), end='')
+        log.debug('Fetching «{}»'.format(package))
         pkg = fetch('action/package_show?id={}'.format(package), api_uri, api_key, BASE64AUTH)
         if ('update_frequency' in pkg) and not args.force :
-            print('… skipping')
+            log.debug('… skipping')
             continue
         else:
             patch = {}
@@ -225,10 +226,10 @@ def main():
                 _catalog_ingest(pkg, patch)
             try:
                 updated = fetch('action/package_patch', api_uri, api_key, BASE64AUTH, data=patch)
-                print(' OK')
+                log.debug(' OK')
             except urllib2.HTTPError as e:
-                print(' FAIL!')
-                print(e.read())
+                log.debug(' FAIL!')
+                log.debug(e.read())
 
     if args.catalog_fields_create:
         with open(args.catalog_fields_create, 'w') as outfile:
