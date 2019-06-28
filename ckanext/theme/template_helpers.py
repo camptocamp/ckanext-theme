@@ -28,7 +28,13 @@ def list_data_formats(package):
     data_formats = filter(lambda x: x['key'] == 'data-format', package.get('extras', []))
     data_formats = data_formats[0]['value'] if len(data_formats) > 0 else ''
     formats.extend(data_formats.split(','))
-    return formats
+    # strip whitespaces around words and remove empty tags
+    formats = [x.strip() for x in formats if x]
+    #formats = [x for x in formats if x]
+    # deduplicate list of values
+    formats = list(set(formats))
+    # sort alphabetically
+    return sorted(formats)
 
 
 def update_frequency_etalab_codelist(field):
