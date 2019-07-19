@@ -55,6 +55,11 @@ body, h1, h2, h3, h4, .btn {
   max-width: 12.25em;
   height: 10em;
 }
+body > [role=main] .media-item {
+  width: 24.25em;
+  max-width: 24.25em;
+  height: 19em;
+}
 .homepage .media-view:focus,
 .homepage .media-view:hover {
   border-color: #0F4395;
