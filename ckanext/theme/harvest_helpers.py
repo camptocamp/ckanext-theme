@@ -1,6 +1,7 @@
 # coding: utf8
 # CSW Harvest helper functions
 from collections import OrderedDict
+import json
 import re
 import urllib
 
@@ -81,6 +82,11 @@ update_frequencies = [
         'label_fr': u'Inconnue',
         'description_fr': u''
     },
+]
+
+open_licence_tags = [
+    "Aucune raison de restriction",
+    "Licence Ouverte",
 ]
 
 # dict used to define the CKAN categories list (edit form). also used during harvesting to scan the ISO or INSPIRE
@@ -237,6 +243,19 @@ themes = OrderedDict({
     }
 })
 
+def get(pkg, key, default=''):
+    val = filter(lambda x: x['key'] == key, pkg.get('extras', []))
+    val = val[0]['value'] if len(val) > 0 else ''
+    return val or default
+
+
+def get_sub(pkg, key, sub_key_k, sub_value_k, id, default=''):
+    sub = get(pkg, key)
+    try:
+        d = json.loads(sub)
+        return next(item[sub_value_k] for item in d if id in item[sub_key_k])
+    except:
+        return default
 
 def gn_csw_build_inspire_link(harvester_source, iso_values):
     """
@@ -335,4 +354,97 @@ def update_frequency_iso_to_eta(freq):
     """
     matches = (x['eta_code'] for x in update_frequencies if freq == x['iso_code'] )
     # return the first occurrence matching the criteria
-    return next(matches)
+    try:
+        freq = next(matches)
+    except:
+        freq = update_frequencies[-1]['eta_code']
+    return freq
+
+
+def infer_datatypes(pkg):
+    dt = []
+    # Look for open source licence hints
+    # TODO: if possible, be exhaustive...
+    lic = get(pkg, 'access_constraints')
+    if lic:
+        lic_values = json.loads(lic)
+        # see if lists intersect
+        if list(set(open_licence_tags) & set(lic_values)):
+            dt.append(u'donnees-ouvertes')
+
+    # check resource type
+    # TODO: identify the values for u'donnees-intelligentes' and u'rapports-etudes'
+    type = get(pkg, 'resource-type')
+    if type == 'dataset':
+        dt.append(u'donnees-geographiques')
+
+    return dt if dt else [u'donnees-geographiques'] # we need to provide at least one value
+
+
+def fix_harvest_scheme_fields(package_dict):
+    """
+    Harvest does not work well with custom scheme defined using ckanext-scheming extension: if some harvested fields,
+    stored in package['extras'], are named similar to a field in the scheming schema (ckan_dataset.json), there is a
+    validation error. Scheming does not look for these values in extras (must be at root), but does not accept similar
+    keys in extras as it would cause trouble during data storage.
+    Solution is to get those values from extras, put them at package root so scheming can use them and remove those
+    values from extras. This is what this function does. The modifications are done in-situ in the package_dict
+    :param package_dict: original package_dict
+    :return:
+    """
+    # custom fields need to go to top level:
+    # package_dict['extras']['my_field'] becomes package_dict['my_field']
+    # FIXME read fields from ckanext-scheming
+    # FIXME handle different source and target schemas
+    #        e.g. through field mapping in harvest config?
+    # FIXME customise fields to your ckanext-scheming dataset schema
+    fields = ['title', 'name', 'tag_string', 'license_id',
+              'owner_org', 'notes', 'update_frequency',
+              'datatype', 'thumbnail', 'category', 'hyperlink', 'inspire_url',
+              'dataset_publication_date', 'dataset_modification_date', 'support', 'author', 'author_email',
+              'spatial', 'spatial-name', 'spatial-text']
+    # make extras a dictionary, so we can more easily access the records
+    extras_keys = {d['key']: d for d in package_dict['extras']}
+    for field in fields:
+        if field in extras_keys.keys():
+            package_dict[field] = extras_keys[field]['value']
+            extras_keys.pop(field, None)
+
+    package_dict['license_id'] = u'notspecified'
+    package_dict['datatype'] = u'unknown'
+    # TODO: deal with situation where this is not defined
+    package_dict['thumbnail'] = extras_keys['graphic-preview-file']['value']
+    # TODO: complete with fields from schema
+    # TODO: clean code
+    frequency = 'unknown'
+    try:
+        frequency = extras_keys.get('frequency-of-update')['value']
+    except:
+        # If we get an error, then default value will be the one defined above
+        pass
+    package_dict['update_frequency'] = update_frequency_iso_to_eta(frequency)
+    # package_dict['resources'] = [
+    #     {
+    #         'resource_locator_function': '',
+    #         'name': 'Service WMS et WFS',
+    #         'format': 'ZIP',
+    #         'url': 'https://data.bordeaux-metropole.fr/key',
+    #         'resource_locator_protocol': 'WWW:LINK-1.0-http--link',
+    #         'description': u"Service WMS et WFS de Bordeaux M\xe9tropole (demander votre cl\xe9 d'acc\xe8s)",
+    #         'data_type':'file'
+    #     }
+    # ]
+    for res in package_dict['resources']:
+        if res.get('data_type', None) is None:
+            # TODO: infer proper data_type depending on protocol / format
+            res['data_type'] = 'file'
+
+    # append remainder of package_dict to package notes
+    # for field in package_dict['extras'].keys():
+    #     package_dict['notes'] += "\n###{0}\n{1}".format(field.title(), str(package_dict['extras'][field]))
+
+    # Finally, drop extras as scheming doesn't allow extras FALSE ! No need, just remove the scheming synonyms from extras
+    # extras_keys.pop('extras', None)
+    package_dict['extras'] = extras_keys.values()
+
+    return package_dict

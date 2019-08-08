@@ -92,21 +92,26 @@ class ThemePlugin(plugins.SingletonPlugin):
         #  * else, if there is [1..n] inspire theme keywords, we try the mapping with them
         # Themes are managed as ckan groups
         package_dict['groups'] = harvest_helpers.get_themes(iso_values)
+        #
+        # package_dict['extras'].extend([
+        #     {'key': 'inspire-url', 'value': harvest_helpers.gn_csw_build_inspire_link(data_dict['harvest_object'].source,
+        #                                                               iso_values)},
+        #     {'key': 'topic-categories', 'value': ', '.join(iso_values.get('topic-category'))},
+        #     {'key': 'data-format', 'value': ', '.join(f['name'] for f in iso_values.get('data-format'))},
+        # ])
+        #
+        # # set a consistent point of contact (name & email match a same entity instead of random-ish)
+        # poc = harvest_helpers.get_poc(iso_values)
+        # if poc:
+        #     harvest_helpers.update_or_set_extra(package_dict, 'contact', poc.get('organisation-name',
+        #                                                                          poc.get('individual-name', '')))
+        #     harvest_helpers.update_or_set_extra(package_dict, 'contact-email', poc.get('contact-info').get('email', ''))
 
-        package_dict['extras'].extend([
-            {'key': 'inspire-url', 'value': harvest_helpers.gn_csw_build_inspire_link(data_dict['harvest_object'].source,
-                                                                      iso_values)},
-            {'key': 'topic-categories', 'value': ', '.join(iso_values.get('topic-category'))},
-            {'key': 'data-format', 'value': ', '.join(f['name'] for f in iso_values.get('data-format'))},
-        ])
 
-        # set a consistent point of contact (name & email match a same entity instead of random-ish)
-        poc = harvest_helpers.get_poc(iso_values)
-        if poc:
-            harvest_helpers.update_or_set_extra(package_dict, 'contact', poc.get('organisation-name',
-                                                                                 poc.get('individual-name', '')))
-            harvest_helpers.update_or_set_extra(package_dict, 'contact-email', poc.get('contact-info').get('email', ''))
+        log.info('Working on dataset {}'.format(package_dict['name']))
 
+        # fix harvested package to make it compatible with the scheming extension
+        harvest_helpers.fix_harvest_scheme_fields(package_dict)
         return package_dict
 
     # ITemplateHelper
