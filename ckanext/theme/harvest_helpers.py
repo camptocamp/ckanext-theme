@@ -243,21 +243,31 @@ themes = OrderedDict({
     }
 })
 
-def get(pkg, key, default=''):
-    val = filter(lambda x: x['key'] == key, pkg.get('extras', []))
-    val = val[0]['value'] if len(val) > 0 else ''
-    return val or default
 
-
-def get_sub(pkg, key, sub_key_k, sub_value_k, id, default=''):
-    sub = get(pkg, key)
+def _get_sub(extras_dict, key, sub_key_k, sub_value_k, id, default=''):
+    sub = _get_value(extras_dict, key)
     try:
         d = json.loads(sub)
         return next(item[sub_value_k] for item in d if id in item[sub_key_k])
     except:
         return default
 
-def gn_csw_build_inspire_link(harvester_source, iso_values):
+
+def _get_value(extras_dict, key, default_value=''):
+    """
+    Get the value out of a dict structured like the extras_keys_dict (see below) if the key exists. Return default_value
+    if the key is absent or not properly structured
+    :param extras_dict:
+    :param key:
+    :return:
+    """
+    try:
+        return extras_dict.get(key)['value']
+    except:
+        return default_value
+
+
+def _gn_csw_build_inspire_link(harvester_source, iso_values):
     """
     Try to produce a geonetwork permalink out of harvester url and metadata uuid
     :param harvester_source:
@@ -287,7 +297,7 @@ def gn_csw_build_inspire_link(harvester_source, iso_values):
     return ''
 
 
-def get_poc(iso_values):
+def _get_poc(iso_values):
     """
     CKAN harvest tend to mix point of contact information if several are provided.
     This function scans the point of contacts and returns the first one. Priority order is given by the
@@ -304,7 +314,7 @@ def get_poc(iso_values):
     return pocs_ordered[0]
 
 
-def get_themes(iso_values):
+def _get_themes(iso_values):
     """
     Extract themes
      * if there is [1..n] ISO themes, it is mapped to a pigma theme
@@ -330,23 +340,7 @@ def get_themes(iso_values):
     return list(groups)
 
 
-def update_or_set_extra(package_dict, key, value):
-    """
-    If the key already exists, replace its value. Else append this key/value pair
-    :param package_dict: the dict to update
-    :param key:
-    :param value:
-    :return:
-    """
-    # get the first entry in the list comprehension
-    entry = next((x for x in package_dict['extras'] if x['key'] == key), None)
-    if entry:
-        entry['value'] = value
-    else:
-        package_dict['extras'].append({'key': key, 'value': value})
-
-
-def update_frequency_iso_to_eta(freq):
+def _update_frequency_iso_to_eta(freq):
     """
     return the eta_code (etalab value) for the given iso_code
     :param freq:
@@ -361,11 +355,11 @@ def update_frequency_iso_to_eta(freq):
     return freq
 
 
-def infer_datatypes(pkg):
+def _infer_datatypes(extras_dict):
     dt = []
     # Look for open source licence hints
     # TODO: if possible, be exhaustive...
-    lic = get(pkg, 'access_constraints')
+    lic = _get_value(extras_dict, 'access_constraints', None)
     if lic:
         lic_values = json.loads(lic)
         # see if lists intersect
@@ -374,14 +368,49 @@ def infer_datatypes(pkg):
 
     # check resource type
     # TODO: identify the values for u'donnees-intelligentes' and u'rapports-etudes'
-    type = get(pkg, 'resource-type')
+    type = _get_value(extras_dict, 'resource-type', None)
     if type == 'dataset':
         dt.append(u'donnees-geographiques')
 
     return dt if dt else [u'donnees-geographiques'] # we need to provide at least one value
 
 
-def fix_harvest_scheme_fields(package_dict):
+def _guess_resource_datatype(resource, default='other'):
+    """
+    Try to guess a data_type value in conformity with the choices given in the ckan scheme
+    :param resource: the resource object to use
+    :param default: default value if nothing relevant is found
+    :return:
+    """
+    # TODO: improve the guessing work
+    if resource['resource_locator_protocol'] in ['WWW:LINK-1.0-http--link']:
+        if resource['format'] is None:
+            return 'api'
+        else:
+            return 'doc'
+    if resource['resource_locator_protocol'] in ['WWW:DOWNLOAD-1.0-http--download']:
+        if resource['format'] in ['doc', 'docx', 'pdf']:
+            return 'doc'
+        else:
+            return 'file'
+    return default
+
+
+def _fix_resource(resource):
+    """
+    Resources attached to a metadata might have some fields not set that might make ckan complain like 'data_type'
+    This fixes the missing fields, trying to fill them with relevant information when possible.
+    The fixes are applied in-place in the resource object
+    :param resource:
+    :return:
+    """
+    if 'data_type' not in resource or resource['data_type'] == '':
+        resource['data_type'] = _guess_resource_datatype(resource)
+    if 'description' not in resource or resource['description'] == '':
+        resource['description'] = u'Non renseigné'
+
+
+def fix_harvest_scheme_fields(package_dict, data_dict):
     """
     Harvest does not work well with custom scheme defined using ckanext-scheming extension: if some harvested fields,
     stored in package['extras'], are named similar to a field in the scheming schema (ckan_dataset.json), there is a
@@ -389,6 +418,7 @@ def fix_harvest_scheme_fields(package_dict):
     keys in extras as it would cause trouble during data storage.
     Solution is to get those values from extras, put them at package root so scheming can use them and remove those
     values from extras. This is what this function does. The modifications are done in-situ in the package_dict
+    Also computes values from geonetwork metadata
     :param package_dict: original package_dict
     :return:
     """
@@ -404,47 +434,41 @@ def fix_harvest_scheme_fields(package_dict):
               'dataset_publication_date', 'dataset_modification_date', 'support', 'author', 'author_email',
               'spatial', 'spatial-name', 'spatial-text']
     # make extras a dictionary, so we can more easily access the records
-    extras_keys = {d['key']: d for d in package_dict['extras']}
+    extras_keys_dict = {d['key']: d for d in package_dict['extras']}
+    iso_values = data_dict['iso_values']
+
     for field in fields:
-        if field in extras_keys.keys():
-            package_dict[field] = extras_keys[field]['value']
-            extras_keys.pop(field, None)
+        if field in extras_keys_dict.keys():
+            package_dict[field] = extras_keys_dict[field]['value']
+            extras_keys_dict.pop(field, None)
 
-    package_dict['license_id'] = u'notspecified'
-    package_dict['datatype'] = u'unknown'
-    # TODO: deal with situation where this is not defined
-    package_dict['thumbnail'] = extras_keys['graphic-preview-file']['value']
-    # TODO: complete with fields from schema
-    # TODO: clean code
-    frequency = 'unknown'
-    try:
-        frequency = extras_keys.get('frequency-of-update')['value']
-    except:
-        # If we get an error, then default value will be the one defined above
-        pass
-    package_dict['update_frequency'] = update_frequency_iso_to_eta(frequency)
-    # package_dict['resources'] = [
-    #     {
-    #         'resource_locator_function': '',
-    #         'name': 'Service WMS et WFS',
-    #         'format': 'ZIP',
-    #         'url': 'https://data.bordeaux-metropole.fr/key',
-    #         'resource_locator_protocol': 'WWW:LINK-1.0-http--link',
-    #         'description': u"Service WMS et WFS de Bordeaux M\xe9tropole (demander votre cl\xe9 d'acc\xe8s)",
-    #         'data_type':'file'
-    #     }
-    # ]
-    for res in package_dict['resources']:
-        if res.get('data_type', None) is None:
-            # TODO: infer proper data_type depending on protocol / format
-            res['data_type'] = 'file'
+    #package_dict['id'] = package_dict['name']
+    package_dict['license_id'] = 'other-at'
+    package_dict['thumbnail'] = _get_value(extras_keys_dict, 'graphic-preview-file', '')
+    frequency = _get_value(extras_keys_dict, 'frequency-of-update', 'unknown')
+    package_dict['update_frequency'] = _update_frequency_iso_to_eta(frequency)
+    for resource in package_dict['resources']:
+        _fix_resource(resource)
 
-    # append remainder of package_dict to package notes
-    # for field in package_dict['extras'].keys():
-    #     package_dict['notes'] += "\n###{0}\n{1}".format(field.title(), str(package_dict['extras'][field]))
+    # Compute values not present as-is in geonetwork
+    package_dict['inspire_url'] = _gn_csw_build_inspire_link(data_dict['harvest_object'].source, iso_values)
+    package_dict['topic-categories'] = ', '.join(iso_values.get('topic-category'))
+    package_dict['data-format'] = ', '.join(f['name'] for f in iso_values.get('data-format'))
+    # set a consistent point of contact (name & email match a same entity instead of random-ish)
+    poc = _get_poc(iso_values)
+    if poc:
+        # get organisation name if available, else individual name
+        package_dict['author'] = poc.get('organisation-name', poc.get('individual-name', ''))
+        package_dict['author_email'] = poc.get('contact-info').get('email', '')
+
+    package_dict['dataset_modification_date'] = _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'creation')
+    package_dict['dataset_publication_date'] = _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'publication')
+    package_dict['datatype'] = _infer_datatypes(extras_keys_dict)
+    package_dict['maintainer_email'] = _get_value(extras_keys_dict, 'contact-email', '')
+    package_dict['metadata_created'] = _get_value(extras_keys_dict, 'metadata-date', '')
+    package_dict['metadata_modified'] = _get_value(extras_keys_dict, 'metadata-date', '')
+    package_dict['groups'] = _get_themes(iso_values)
 
     # Finally, drop extras as scheming doesn't allow extras FALSE ! No need, just remove the scheming synonyms from extras
-    # extras_keys.pop('extras', None)
-    package_dict['extras'] = extras_keys.values()
-
-    return package_dict
+    # extras_keys_dict.pop('extras', None)
+    package_dict['extras'] = extras_keys_dict.values()
