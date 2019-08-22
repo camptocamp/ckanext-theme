@@ -60,7 +60,7 @@ class ThemePlugin(plugins.SingletonPlugin):
 
     # IPackageController
     def before_index(self, pkg_dict):
-        pkg_dict['datatype'] = loads(pkg_dict.get('datatype', '[]'))
+        #pkg_dict['datatype'] = loads(pkg_dict.get('datatype', '[]'))
         return pkg_dict
 
     # IPackageController
