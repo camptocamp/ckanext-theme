@@ -39,6 +39,10 @@ msgstr "Granularité de la couverture territoriale"
 msgid "Organizations"
 msgstr "Organisations"
 
+#: ckan/templates/snippets/additional_info.html:7
+msgid "Additional Info"
+msgstr "Informations complémentaires"
+
 msgid "donnees-ouvertes"
 msgstr "Données ouvertes"
 
