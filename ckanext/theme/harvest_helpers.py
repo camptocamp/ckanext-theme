@@ -73,7 +73,7 @@ update_frequencies = [
     {
         'iso_code': u'notPlanned',
         'eta_code': u'punctual',
-        'label_fr': u'Non plannifié',
+        'label_fr': u'Non planifié',
         'description_fr': u''
     },
     {
@@ -243,6 +243,16 @@ themes = OrderedDict({
     }
 })
 
+# used to define the format from the resource protocol. The first entry is the beginning of the protocol name,
+# the second is the format name
+protocol_format_correspondance = {
+    ('OGC:WMS', 'WMS'),
+    ('OGC:WMTS', 'WMTS'),
+    ('OGC:WFS', 'WFS'),
+    ('OGC:GML', 'GML'),
+    ('OGC:KML', 'KML'),
+}
+
 
 def _get_sub(extras_dict, key, sub_key_k, sub_value_k, id, default=''):
     sub = _get_value(extras_dict, key)
@@ -396,6 +406,15 @@ def _guess_resource_datatype(resource, default='other'):
     return default
 
 
+def _guess_resource_format(resource):
+    for f in protocol_format_correspondance:
+        if resource['resource_locator_protocol'].startswith(f[0]):
+            return f[1]
+    if resource['url'].endswith('geojson'):
+        return 'application/geojson'
+    return ''
+
+
 def _fix_resource(resource):
     """
     Resources attached to a metadata might have some fields not set that might make ckan complain like 'data_type'
@@ -404,6 +423,8 @@ def _fix_resource(resource):
     :param resource:
     :return:
     """
+    if 'format' not in resource or not resource['format']:
+        resource['format'] = _guess_resource_format(resource)
     if 'data_type' not in resource or resource['data_type'] == '':
         resource['data_type'] = _guess_resource_datatype(resource)
     if 'description' not in resource or resource['description'] == '':
