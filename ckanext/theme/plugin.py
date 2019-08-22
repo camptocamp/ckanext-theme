@@ -6,7 +6,7 @@ from os.path import join, dirname, abspath
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 from ckan.plugins.toolkit import _
-from ckanext.theme.template_helpers import dict_list_or_dict_reduce
+from ckanext.theme.template_helpers import get_helpers as theme_get_template_helpers
 from ckanext.spatial.interfaces import ISpatialHarvester
 import ckanext.theme.api as api
 import ckanext.theme.config as config
@@ -49,6 +49,7 @@ class ThemePlugin(plugins.SingletonPlugin):
             ('organization', _(u'Organisation')),
             ('groups', _(u'Thématique')),
             ('keywords', _(u'Mot-clé')),
+
             ('granularity', _(u'Granularité')),
             ('res_format', _(u'Format')),
             ('update_frequency', _(u'Fréquence de mise à jour')),
@@ -86,19 +87,20 @@ class ThemePlugin(plugins.SingletonPlugin):
         iso_values = data_dict['iso_values']
         # log.debug(iso_values)
 
-        groups = []
-        for group, keywords in mapping.iteritems():
-            for keyword in iso_values.get('keyword-inspire-theme'):
-                if keyword in keywords:
-                    groups.append({'id': group})
-        package_dict['groups'] = list(groups)
-        package_dict['extras'].append(
+        # Manage themes:
+        #  * if there is [1..n] ISO themes, it is mapped to a pigma theme
+        #  * else, if there is [1..n] inspire theme keywords, we try the mapping with them
+        # Themes are managed as ckan groups
+        package_dict['groups'] = harvest_helpers.get_themes(iso_values)
+
+        package_dict['extras'].extend([
             {'key': 'inspire-url', 'value': harvest_helpers.gn_csw_build_inspire_link(data_dict['harvest_object'].source,
-                                                                      iso_values)}
-        )
-        package_dict['extras'].append(
-            {'key': 'topic-categories', 'value': ', '.join(iso_values.get('topic-category'))}
-        )
+                                                                      iso_values)},
+            {'key': 'topic-categories', 'value': ', '.join(iso_values.get('topic-category'))},
+            {'key': 'data-format', 'value': ', '.join(f['name'] for f in iso_values.get('data-format'))},
+        ])
+
+        # set a consistent point of contact (name & email match a same entity instead of random-ish)
         poc = harvest_helpers.get_poc(iso_values)
         if poc:
             harvest_helpers.update_or_set_extra(package_dict, 'contact', poc.get('organisation-name',
@@ -109,53 +111,4 @@ class ThemePlugin(plugins.SingletonPlugin):
 
     # ITemplateHelper
     def get_helpers(self):
-        '''Register the most_popular_groups() function above as a template
-        helper function.
-
-        '''
-        # Template helper function names should begin with the name of the
-        # extension they belong to, to avoid clashing with functions from
-        # other extensions.
-        return {
-            'dict_list_or_dict_reduce': dict_list_or_dict_reduce
-        }
-
-
-# Note that mapping misses culture & education-formation groups
-mapping = {
-    "institutions-partenariats": (
-        u"Services d'utilité publique et services publics"
-    ),
-    "amenagement": (
-        u"Adresses",
-        u"Zones de gestion, de restriction ou de réglementation et unités de déclaration"
-    ),
-    "economie-emploi": (
-        u"Lieux de production et sites industriels"
-    ),
-    "reseaux-energies": (
-        u"Sources d'énergie"
-    ),
-    "environnement-risques-sante": (
-        u"Régions biogéographiques",
-        u"Habitats et biotopes",
-        u"Répartition des espèces",
-        u"Conditions atmosphériques",
-        u"Caractéristiques géographiques météorologiques",
-        u"Sites protégés",
-        u"Sols",
-        u"Géologie",
-        u"Ressources minérales",
-        u"Zones à risque naturel",
-        u"Altitude",
-        u"Hydrographie"
-    ),
-    "donnees-reference": (
-        u"Unités administratives",
-        u"Unités statistiques",
-        u"Dénominations géographiques"
-    ),
-    "transports-mobilites": (
-        u"Réseaux de transport"
-    )
-}
+        return theme_get_template_helpers()
