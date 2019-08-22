@@ -482,7 +482,7 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
         package_dict['author'] = poc.get('organisation-name', poc.get('individual-name', ''))
         package_dict['author_email'] = poc.get('contact-info').get('email', '')
 
-    package_dict['dataset_modification_date'] = _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'creation')
+    package_dict['dataset_modification_date'] = _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'revision')
     package_dict['dataset_publication_date'] = _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'publication')
     package_dict['datatype'] = _infer_datatypes(extras_keys_dict)
     package_dict['maintainer_email'] = _get_value(extras_keys_dict, 'contact-email', '')
