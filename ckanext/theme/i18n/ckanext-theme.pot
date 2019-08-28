@@ -1,7 +1,6 @@
 # Translations template for ckanext-theme.
 # Copyright (C) 2019 ORGANIZATION
-# This file is distributed under the same license as the ckanext-theme
-# project.
+# This file is distributed under the same license as the ckanext-theme project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
 #
 #, fuzzy
@@ -9,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-theme 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-02-20 16:33+0100\n"
+"POT-Creation-Date: 2019-08-28 18:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,59 +17,33 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: ckanext/theme/plugin.py:24
-msgid "Themes"
+#: ckanext/theme/plugin.py:59 ckanext/theme/templates/ckan_header.html:88
+#: ckanext/theme/templates/ckan_menu.html:8
+#: ckanext/theme/templates/group/base_form_page.html:6
+#: ckanext/theme/templates/package/group_list.html:5
+msgid "Groups"
+msgstr "Thématiques"
+
+#: ckanext/theme/plugin.py:60
+msgid "Mots-clés"
 msgstr ""
 
-#: ckanext/theme/plugin.py:25
-msgid "Keywords"
-msgstr ""
-
-#: ckanext/theme/plugin.py:26
+#: ckanext/theme/plugin.py:61
 msgid "Types"
 msgstr ""
 
-#: ckanext/theme/plugin.py:27
-msgid "Update frequency"
+#: ckanext/theme/plugin.py:62
+msgid "Fréquence de mise à jour"
 msgstr ""
 
-#: ckanext/theme/plugin.py:28
-msgid "Granularity"
+#: ckanext/theme/plugin.py:63
+msgid "Granularité"
 msgstr ""
 
-#: ckanext/theme/plugin.py:29
-msgid "Organizations"
+#: ckanext/theme/plugin.py:64
+msgid "Organisations"
 msgstr ""
 
-#: ckanext/theme/templates/snippets/facet_list.html:83
-msgid "Show More {facet_type}"
+#: ckanext/theme/fanstatic/theme_autocomplete_geog_extent.js:209
+msgid "Start typing…"
 msgstr ""
-
-#: ckanext/theme/templates/snippets/facet_list.html:86
-msgid "Show Only Popular {facet_type}"
-msgstr ""
-
-#: ckanext/theme/templates/snippets/facet_list.html:90
-msgid "There are no {facet_type} that match this search"
-msgstr ""
-
-#: ckanext/theme/templates/snippets/package_item.html:41
-msgid "Private"
-msgstr ""
-
-#: ckanext/theme/templates/snippets/package_item.html:50
-msgid "Draft"
-msgstr ""
-
-#: ckanext/theme/templates/snippets/package_item.html:52
-msgid "Deleted"
-msgstr ""
-
-#: ckanext/theme/templates/snippets/package_item.html:65
-msgid "Popular"
-msgstr ""
-
-#: ckanext/theme/templates/snippets/package_item.html:72
-msgid "This dataset has no description"
-msgstr ""
-

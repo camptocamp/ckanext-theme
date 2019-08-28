@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-theme 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-02-20 16:33+0100\n"
+"POT-Creation-Date: 2019-08-28 18:28+0200\n"
 "PO-Revision-Date: 2019-02-20 16:33+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -19,25 +19,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: ckanext/theme/plugin.py:24
-msgid "Themes"
-msgstr "Thèmes"
+#: ckanext/theme/plugin.py:59 ckanext/theme/templates/ckan_header.html:88
+#: ckanext/theme/templates/ckan_menu.html:8
+#: ckanext/theme/templates/group/base_form_page.html:6
+#: ckanext/theme/templates/package/group_list.html:5
+msgid "Groups"
+msgstr "Thématiques"
 
-#: ckanext/theme/plugin.py:25
-msgid "Keywords"
-msgstr "Mots clés"
+#: ckanext/theme/plugin.py:60
+msgid "Mots-clés"
+msgstr ""
 
-#: ckanext/theme/plugin.py:27
-msgid "Update frequency"
-msgstr "Fréquence de la mise à jour"
+#: ckanext/theme/plugin.py:61
+msgid "Types"
+msgstr ""
 
-#: ckanext/theme/plugin.py:28
-msgid "Granularity"
+#: ckanext/theme/plugin.py:62
+msgid "Fréquence de mise à jour"
+msgstr ""
+
+#: ckanext/theme/plugin.py:63
+#, fuzzy
+msgid "Granularité"
 msgstr "Granularité de la couverture territoriale"
-
-#: ckanext/theme/plugin.py:29
-msgid "Organizations"
-msgstr "Organisations"
 
 #: ckan/templates/snippets/additional_info.html:7
 msgid "Additional Info"
@@ -67,35 +71,8 @@ msgstr "Annuler"
 msgid "Apply"
 msgstr "Appliquer"
 
-msgid "unknow"
-msgstr "Inconnue"
+msgid "Packages Descending"
+msgstr "Nombre de données (décroissant)"
 
-msgid "intermittently"
-msgstr "Ponctuelle"
-
-msgid "realtime"
-msgstr "Temps réel"
-
-msgid "daily"
-msgstr "Quotidienne"
-
-msgid "weekly"
-msgstr "Hebdomadaire"
-
-msgid "monthly"
-msgstr "Mensuelle"
-
-msgid "fortnightly"
-msgstr "Bi-mensuelle"
-
-msgid "quarterly"
-msgstr "Trimestrielle"
-
-msgid "semiannual"
-msgstr "Semestrielle"
-
-msgid "annual"
-msgstr "Annuelle"
-
-msgid "irregularly"
-msgstr "Sans régularité"
+msgid "Packages Ascending"
+msgstr "Nombre de données (croissant)"
