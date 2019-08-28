@@ -22,6 +22,7 @@ class ThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IConfigurable)
     plugins.implements(plugins.IBlueprint)
+    plugins.implements(plugins.IRoutes)
     plugins.implements(plugins.IFacets, inherit=True)
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.ITranslation)
@@ -31,6 +32,15 @@ class ThemePlugin(plugins.SingletonPlugin):
     # IBlueprint
     def get_blueprint(self):
         return api.theme_api
+
+    # IRoutes
+    def before_map(self, map):
+        # sort organizations by default
+        map.connect('ckanext_theme_organizations_index', '/organization?q=&sort=package_count+desc', action='index')
+        return map
+
+    def after_map(selfself, map):
+        return map
 
     # Iconfigurable
     def configure(self, main_config):
