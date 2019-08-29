@@ -76,3 +76,42 @@ msgstr "Nombre de données (décroissant)"
 
 msgid "Packages Ascending"
 msgstr "Nombre de données (croissant)"
+
+msgid "punctual"
+msgstr "Non planifié"
+
+msgid "unknown"
+msgstr "Inconnue"
+
+msgid "continuous"
+msgstr "Continue"
+
+msgid "irregular"
+msgstr "Lorsque nécessaire"
+
+msgid "intermittently"
+msgstr "Ponctuelle"
+
+msgid "realtime"
+msgstr "Temps réel"
+
+msgid "daily"
+msgstr "Quotidienne"
+
+msgid "weekly"
+msgstr "Hebdomadaire"
+
+msgid "monthly"
+msgstr "Mensuelle"
+
+msgid "biweekly"
+msgstr "Bi-mensuelle"
+
+msgid "quarterly"
+msgstr "Trimestrielle"
+
+msgid "semiannual"
+msgstr "Semestrielle"
+
+msgid "annual"
+msgstr "Annuelle"
