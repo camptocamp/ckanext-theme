@@ -25,8 +25,9 @@ def list_data_formats(package):
     # get first the formats inferred by default:
     formats = dict_list_or_dict_reduce(package['resources'], 'format')
     # then get the data-format values
-    data_formats = package.get('data-format', [])
-    formats.extend(data_formats)
+    data_formats = filter(lambda x: x['key'] == 'data-format', package.get('extras', []))
+    data_formats = data_formats[0]['value'] if len(data_formats) > 0 else ''
+    formats.extend(data_formats.split(','))
     # strip whitespaces around words and remove empty tags
     formats = [x.strip() for x in formats if x]
     #formats = [x for x in formats if x]

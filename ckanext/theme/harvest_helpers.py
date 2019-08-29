@@ -440,6 +440,8 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
     Solution is to get those values from extras, put them at package root so scheming can use them and remove those
     values from extras. This is what this function does. The modifications are done in-situ in the package_dict
     Also computes values from geonetwork metadata
+    Beware: fields that are not in the custom schema still have to be stored in the extras. If not, they won't be stored
+    in the database, hence lost after the harvest
     :param package_dict: original package_dict
     :return:
     """
@@ -474,7 +476,6 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
     # Compute values not present as-is in geonetwork
     package_dict['inspire_url'] = _gn_csw_build_inspire_link(data_dict['harvest_object'].source, iso_values)
     package_dict['topic-categories'] = ', '.join(iso_values.get('topic-category'))
-    package_dict['data-format'] = ', '.join(f['name'] for f in iso_values.get('data-format'))
     # set a consistent point of contact (name & email match a same entity instead of random-ish)
     poc = _get_poc(iso_values)
     if poc:
@@ -485,10 +486,13 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
     package_dict['dataset_modification_date'] = _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'revision')
     package_dict['dataset_publication_date'] = _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'publication')
     package_dict['datatype'] = _infer_datatypes(extras_keys_dict)
-    package_dict['maintainer_email'] = _get_value(extras_keys_dict, 'contact-email', '')
-    package_dict['metadata_created'] = _get_value(extras_keys_dict, 'metadata-date', '')
-    package_dict['metadata_modified'] = _get_value(extras_keys_dict, 'metadata-date', '')
     package_dict['groups'] = _get_themes(iso_values)
+
+    # add some extra fields. Those fields, as they are not in the schema, have to be stored in extras
+    extras_keys_dict['data-format'] = {'key': 'data-format', 'value': ', '.join(f['name'] for f in iso_values.get('data-format'))}
+    extras_keys_dict['maintainer_email'] = {'key': 'data-format', 'value': _get_value(extras_keys_dict, 'contact-email', '')}
+    extras_keys_dict['metadata_created'] = {'key': 'data-format', 'value': _get_value(extras_keys_dict, 'metadata-date', '')}
+    extras_keys_dict['metadata_modified'] = {'key': 'data-format', 'value': _get_value(extras_keys_dict, 'metadata-date', '')}
 
     # Finally, drop extras as scheming doesn't allow extras FALSE ! No need, just remove the scheming synonyms from extras
     # extras_keys_dict.pop('extras', None)
