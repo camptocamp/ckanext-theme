@@ -490,9 +490,9 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
 
     # add some extra fields. Those fields, as they are not in the schema, have to be stored in extras
     extras_keys_dict['data-format'] = {'key': 'data-format', 'value': ', '.join(f['name'] for f in iso_values.get('data-format'))}
-    extras_keys_dict['maintainer_email'] = {'key': 'data-format', 'value': _get_value(extras_keys_dict, 'contact-email', '')}
-    extras_keys_dict['metadata_created'] = {'key': 'data-format', 'value': _get_value(extras_keys_dict, 'metadata-date', '')}
-    extras_keys_dict['metadata_modified'] = {'key': 'data-format', 'value': _get_value(extras_keys_dict, 'metadata-date', '')}
+    #extras_keys_dict['maintainer_email'] = {'key': 'maintainer_email', 'value': _get_value(extras_keys_dict, 'contact-email', '')}
+    extras_keys_dict['metadata_created'] = {'key': 'metadata_created', 'value': _get_value(extras_keys_dict, 'metadata-date', '')}
+    extras_keys_dict['metadata_modified'] = {'key': 'metadata_modified', 'value': _get_value(extras_keys_dict, 'metadata-date', '')}
 
     # Finally, drop extras as scheming doesn't allow extras FALSE ! No need, just remove the scheming synonyms from extras
     # extras_keys_dict.pop('extras', None)
