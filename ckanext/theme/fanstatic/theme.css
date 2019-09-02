@@ -317,6 +317,9 @@ h2 {
     white-space: nowrap;
     text-transform: uppercase;
 }
+[role=main] .secondary ul {
+  flex-direction: column;
+}
 h1 {
     text-transform: none;
 }
