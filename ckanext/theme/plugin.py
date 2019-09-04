@@ -70,14 +70,13 @@ class ThemePlugin(plugins.SingletonPlugin):
 
     # IPackageController
     def before_index(self, pkg_dict):
-        #pkg_dict['datatype'] = loads(pkg_dict.get('datatype', '[]'))
+        pkg_dict['datatype'] = loads(pkg_dict.get('datatype', '[]'))
         return pkg_dict
 
     # IPackageController
     def before_search(self, search_param):
         search_param['qf'] = 'title^2 text'
         return search_param
-
 
     # ITranslation
     def i18n_locales(self):
