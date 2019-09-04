@@ -485,7 +485,12 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
 
     package_dict['dataset_modification_date'] = _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'revision')
     package_dict['dataset_publication_date'] = _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'publication')
-    package_dict['datatype'] = _infer_datatypes(extras_keys_dict)
+    # Support datatype default_values from harvest config
+    # ex.: `{"default_extras": { "datatype": ["donnees-geographiques", "donnees-ouvertes"]}}` in the configuration field
+    # of the harvest
+    datatypes = json.loads(package_dict.get('datatype', '[]'))
+    # merge lists with unique values
+    package_dict['datatype'] = list(set(datatypes + _infer_datatypes(extras_keys_dict)))
     package_dict['groups'] = _get_themes(iso_values)
 
     # add some extra fields. Those fields, as they are not in the schema, have to be stored in extras
