@@ -22,6 +22,7 @@ class ThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IConfigurable)
     plugins.implements(plugins.IBlueprint)
+    plugins.implements(plugins.IRoutes)
     plugins.implements(plugins.IFacets, inherit=True)
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.ITranslation)
@@ -31,6 +32,15 @@ class ThemePlugin(plugins.SingletonPlugin):
     # IBlueprint
     def get_blueprint(self):
         return api.theme_api
+
+    # IRoutes
+    def before_map(self, map):
+        # sort organizations by default
+        map.connect('ckanext_theme_organizations_index', '/organization?q=&sort=package_count+desc', action='index')
+        return map
+
+    def after_map(selfself, map):
+        return map
 
     # Iconfigurable
     def configure(self, main_config):
@@ -48,7 +58,7 @@ class ThemePlugin(plugins.SingletonPlugin):
         return OrderedDict([
             ('organization', _(u'Organisation')),
             ('groups', _(u'Thématique')),
-            ('keywords', _(u'Mot-clé')),
+            ('tags', _(u'Mot-clé')),
 
             ('granularity', _(u'Granularité')),
             ('res_format', _(u'Format')),
@@ -68,7 +78,6 @@ class ThemePlugin(plugins.SingletonPlugin):
         search_param['qf'] = 'title^2 text'
         return search_param
 
-
     # ITranslation
     def i18n_locales(self):
         return ('fr')
@@ -86,27 +95,10 @@ class ThemePlugin(plugins.SingletonPlugin):
         package_dict = data_dict['package_dict']
         iso_values = data_dict['iso_values']
         # log.debug(iso_values)
-
-        # Manage themes:
-        #  * if there is [1..n] ISO themes, it is mapped to a pigma theme
-        #  * else, if there is [1..n] inspire theme keywords, we try the mapping with them
-        # Themes are managed as ckan groups
-        package_dict['groups'] = harvest_helpers.get_themes(iso_values)
-
-        package_dict['extras'].extend([
-            {'key': 'inspire-url', 'value': harvest_helpers.gn_csw_build_inspire_link(data_dict['harvest_object'].source,
-                                                                      iso_values)},
-            {'key': 'topic-categories', 'value': ', '.join(iso_values.get('topic-category'))},
-            {'key': 'data-format', 'value': ', '.join(f['name'] for f in iso_values.get('data-format'))},
-        ])
-
-        # set a consistent point of contact (name & email match a same entity instead of random-ish)
-        poc = harvest_helpers.get_poc(iso_values)
-        if poc:
-            harvest_helpers.update_or_set_extra(package_dict, 'contact', poc.get('organisation-name',
-                                                                                 poc.get('individual-name', '')))
-            harvest_helpers.update_or_set_extra(package_dict, 'contact-email', poc.get('contact-info').get('email', ''))
-
+        log.info('Working on dataset {}'.format(package_dict['name']))
+        # fix harvested package to make it compatible with the scheming extension
+        # & transform geonetwork metadata to make them available in the schema
+        harvest_helpers.fix_harvest_scheme_fields(package_dict, data_dict)
         return package_dict
 
     # ITemplateHelper

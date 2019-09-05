@@ -16,7 +16,7 @@ def dict_list_or_dict_reduce(list_, key, unique=True):
 def list_data_formats(package):
     """
     Improved list of available formats.
-    By default, CSW haravester has a poor file format guessing algo
+    By default, CSW harvester has a poor file format guessing algo
     (see  ckan/src/ckanext-spatial/ckanext/spatial/harvesters/base.py L94)
     This also checks on the data-format iso values
     :param package:
@@ -25,10 +25,20 @@ def list_data_formats(package):
     # get first the formats inferred by default:
     formats = dict_list_or_dict_reduce(package['resources'], 'format')
     # then get the data-format values
-    data_formats = filter(lambda x: x['key'] == 'data-format', package.get('extras', []))
+    # The 3 following lines deal with root page where, strangely, objects that should be lists are provided as dicts
+    extras = package.get('extras', [])
+    if isinstance(extras, dict):
+        extras = extras.values()
+    data_formats = filter(lambda x: x['key'] == 'data-format', extras)
     data_formats = data_formats[0]['value'] if len(data_formats) > 0 else ''
     formats.extend(data_formats.split(','))
-    return formats
+    # strip whitespaces around words and remove empty tags
+    formats = [x.strip() for x in formats if x]
+    #formats = [x for x in formats if x]
+    # deduplicate list of values
+    formats = list(set(formats))
+    # sort alphabetically
+    return sorted(formats)
 
 
 def update_frequency_etalab_codelist(field):

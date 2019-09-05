@@ -22,17 +22,25 @@
       </a>
     </li>
     {% if res.url and h.is_url(res.url) %}
-    <li>
-      <a href="{{ res.url }}" class="resource-url-analytics" target="_blank">
-        {% if res.has_views or res.url_type == 'upload' %}
-        <i class="fa fa-arrow-circle-o-down"></i>
-        {{ _('Download') }}
+      {% if res.format.lower() == 'wms' %}<li>
+            <a href="/mapfishapp/?owsurl={{ res.url }}&owstype=WMSLayer&layername={{ res.name }}" class="resource-url-analytics" target="_blank">
+                <i class="fa fa-external-link"></i>
+                {{ _('View resource in map') }}
+            </a>
+          </li>
         {% else %}
-        <i class="fa fa-external-link"></i>
-        {{ _('Go to resource') }}
+          <li>
+            <a href="{{ res.url }}" class="resource-url-analytics" target="_blank">
+              {% if res.has_views or res.url_type == 'upload' %}
+              <i class="fa fa-arrow-circle-o-down"></i>
+              {{ _('Download') }}
+              {% else %}
+              <i class="fa fa-external-link"></i>
+              {{ _('Go to resource') }}
+              {% endif %}
+            </a>
+          </li>
         {% endif %}
-      </a>
-    </li>
     {% endif %}
     {% if can_edit %}
     <li>
