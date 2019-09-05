@@ -19,6 +19,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
+#: ckanext/theme/plugin.py:59
+msgid "Groups"
+msgstr "Thématiques"
+
+msgid "Group"
+msgstr "Thématique"
+
 #: ckanext/theme/plugin.py:24
 msgid "Themes"
 msgstr "Thèmes"
@@ -27,17 +34,28 @@ msgstr "Thèmes"
 msgid "Keywords"
 msgstr "Mots clés"
 
+#: ckanext/theme/plugin.py:25
+msgid "Keyword"
+msgstr "Mot clé"
+
 #: ckanext/theme/plugin.py:27
 msgid "Update frequency"
-msgstr "Fréquence de la mise à jour"
+msgstr "Fréquence de mise à jour"
 
 #: ckanext/theme/plugin.py:28
 msgid "Granularity"
 msgstr "Granularité de la couverture territoriale"
 
+#: ckan/templates/snippets/additional_info.html:7
+msgid "Additional Info"
+msgstr "Informations complémentaires"
+
 #: ckanext/theme/plugin.py:29
 msgid "Organizations"
 msgstr "Organisations"
+
+msgid "Organization"
+msgstr "Organisation"
 
 msgid "donnees-ouvertes"
 msgstr "Données ouvertes"
@@ -63,8 +81,23 @@ msgstr "Annuler"
 msgid "Apply"
 msgstr "Appliquer"
 
-msgid "unknow"
+msgid "Packages Descending"
+msgstr "Nombre de données (décroissant)"
+
+msgid "Packages Ascending"
+msgstr "Nombre de données (croissant)"
+
+msgid "punctual"
+msgstr "Non planifié"
+
+msgid "unknown"
 msgstr "Inconnue"
+
+msgid "continuous"
+msgstr "Continue"
+
+msgid "irregular"
+msgstr "Lorsque nécessaire"
 
 msgid "intermittently"
 msgstr "Ponctuelle"
@@ -81,7 +114,7 @@ msgstr "Hebdomadaire"
 msgid "monthly"
 msgstr "Mensuelle"
 
-msgid "fortnightly"
+msgid "biweekly"
 msgstr "Bi-mensuelle"
 
 msgid "quarterly"
@@ -93,5 +126,5 @@ msgstr "Semestrielle"
 msgid "annual"
 msgstr "Annuelle"
 
-msgid "irregularly"
-msgstr "Sans régularité"
+msgid "View resource in map"
+msgstr "Afficher dans la carte"
