@@ -16,7 +16,7 @@ Example:
 {% set truncate = truncate or 180 %}
 {% set truncate_title = truncate_title or 80 %}
 {% set title = package.title or package.name %}
-{% set notes = h.markdown_extract(package.notes, extract_length=truncate) %}
+{% set notes = h.markdown_extract(package.description or package.notes, extract_length=truncate) %}
 
 {% block package_item %}
   <li class="{{ item_class or "dataset-item" }}">
@@ -86,20 +86,6 @@ Example:
           {% endblock %}
         {% endif %}
       {% endblock %}
-      <ul class="dataset-resources unstyled">
-        {% for resource in package.datatype %}
-          {% set schema = h.scheming_get_dataset_schema('dataset') %}
-          <li class="dataset-datatype">
-            <a href="{{ h.url_for(controller='package', action='read', id=package.name) }}" class="label" data-format="{{ resource.lower() }}">
-            {% for field in schema.dataset_fields if field.field_name == 'datatype' %}
-              {% for choice in field.choices if choice.value == resource %}
-                {{ choice.label }}
-              {% endfor %}
-            {% endfor %}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
     {% endblock %}
 
 	</div>

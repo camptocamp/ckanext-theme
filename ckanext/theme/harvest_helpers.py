@@ -452,11 +452,11 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
     # FIXME handle different source and target schemas
     #        e.g. through field mapping in harvest config?
     # FIXME customise fields to your ckanext-scheming dataset schema
-    fields = ['title', 'name', 'tag_string', 'license_id',
-              'owner_org', 'notes', 'update_frequency',
-              'datatype', 'thumbnail', 'category', 'hyperlink', 'inspire_url',
-              'dataset_publication_date', 'dataset_modification_date', 'support', 'author', 'author_email',
-              'spatial', 'spatial-name', 'spatial-text']
+    fields = ['title', 'name', 'tag_string',
+              'owner_org', 'description', 'accrualPeriodicity',
+              'thumbnail', 'hyperlink',
+              'issued', 'modified', 'publisher', 'contactPoint', 'contactPoint_email',
+              'spatial', 'spatial-name', 'spatial-text', 'lineage']
     # make extras a dictionary, so we can more easily access the records
     extras_keys_dict = {d['key']: d for d in package_dict['extras']}
     iso_values = data_dict['iso_values']
@@ -465,33 +465,36 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
         if field in extras_keys_dict.keys():
             package_dict[field] = extras_keys_dict[field]['value']
             extras_keys_dict.pop(field, None)
-
-    #package_dict['id'] = package_dict['name']
-    package_dict['license_id'] = 'other-at'
+    try:
+        # try to get the GN uuid as id for the dataset
+        package_dict['id'] = iso_values['guid']
+    except:
+        pass
+    package_dict['description'] = package_dict['notes']
     package_dict['thumbnail'] = _get_value(extras_keys_dict, 'graphic-preview-file', '')
     frequency = _get_value(extras_keys_dict, 'frequency-of-update', 'unknown')
-    package_dict['update_frequency'] = _update_frequency_iso_to_eta(frequency)
+    package_dict['accrualPeriodicity'] = _update_frequency_iso_to_eta(frequency)
     for resource in package_dict['resources']:
         _fix_resource(resource)
 
     # Compute values not present as-is in geonetwork
-    package_dict['inspire_url'] = _gn_csw_build_inspire_link(data_dict['harvest_object'].source, iso_values)
+    package_dict['hyperlink'] = _gn_csw_build_inspire_link(data_dict['harvest_object'].source, iso_values)
     package_dict['topic-categories'] = ', '.join(iso_values.get('topic-category'))
     # set a consistent point of contact (name & email match a same entity instead of random-ish)
     poc = _get_poc(iso_values)
     if poc:
         # get organisation name if available, else individual name
-        package_dict['author'] = poc.get('organisation-name', poc.get('individual-name', ''))
-        package_dict['author_email'] = poc.get('contact-info').get('email', '')
+        package_dict['contactPoint'] = poc.get('organisation-name', poc.get('individual-name', ''))
+        package_dict['contactPoint_email'] = poc.get('contact-info').get('email', '')
 
-    package_dict['dataset_modification_date'] = _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'revision')
-    package_dict['dataset_publication_date'] = _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'publication')
-    # Support datatype default_values from harvest config
-    # ex.: `{"default_extras": { "datatype": ["donnees-geographiques", "donnees-ouvertes"]}}` in the configuration field
-    # of the harvest
-    datatypes = json.loads(package_dict.get('datatype', '[]'))
-    # merge lists with unique values
-    package_dict['datatype'] = list(set(datatypes + _infer_datatypes(extras_keys_dict)))
+    package_dict['modified'] = _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'revision') or _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'creation')
+    package_dict['issued'] = _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'publication')
+    # # Support datatype default_values from harvest config
+    # # ex.: `{"default_extras": { "datatype": ["donnees-geographiques", "donnees-ouvertes"]}}` in the configuration field
+    # # of the harvest
+    # datatypes = json.loads(package_dict.get('datatype', '[]'))
+    # # merge lists with unique values
+    # package_dict['datatype'] = list(set(datatypes + _infer_datatypes(extras_keys_dict)))
     package_dict['groups'] = _get_themes(iso_values)
 
     # add some extra fields. Those fields, as they are not in the schema, have to be stored in extras

@@ -69,7 +69,7 @@
                     "data-module-key": "id",
                     "data-module-label": "name"
                 },
-                "form_placeholder": "eg. Nouvelle Aquitaine",
+                "form_placeholder": "eg. Hauts-de-France",
                 "validators": "ignore_missing unicode"
             }
         },

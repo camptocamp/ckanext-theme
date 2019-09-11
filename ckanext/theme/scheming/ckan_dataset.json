@@ -2,7 +2,7 @@
     "dataset_fields": [
         {
             "field_name": "title",
-            "label": "Titre",
+            "label": "Nom de la donnée",
             "preset": "title",
             "required": true
         },
@@ -19,57 +19,15 @@
             "required": true
         },
         {
-            "field_name": "license_id",
-            "form_snippet": "license.html",
-            "label": "License",
-            "required": true
-        },
-        {
             "field_name": "owner_org",
             "label": "Organisation",
             "preset": "dataset_organization",
             "required": true
         },
         {
-            "field_name": "notes",
+            "field_name": "description",
             "form_snippet": "markdown.html",
             "label": "Description",
-            "required": true
-        },
-        {
-            "field_name": "update_frequency",
-            "label": "Fr\u00e9quence de mise \u00e0 jour",
-            "choices_helper": "theme_update_frequency_etalab_codelist",
-            "form_include_blank_choice": false,
-            "preset": "select",
-            "required": true
-        },
-        {
-            "choices": [
-                {
-                    "label": "Donn\u00e9es ouvertes",
-                    "value": "donnees-ouvertes"
-                },
-                {
-                    "label": "Donn\u00e9es intelligentes",
-                    "value": "donnees-intelligentes"
-                },
-                {
-                    "label": "Donn\u00e9es g\u00e9ographiques",
-                    "value": "donnees-geographiques"
-                },
-                {
-                    "label": "Rapports et \u00e9tudes",
-                    "value": "rapports-etudes"
-                },
-                {
-                    "label": "Non renseign\u00e9",
-                    "value": "unknown"
-                }
-            ],
-            "field_name": "datatype",
-            "label": "Type de donn\u00e9es",
-            "preset": "multiple_checkbox",
             "required": true
         },
         {
@@ -78,103 +36,51 @@
             "label": "Imagette"
         },
         {
-            "field_name": "category",
-            "label": "Catégories",
-            "help_text": "Choisissez une ou plusieurs catégories en maintenant la touche CTRL enfoncée",
-            "preset": "multiple_select",
-            "choices": [
-                {
-                   "value": "foret",
-                   "label": "For\u00eat"
-                },
-                {
-                   "value": "agriculture",
-                   "label": "Agriculture"
-                },
-                {
-                   "value": "recherche",
-                   "label": "Recherche"
-                },
-                {
-                   "value": "services-etat",
-                   "label": "Services de l'\u00e9tat"
-                },
-                {
-                   "value": "socio-eco",
-                   "label": "Socio-\u00e9conomique"
-                }
-            ]
-        },
-        {
             "field_name": "hyperlink",
             "display_snippet": "default_link.html",
             "label": "Lien web"
         },
         {
-            "display_property": "foaf:homepage",
-            "display_snippet": "default_link.html",
-            "field_name": "inspire_url",
-            "label": "URL de la fiche INSPIRE"
-        },
-        {
-            "choices": [
-                {
-                    "label": "Ind\u00e9finie",
-                    "value": "indefinie"
-                },
-                {
-                    "label": "Pays",
-                    "value": "pays"
-                },
-                {
-                    "label": "R\u00e9gion",
-                    "value": "region"
-                },
-                {
-                    "label": "D\u00e9partement",
-                    "value": "departement"
-                },
-                {
-                    "label": "Intercommunalit\u00e9 (EPCI)",
-                    "value": "epci"
-                },
-                {
-                    "label": "Commune",
-                    "value": "commune"
-                }
-            ],
-            "field_name": "granularity",
-            "form_include_blank_choice": false,
-            "label": "Granularit\u00e9 de la couverture territoriale",
-            "preset": "select"
-        },
-        {
-            "field_name": "dataset_publication_date",
+            "field_name": "issued",
             "label": "Date de publication",
             "preset": "date"
         },
         {
-            "field_name": "dataset_modification_date",
-            "label": "Date de mise \u00e0 jour",
+            "field_name": "modified",
+            "label": "Date de cr\u00e9ation ou de mise \u00e0 jour de la donn\u00e9e",
             "preset": "date"
         },
         {
-            "display_property": "dc:creator",
-            "field_name": "author",
+            "display_property": "dct:publisher",
+            "field_name": "publisher",
+            "form_placeholder": "Jean Dupont",
+            "label": "Nom du(es) propri\u00e9taire(s)"
+        },
+        {
+            "field_name": "accrualPeriodicity",
+            "label": "Fr\u00e9quence de mise \u00e0 jour de la donnée",
+            "choices_helper": "theme_update_frequency_etalab_codelist",
+            "form_include_blank_choice": false,
+            "preset": "select",
+            "required": false
+        },
+        {
+            "display_property": "dct:contactPoint",
+            "field_name": "contactPoint",
             "form_placeholder": "Jean Dupont",
             "label": "Contact"
         },
         {
-            "display_email_name_field": "author",
-            "display_property": "dc:creator",
+            "display_email_name_field": "contactPoint",
+            "display_property": "dct:contactPoint",
             "display_snippet": "default_email.html",
-            "field_name": "author_email",
+            "field_name": "contactPoint_email",
             "label": "E-mail du contact"
         },
         {
             "display_snippet": "text.html",
             "field_name": "spatial-name",
-            "label": "\u00c9tendue g\u00e9ographique",
+            "label": "Couverture spatiale",
             "preset": "geog_extent_name_autocomplete"
         },
         {
@@ -189,6 +95,12 @@
             "field_name": "spatial",
             "label": "\u00c9tendue g\u00e9ographique (geojson)",
             "preset": "json_object"
+        },
+        {
+            "field_name": "lineage",
+            "form_snippet": "markdown.html",
+            "label": "G\u00e9n\u00e9alogie",
+            "required": false
         }
     ],
     "dataset_type": "dataset",

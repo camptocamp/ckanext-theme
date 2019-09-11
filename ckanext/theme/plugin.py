@@ -60,10 +60,8 @@ class ThemePlugin(plugins.SingletonPlugin):
             ('groups', _(u'Group')),
             ('tags', _(u'Keyword')),
 
-            ('granularity', _(u'Granularity')),
             ('res_format', _(u'Format')),
-            ('update_frequency', _(u'Update frequency')),
-            ('license_id', _(u'Licence')),
+            ('accrualPeriodicity', _(u'Update frequency')),
             # ('datatype', _(u'Type')),
             # ('tags', _(u'Mot-clé')),
         ])
