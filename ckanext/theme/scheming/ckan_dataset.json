@@ -78,6 +78,15 @@
             "label": "Imagette"
         },
         {
+            "field_name": "themes",
+            "display_snippet": null,
+            "label": "Thématiques",
+            "help_text": "Choisissez une ou plusieurs thématiques en maintenant la touche CTRL enfoncée",
+            "preset": "multiple_select",
+            "choices_helper": "theme_thematics_list",
+            "select_size" : 12
+        },
+        {
             "field_name": "category",
             "label": "Catégories",
             "help_text": "Choisissez une ou plusieurs catégories en maintenant la touche CTRL enfoncée",

@@ -1,5 +1,6 @@
 # Template helper functions
 from ckan.lib.helpers import dict_list_reduce
+from ckan.plugins import toolkit
 
 from harvest_helpers import update_frequencies, themes
 
@@ -52,6 +53,16 @@ def update_frequency_etalab_codelist(field):
     return ({ 'value': x['eta_code'], 'label': x['label_fr'] } for x in update_frequencies)
 
 
+def thematics_list(field):
+    """
+        Provides a choices list of thematics (groups) values
+        Used in scheming config ckan_dataset.json.
+        :return:
+        """
+    # create a list of value/label entries to be used in the multiselect field in the dataset form
+    groups = toolkit.get_action('group_list')(data_dict={'all_fields': True})
+    return ({'value': x['name'], 'label': x['display_name']} for x in groups)
+
 # not used, finally. Might be removed...
 def themes_codelist(field):
     """
@@ -74,5 +85,6 @@ def get_helpers():
         'theme_dict_list_or_dict_reduce': dict_list_or_dict_reduce,
         'theme_list_data_formats': list_data_formats,
         'theme_update_frequency_etalab_codelist' : update_frequency_etalab_codelist,
-        'theme_themes_codelist' : themes_codelist
+        'theme_themes_codelist' : themes_codelist,
+        'theme_thematics_list' : thematics_list
     }

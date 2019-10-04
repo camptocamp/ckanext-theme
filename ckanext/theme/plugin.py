@@ -17,7 +17,6 @@ import logging
 
 log = logging.getLogger(__name__)
 
-
 class ThemePlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IConfigurable)
@@ -71,6 +70,34 @@ class ThemePlugin(plugins.SingletonPlugin):
     def before_index(self, pkg_dict):
         pkg_dict['datatype'] = loads(pkg_dict.get('datatype', '[]'))
         return pkg_dict
+
+    # IPackageController
+    def after_update(self, context, pkg_dict):
+        # assign groups based on the edition form's themes values
+        # 1. retrieve current groups list
+        pkg = toolkit.get_action('package_show')(context, {'id': pkg_dict['id']})
+        current_groups_names_list = [grp['name']for grp in pkg['groups']]
+        # 2. build the themes list
+        themes = loads(pkg_dict.get('themes', '[]'))
+        # 3. if the difference is not null, update the groups the package belongs to
+        # we need to perform this action as superuser, since I couldn't find a way to override auth system that would
+        # work here...
+        # This should be fine, since if we are there, it means we were allowed first to update this package
+        user = toolkit.get_action('get_site_user')({'ignore_auth': True}, {})
+        # we check if the groups list and themes list are different. In that case, we update only on the intersection
+        # with available groups list (prevent possible mistakes in groups names)
+        if bool(set(themes).difference(current_groups_names_list)):
+            all_groups_list = toolkit.get_action('group_list')(context, {})
+            grps = [{'name' : theme} for theme in set(themes).intersection(all_groups_list)]
+            updated_ds = toolkit.get_action('package_patch')({'user': user['name']}, data_dict={
+                'id' : pkg_dict['id'],
+                'groups' : grps
+            })
+
+        return {
+            'context' : context,
+            'pkg_dict': pkg_dict
+        }
 
     # IPackageController
     def before_search(self, search_param):
