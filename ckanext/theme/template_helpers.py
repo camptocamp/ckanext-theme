@@ -63,17 +63,6 @@ def thematics_list(field):
     groups = toolkit.get_action('group_list')(data_dict={'all_fields': True})
     return ({'value': x['name'], 'label': x['display_name']} for x in groups)
 
-# not used, finally. Might be removed...
-def themes_codelist(field):
-    """
-    Provides a choices list of themes, matching the PIGMA list
-    Used in scheming config ckan_dataset.json.
-    :return:
-    """
-    # create a list of value/label entries to be used in the combobox in the dataset form
-    return ({ 'value': k, 'label': v['label_fr'] } for k,v in themes.items())
-
-
 def get_helpers():
     '''Register the functions above as a template helper functions.
 
@@ -85,6 +74,5 @@ def get_helpers():
         'theme_dict_list_or_dict_reduce': dict_list_or_dict_reduce,
         'theme_list_data_formats': list_data_formats,
         'theme_update_frequency_etalab_codelist' : update_frequency_etalab_codelist,
-        'theme_themes_codelist' : themes_codelist,
         'theme_thematics_list' : thematics_list
     }

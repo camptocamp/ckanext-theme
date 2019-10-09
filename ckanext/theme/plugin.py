@@ -73,7 +73,14 @@ class ThemePlugin(plugins.SingletonPlugin):
 
     # IPackageController
     def after_update(self, context, pkg_dict):
-        # assign groups based on the edition form's themes values
+        return self.themes_field_to_groups(context, pkg_dict)
+
+    # IPackageController
+    def after_create(self, context, pkg_dict):
+        return self.themes_field_to_groups(context, pkg_dict)
+
+    def themes_field_to_groups(self, context, pkg_dict):
+        # assign groups based on the edition form's themes values (I couldn't manage a way to edit directly the groups)
         # 1. retrieve current groups list
         pkg = toolkit.get_action('package_show')(context, {'id': pkg_dict['id']})
         current_groups_names_list = [grp['name']for grp in pkg['groups']]
@@ -86,7 +93,7 @@ class ThemePlugin(plugins.SingletonPlugin):
         user = toolkit.get_action('get_site_user')({'ignore_auth': True}, {})
         # we check if the groups list and themes list are different. In that case, we update only on the intersection
         # with available groups list (prevent possible mistakes in groups names)
-        if bool(set(themes).difference(current_groups_names_list)):
+        if bool(set(themes).symmetric_difference(current_groups_names_list)):
             all_groups_list = toolkit.get_action('group_list')(context, {})
             grps = [{'name' : theme} for theme in set(themes).intersection(all_groups_list)]
             updated_ds = toolkit.get_action('package_patch')({'user': user['name']}, data_dict={
