@@ -7,6 +7,7 @@ from json import dumps
 from ckan.plugins.toolkit import config
 import ckan.plugins.toolkit as toolkit
 from ckan.views.api import _finish_ok
+import template_helpers
 
 theme_api = Blueprint('theme_api', __name__)
 
@@ -51,6 +52,18 @@ def etalab_get_extent_bbox():
     coords = list(geojson.utils.coords(response_dict['geometry']))
     poly = _bbox(coords)
     return geojson.dumps(poly)
+
+
+@theme_api.route('/theme-api/update_frequency/list', endpoint='update_frequency_list')
+def update_frequency_list():
+    '''Provides the list of possible update_frequency values, according to etalab list'''
+    values = list(template_helpers.update_frequency_etalab_codelist(None))
+    resultSet = {
+        u'ResultSet': {
+            u'Result': values
+        }
+    }
+    return _finish_ok(resultSet)
 
 
 def _bbox(coord_list):
