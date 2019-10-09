@@ -1,4 +1,11 @@
 {% ckan_extends %}
+
+{#
+Nobody should be able to create an org (managed by geOrchestra's console)
+#}
+{% block page_primary_action %}
+{% endblock %}
+
 {% block secondary %}{% endblock %}
 {% block organizations_search_form %}
     {% snippet 'snippets/search_form.html', form_id='organization-search-form', type='organization', query=c.q, sorting_selected=c.sort_by_selected, count=c.page.item_count, placeholder=_('Search organizations...'), show_empty=request.params, no_bottom_border=true if c.page.items, sorting = [(_('Packages Descending'), 'package_count desc'), (_('Packages Ascending'), 'package_count asc'), (_('Name Ascending'), 'title asc'), (_('Name Descending'), 'title desc')] %}
