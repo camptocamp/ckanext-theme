@@ -454,6 +454,9 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
     # merge lists with unique values
     package_dict['datatype'] = list(set(datatypes + _infer_datatypes(extras_keys_dict)))
     package_dict['groups'] = _get_themes(iso_values)
+    # We now use the `themes` schema field to manage the themes, then synced to groups. So we need to set the themes
+    # values:
+    package_dict['themes'] = [gp['id'] for gp in package_dict['groups']]
 
     # add some extra fields. Those fields, as they are not in the schema, have to be stored in extras
     extras_keys_dict['data-format'] = {'key': 'data-format', 'value': ', '.join(f['name'] for f in iso_values.get('data-format'))}
