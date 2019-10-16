@@ -95,136 +95,102 @@ open_licence_tags = [
 themes = OrderedDict({
     "amenagement": {
         'label_fr': u'Aménagement',
-        'iso_themes': (u'structure'),
-        'inspire_themes': (
-            u"Adresses",
-            u"Usage des sols"
-        ),
-    },
-    "citoyennete": {
-        'label_fr': u'Citoyenneté et démocratie',
-        'iso_themes': (),
-        'inspire_themes': (),
-    },
-    "culture": {
-        'label_fr': u'Culture, patrimoine et tourisme',
-        'iso_themes': (),
-        'inspire_themes': (),
-    },
-    "economie": {
-        'label_fr': u'Economie et entreprises',
-        'iso_themes': (u'economy'),
-        'inspire_themes': (
-            u"Lieux de production et sites industriels"
-        ),
-    },
-    "energie": {
-        'label_fr': u'Energies et réseaux',
-        'iso_themes': (),
-        'inspire_themes': (
-            u"Sources d'énergie"
-        ),
-    },
-    "environnement": {
-        'label_fr': u'Energies et réseaux',
-        'iso_themes': (
-            u'environment',
-            u'climatologyMeteorologyAtmosphere',
-            u'biota'
-            u'geoscientificInformation',
-            u'inlandWaters',
-            u'elevation'
-        ),
-        'inspire_themes': (
-            u"Régions biogéographiques",
-            u"Habitats et biotopes",
-            u"Répartition des espèces",
-            u"Conditions atmosphériques",
-            u"Caractéristiques géographiques météorologiques",
-            u"Sites protégés",
-            u"Sols",
-            u"Géologie",
-            u"Ressources minérales",
-            u"Zones à risque naturel",
-            u"Altitude",
-            u"Hydrographie"
-        ),
-    },
-    "equipement": {
-        'label_fr': u'Equipements, bâtiments et logement',
         'iso_themes': (
             u'structure',
-            u'intelligenceMilitary'
         ),
         'inspire_themes': (
-            u"Bâtiments",
-            u"Installations de suivi environnemental"
+            u"Usage des sols",
         ),
     },
-    "formation": {
-        'label_fr': u'Formation, éducation et emploi',
-        'iso_themes': (),
-        'inspire_themes': (),
-    },
-    "mer": {
-        'label_fr': u'Mer et littoral',
+    "donnees-reference": {
+        'label_fr': u'Données de référence',
         'iso_themes': (
-            u'oceans'
-        ),
-        'inspire_themes': (
-            u"Régions maritimes",
-            u"Caractéristiques géographiques océanographiques"
-        ),
-    },
-    "imagerie": {
-        'label_fr': u'Imagerie et occupation du sol',
-        'iso_themes': (
-            u'imageryBaseMapsEarthCover',
-            u'planningCadastre'
+            u'boundaries',
+            u'elevation',
+            u'imageryBaseMapsEarthCover'
+            u'location',
+            u'planningCadastre',
         ),
         'inspire_themes': (
             u"Ortho-imagerie",
-            u"Occupation des terres",
-            u"Parcelles cadastrales",
-            u"Usage des sols"
-        ),
-    },
-    "limites-administratives": {
-        'label_fr': u'Limites administratives et référentiels',
-        'iso_themes': (
-            u'boundaries'
-        ),
-        'inspire_themes': (
+            u"Référentiels de coordonnées",
+            u"Systèmes de maillage géographique",
             u"Unités administratives",
             u"Unités statistiques",
-            u"Dénominations géographiques"
         ),
     },
-    "mobilite": {
-        'label_fr': u'Mobilité et transports',
+    "economie-emploi": {
+        'label_fr': u'Économie et emploi',
         'iso_themes': (
-            u'transportation'
+            u'economy',
+            u'farming',
         ),
         'inspire_themes': (
-            u"Réseaux de transport"
+            u"Lieux de production et sites industriels",
         ),
     },
-    "sciences": {
-        'label_fr': u'Sciences, recherche et innovation',
+    "education-formation": {
+        'label_fr': u'Education et formation',
         'iso_themes': (),
-        'inspire_themes': (),
+        'inspire_themes': (
+        ),
     },
-    "sante": {
-        'label_fr': u'Social, santé et sports',
+    "environnement-risques-sante": {
+        'label_fr': u'Environnement, risques et santé',
         'iso_themes': (
+            u'biota',
+            u'climatologyMeteorologyAtmosphere',
+            u'environment'
+            u'geoscientificInformation',
             u'health',
-            u'society'
+            u'inlandWaters',
+            u'intelligenceMilitary',
+            u'oceans',
         ),
         'inspire_themes': (
-            u"Santé et sécurité des personnes",
-            u"Répartition de la population-Démographie"
-        )
-    }
+            u"Caractéristiques géographiques océanographiques",
+            u"Conditions atmosphériques",
+            u"Habitats et biotopes",
+            u"Ressources minérales",
+            u"Régions biogéographiques",
+            u"Répartition des espèces",
+            u"Sites protégés",
+            u"Sols",
+            u"Zones de gestion, de restriction ou de réglementation et unités de déclaration",
+            u"Zones à risque naturel",
+        ),
+    },
+    "institutions-partenariats": {
+        'label_fr': u'Institutions et partenariats',
+        'iso_themes': (
+            u'utilitiesCommunication',
+        ),
+        'inspire_themes': (
+        ),
+    },
+    "reseaux-energies": {
+        'label_fr': u'Réseaux et énergies',
+        'iso_themes': (),
+        'inspire_themes': (
+            u"Sources d'énergie",
+        ),
+    },
+    "transports-mobilites": {
+        'label_fr': u'Transports et mobilités',
+        'iso_themes': (
+            u'transportation',
+        ),
+        'inspire_themes': (
+        ),
+    },
+    "culture": {
+        'label_fr': u'Vie sociale et culturelle',
+        'iso_themes': (
+            u'society',
+        ),
+        'inspire_themes': (
+        ),
+    },
 })
 
 # used to define the format from the resource protocol. The first entry is the beginning of the protocol name,
