@@ -97,7 +97,7 @@
             "preset": "json_object"
         },
         {
-            "field_name": "lineage",
+            "field_name": "genealogy",
             "form_snippet": "markdown.html",
             "label": "G\u00e9n\u00e9alogie",
             "required": false

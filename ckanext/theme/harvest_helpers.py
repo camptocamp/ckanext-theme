@@ -93,28 +93,12 @@ open_licence_tags = [
 # categories and transform them to categories in this list.
 # TODO: update the groups.csv file and deduplicate this config. Maybe all in a csv file
 themes = OrderedDict({
-    "administration": {
-        'label_fr': u'Administration et action publique',
-        'iso_themes': (
-            u'utilitiesCommunication'
-        ),
-        'inspire_themes': (
-            u"Services d'utilité publique et services publics"
-        ),
-    },
-    "agriculture": {
-        'label_fr': u'Agriculture, sylviculture et viticulture',
-        'iso_themes': (u'farming'),
-        'inspire_themes': (
-            u"Installations agricoles et aquacoles"
-        ),
-    },
     "amenagement": {
-        'label_fr': u'Aménagement et urbanisme',
-        'iso_themes': (),
+        'label_fr': u'Aménagement',
+        'iso_themes': (u'structure'),
         'inspire_themes': (
             u"Adresses",
-            u"Zones de gestion, de restriction ou de réglementation et unités de déclaration"
+            u"Usage des sols"
         ),
     },
     "citoyennete": {
@@ -307,15 +291,15 @@ def _gn_csw_build_inspire_link(harvester_source, iso_values):
     return ''
 
 
-def _get_poc(iso_values):
+def _get_poc(iso_values, poc_priority_list):
     """
     CKAN harvest tend to mix point of contact information if several are provided.
     This function scans the point of contacts and returns the first one. Priority order is given by the
     poc_priority_list var
     :param iso_values: harvested values
+    :param poc_priority_list: list of comma-separated poc types, e.g. "pointOfContact, author, owner, publisher, processor, originator, distributor, resourceProvider, custodian, principalInvestigator, user"
     :return: point of contact object
     """
-    poc_priority_list = config.get('ckanext.theme.harvest.poc.priority.list')
     pocs = iso_values.get('metadata-point-of-contact')
     # pocs = [{'contact-info': {'online-resource': '', 'email': ''}, 'role': 'pointOfContact', 'organisation-name': u"Communaut\xe9 d'Agglom\xe9ration de Saint-Quentin", 'individual-name': '', 'position-name': ''}, {'contact-info': {'online-resource': '', 'email': 'info@aerodata-france.com'}, 'role': 'author', 'organisation-name': 'Aerodata France', 'individual-name': '', 'position-name': ''}]
     if not pocs:
@@ -456,7 +440,7 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
               'owner_org', 'description', 'accrualPeriodicity',
               'thumbnail', 'hyperlink',
               'issued', 'modified', 'publisher', 'contactPoint', 'contactPoint_email',
-              'spatial', 'spatial-name', 'spatial-text', 'lineage']
+              'spatial', 'spatial-name', 'spatial-text', 'genealogy']
     # make extras a dictionary, so we can more easily access the records
     extras_keys_dict = {d['key']: d for d in package_dict['extras']}
     iso_values = data_dict['iso_values']
@@ -481,20 +465,28 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
     package_dict['hyperlink'] = _gn_csw_build_inspire_link(data_dict['harvest_object'].source, iso_values)
     package_dict['topic-categories'] = ', '.join(iso_values.get('topic-category'))
     # set a consistent point of contact (name & email match a same entity instead of random-ish)
-    poc = _get_poc(iso_values)
+    poc_priority_list = config.get('ckanext.theme.harvest.poc.priority.list')
+    poc = _get_poc(iso_values, poc_priority_list)
     if poc:
         # get organisation name if available, else individual name
         package_dict['contactPoint'] = poc.get('organisation-name', poc.get('individual-name', ''))
         package_dict['contactPoint_email'] = poc.get('contact-info').get('email', '')
+    # get publisher poc, and if not available, fall-back to global poc
+    try:
+        publisher_poc = _get_poc(iso_values, "publisher")
+        package_dict['publisher'] = poc.get('organisation-name', poc.get('individual-name', ''))
+    except ValueError:
+        package_dict['publisher'] = package_dict['contactPoint']
 
     package_dict['modified'] = _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'revision') or _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'creation')
     package_dict['issued'] = _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'publication')
-    # # Support datatype default_values from harvest config
-    # # ex.: `{"default_extras": { "datatype": ["donnees-geographiques", "donnees-ouvertes"]}}` in the configuration field
-    # # of the harvest
-    # datatypes = json.loads(package_dict.get('datatype', '[]'))
-    # # merge lists with unique values
-    # package_dict['datatype'] = list(set(datatypes + _infer_datatypes(extras_keys_dict)))
+    package_dict['genealogy'] = iso_values.get('lineage','')
+    # Support datatype default_values from harvest config
+    # ex.: `{"default_extras": { "datatype": ["donnees-geographiques", "donnees-ouvertes"]}}` in the configuration field
+    # of the harvest
+    datatypes = json.loads(package_dict.get('datatype', '[]'))
+    # merge lists with unique values
+    package_dict['datatype'] = list(set(datatypes + _infer_datatypes(extras_keys_dict)))
     package_dict['groups'] = _get_themes(iso_values)
 
     # add some extra fields. Those fields, as they are not in the schema, have to be stored in extras

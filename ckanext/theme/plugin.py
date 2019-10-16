@@ -12,7 +12,6 @@ import ckanext.theme.api as api
 import ckanext.theme.config as config
 import ckanext.theme.harvest_helpers as harvest_helpers
 
-
 import logging
 
 log = logging.getLogger(__name__)
