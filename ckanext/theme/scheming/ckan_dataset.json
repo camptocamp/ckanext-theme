@@ -100,10 +100,9 @@
         },
         {
             "display_snippet": null,
-            "form_snippet": "json_hidden.html",
+            "form_snippet": "textarea.html",
             "field_name": "spatial",
-            "label": "\u00c9tendue g\u00e9ographique (geojson)",
-            "preset": "json_object"
+            "label": "\u00c9tendue g\u00e9ographique (geojson)"
         },
         {
             "field_name": "genealogy",
