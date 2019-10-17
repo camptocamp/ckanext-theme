@@ -100,7 +100,7 @@
         },
         {
             "display_snippet": null,
-            "form_snippet": "textarea.html",
+            "form_snippet": "textarea_hidden.html",
             "field_name": "spatial",
             "label": "\u00c9tendue g\u00e9ographique (geojson)"
         },
