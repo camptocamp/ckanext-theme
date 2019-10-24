@@ -99,6 +99,7 @@ themes = OrderedDict({
             u'structure',
         ),
         'inspire_themes': (
+            u"Occupation des terres",
             u"Usage des sols",
         ),
     },
@@ -112,8 +113,12 @@ themes = OrderedDict({
             u'planningCadastre',
         ),
         'inspire_themes': (
+            u"Dénominations géographiques",
             u"Ortho-imagerie",
+            u"Parcelles cadastrales",
             u"Référentiels de coordonnées",
+            u"Régions maritimes",
+            u"Répartition de la population — démographie",
             u"Systèmes de maillage géographique",
             u"Unités administratives",
             u"Unités statistiques",
@@ -126,6 +131,7 @@ themes = OrderedDict({
             u'farming',
         ),
         'inspire_themes': (
+            u"Installations agricoles et aquacoles",
             u"Lieux de production et sites industriels",
         ),
     },
@@ -150,14 +156,18 @@ themes = OrderedDict({
         'inspire_themes': (
             u"Caractéristiques géographiques océanographiques",
             u"Conditions atmosphériques",
+            u"Géologie",
             u"Habitats et biotopes",
-            u"Ressources minérales",
+            u"Hydrographie",
+            u"Installations de suivi environnemental",
             u"Régions biogéographiques",
             u"Répartition des espèces",
+            u"Ressources minérales",
+            u"Santé et sécurité des personnes",
             u"Sites protégés",
             u"Sols",
-            u"Zones de gestion, de restriction ou de réglementation et unités de déclaration",
             u"Zones à risque naturel",
+            u"Zones de gestion, de restriction ou de réglementation et unités de déclaration",
         ),
     },
     "institutions-partenariats": {
@@ -166,6 +176,7 @@ themes = OrderedDict({
             u'utilitiesCommunication',
         ),
         'inspire_themes': (
+            u"Services d'utilité publique et services publics",
         ),
     },
     "reseaux-energies": {
@@ -181,6 +192,7 @@ themes = OrderedDict({
             u'transportation',
         ),
         'inspire_themes': (
+            u"Réseaux de transport",
         ),
     },
     "culture": {
@@ -274,14 +286,14 @@ def _get_poc(iso_values, poc_priority_list):
     return pocs_ordered[0]
 
 
-def _get_themes(iso_values):
+def _get_themes(iso_values, combine_themes=True):
     """
     Extract themes
      * if there is [1..n] ISO themes, it is mapped to a pigma theme
      * else, if there is [1..n] inspire theme keywords, we try the mapping with them
     Themes are managed as ckan groups
     :param iso_values:
-    :return:
+    :return: list of {'id': theme} unique objects
     """
     #TODO: optimize search (create reverse-mapping dicts, cached so we don't recreate them on the fly for every dataset)
     groups = []
@@ -291,13 +303,16 @@ def _get_themes(iso_values):
         for group_id, group_def in themes.items():
             if th in group_def['iso_themes']:
                 groups.append({'id': group_id})
-    if len(groups)==0:
+    if combine_themes or len(groups)==0:
         # if iso themes don't work, try with inspire themes
         for group_id, group_def in themes.items():
             for keyword in iso_values.get('keyword-inspire-theme'):
                 if keyword in group_def['inspire_themes']:
                     groups.append({'id': group_id})
-    return list(groups)
+
+    # deduplicate our list. We can't use a set because dicts are not hashable
+    groups = {v['id']:v for v in groups}.values()
+    return groups
 
 
 def _update_frequency_iso_to_eta(freq):
@@ -441,8 +456,8 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
     try:
         publisher_poc = _get_poc(iso_values, "publisher")
         package_dict['publisher'] = poc.get('organisation-name', poc.get('individual-name', ''))
-    except ValueError:
-        package_dict['publisher'] = package_dict['contactPoint']
+    except:
+        package_dict['publisher'] = package_dict.get('contactPoint','')
 
     package_dict['modified'] = _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'revision') or _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'creation')
     package_dict['issued'] = _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'publication')
