@@ -100,6 +100,7 @@ themes = OrderedDict({
             u'structure',
         ),
         'inspire_themes': (
+            u"Bâtiments",
             u"Occupation des terres",
             u"Usage des sols",
         ),
@@ -114,6 +115,8 @@ themes = OrderedDict({
             u'planningCadastre',
         ),
         'inspire_themes': (
+            u"Adresses",
+            u"Altitude",
             u"Dénominations géographiques",
             u"Ortho-imagerie",
             u"Parcelles cadastrales",
@@ -155,6 +158,7 @@ themes = OrderedDict({
             u'oceans',
         ),
         'inspire_themes': (
+            u"Caractéristiques géographiques météorologiques",
             u"Caractéristiques géographiques océanographiques",
             u"Conditions atmosphériques",
             u"Géologie",
