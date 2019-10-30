@@ -6,6 +6,7 @@ import re
 import urllib
 
 from ckan.plugins.toolkit import config
+from ckan.lib.munge import substitute_ascii_equivalents
 
 
 # codelists used to get correspondence between geonetwork (iso_code) & etalab (eta_code), and also labels
@@ -442,6 +443,9 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
     Also computes values from geonetwork metadata
     Beware: fields that are not in the custom schema still have to be stored in the extras. If not, they won't be stored
     in the database, hence lost after the harvest
+
+    We also add tags transformation (make them loosely compliant) by default. To deactivate this behaviour, set
+    {'compliant_tags':false} in the harvesting configuration (true by default)
     :param package_dict: original package_dict
     :return:
     """
@@ -467,6 +471,23 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
 
     #package_dict['id'] = package_dict['name']
     package_dict['license_id'] = 'other-at'
+
+    # Sanitize the tags
+    # we need to retrieve the harvest configuration and check
+    # * that `clean_tags` is unset or False (if not, we let the harvest extension run the clean_tags task (munge_tag(tag))
+    #   see https://docs.ckan.org/projects/ckanext-spatial/en/latest/harvesters.html#overview-and-configuration
+    #   and https://github.com/ckan/ckanext-harvest
+    # * that our custom config option, `compliant_tags` is not explicitly set to False
+    harvest_config = dict()
+    try:
+        harvest_config = json.loads(data_dict['harvest_object'].source.config, '{}')
+    except:
+        pass
+    if harvest_config.get('compliant_tags', True) and not harvest_config.get('clean_tags', False):
+        for tag in package_dict['tags']:
+            tag['name'] = sanitizeKeyword(tag['name'], strict=False)
+
+
     package_dict['thumbnail'] = _get_value(extras_keys_dict, 'graphic-preview-file', '')
     frequency = _get_value(extras_keys_dict, 'frequency-of-update', 'unknown')
     package_dict['update_frequency'] = _update_frequency_iso_to_eta(frequency)
@@ -505,3 +526,35 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
     # Finally, drop extras as scheming doesn't allow extras FALSE ! No need, just remove the scheming synonyms from extras
     # extras_keys_dict.pop('extras', None)
     package_dict['extras'] = extras_keys_dict.values()
+
+def sanitizeKeyword(s, strict=True):
+    """
+    Make string compatible for usage as CKAN keywords:
+    keywords rules are not very clear. It seems at first it did not support anything out of lowercased characters and _-
+    but is seems that now it supports well spaces and uppercased chars, as well as accentuated characters.
+    or -_
+
+    This is an alternative to setting {"clean_tags": true} in the harvesting configuration,which is a little bit more destructive
+    (although maybe quite similar to the strict option)
+    :param s:
+    :return:
+    """
+
+    if not s:
+        return ''
+
+    s = re.sub(r'\'\s+', ' ',   s) # remove duplicate spaces
+    s = s.strip() # remove trailing spaces
+    s = re.sub(u'\'', ' ', s) # Change single quote to space
+    #s = re.sub(r'[\s]', '_', s)
+    if strict:
+        # should ensure compiancy with ckan validators requirements (as announced)
+        #s = unidecode.unidecode(s)  # remove accents and keep to closest possible ascii match
+        s = substitute_ascii_equivalents(s)  # remove accents and keep to closest possible ascii match
+        pattern = u'[^\w\-]' # set a more strict match pattern
+        s = re.sub(pattern, '-', s, re.UNICODE).lower() # all lowercased
+    else:
+        # seems sufficient in most cases
+        pattern = u'[^a-zA-Z0-9_àâäôéèëêïîçùûüÿæœÀÂÄÔÉÈËÊÏÎŸÇÙÛÜÆŒ \-]' # Accept accents
+        s = re.sub(pattern, '-', s, re.UNICODE) # don't lowercase systematically
+    return s
