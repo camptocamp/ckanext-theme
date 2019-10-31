@@ -29,6 +29,10 @@ msgstr "Thématiques"
 msgid "Add Group"
 msgstr "Ajouter une Thématique"
 
+#: ckan/templates/group/index.html:20
+msgid "Search groups..."
+msgstr "Rechercher une thématique..."
+
 #: ckan/templates/group/snippets/helper.html:4
 msgid "What are Groups?"
 msgstr "Que sont les groupes ?"
