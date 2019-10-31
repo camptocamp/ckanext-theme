@@ -3,7 +3,6 @@ from flask import Blueprint
 import geojson
 import requests
 from json import dumps
-from collections import Counter
 
 from ckan.plugins.toolkit import config
 import ckan.plugins.toolkit as toolkit
