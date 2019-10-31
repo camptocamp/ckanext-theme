@@ -236,8 +236,7 @@
             "display_snippet": null,
             "form_snippet": "textarea_hidden.html",
             "field_name": "spatial",
-            "label": "\u00c9tendue g\u00e9ographique (geojson)",
-            "preset": "json_object"
+            "label": "\u00c9tendue g\u00e9ographique (geojson)"
         }
     ],
     "dataset_type": "dataset",
