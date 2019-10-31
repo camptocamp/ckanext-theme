@@ -26,6 +26,27 @@ msgstr ""
 msgid "Groups"
 msgstr "Thématiques"
 
+msgid "Add Group"
+msgstr "Ajouter une Thématique"
+
+#: ckan/templates/group/snippets/helper.html:4
+msgid "What are Groups?"
+msgstr "Que sont les groupes ?"
+
+#: ckan/templates/group/snippets/helper.html:8
+msgid ""
+" You can use CKAN Groups to create and manage collections of datasets. "
+"This could be to catalogue datasets for a particular project or team, or "
+"on a particular theme, or as a very simple way to help people find and "
+"search your own published datasets. "
+msgstr ""
+"Vous pouvez utiliser les thématiques CKAN pour créer et gérer des collections"
+" de jeux de données. Cela peut être pour cataloguer des jeux de données "
+"pour un projet ou une équipe en particulier, ou autour d'un thème "
+"spécifique, ou comme moyen très simple d'aider à parcourir et découvrir "
+"vos jeux de données publiés."
+
+
 #: ckanext/theme/plugin.py:60
 msgid "Mots-clés"
 msgstr ""

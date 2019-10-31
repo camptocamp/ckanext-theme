@@ -426,3 +426,9 @@ fieldset.checkboxes label input[type=checkbox] {
     word-break: normal;
     hyphens: none;
 }
+
+.important-info {
+    font-size: large;
+    font-weight: bold;
+    color: #9f0017;
+}
