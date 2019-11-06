@@ -296,13 +296,19 @@ def _gn_csw_build_inspire_link(harvester_source, iso_values):
             url = u"{}/catalog.search#/metadata/{}".format(base_url.group(1), iso_values.get('guid'))
         #TODO: check if the url is valid and if not try other ways, like for instance the unique-resource-identifier value
         # or try other patterns matching catalogs other than geonetwork
-        if urllib.urlopen(url).getcode() == 200:
-            return url
+        try:
+            if urllib.urlopen(url).getcode() == 200:
+                return url
+        except:
+            pass
 
         # 2. Return the value of unique-resource-identifier if valid
-        url = iso_values.get('unique-resource-identifier')
-        if urllib.urlopen(url).getcode() == 200:
-            return url
+        try:
+            url = iso_values.get('unique-resource-identifier')
+            if urllib.urlopen(url).getcode() == 200:
+                return url
+        except:
+            pass
 
     # else...
     return ''
@@ -494,8 +500,7 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
     for resource in package_dict['resources']:
         _fix_resource(resource)
 
-    # Compute values not present as-is in geonetwork
-    package_dict['inspire_url'] = _gn_csw_build_inspire_link(data_dict['harvest_object'].source, iso_values)
+    # Compute values not present as-is in csw
     package_dict['topic-categories'] = ', '.join(iso_values.get('topic-category'))
     # set a consistent point of contact (name & email match a same entity instead of random-ish)
     poc = _get_poc(iso_values)
@@ -523,9 +528,18 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
     extras_keys_dict['metadata_created'] = {'key': 'metadata_created', 'value': _get_value(extras_keys_dict, 'metadata-date', '')}
     extras_keys_dict['metadata_modified'] = {'key': 'metadata_modified', 'value': _get_value(extras_keys_dict, 'metadata-date', '')}
 
+    # catalog-specific work
+    try:
+        fetchGeonetworkExtras(package_dict, data_dict, iso_values)
+    except:
+        pass # probably not a geonetwork catalog then
+
     # Finally, drop extras as scheming doesn't allow extras FALSE ! No need, just remove the scheming synonyms from extras
     # extras_keys_dict.pop('extras', None)
     package_dict['extras'] = extras_keys_dict.values()
+
+def fetchGeonetworkExtras(package_dict, data_dict, iso_values):
+    package_dict['inspire_url'] = _gn_csw_build_inspire_link(data_dict['harvest_object'].source, iso_values)
 
 def sanitizeKeyword(s, strict=True):
     """
