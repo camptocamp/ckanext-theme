@@ -162,6 +162,10 @@
                 {
                     "label": "Commune",
                     "value": "commune"
+                },
+                {
+                    "label": "Point d’int\u00e9r\u00eat ",
+                    "value": "poi"
                 }
             ],
             "field_name": "granularity",
