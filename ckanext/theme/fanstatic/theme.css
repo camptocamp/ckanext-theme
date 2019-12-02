@@ -258,4 +258,43 @@ body > [role=main] .media-item {
   .media-heading {
     font-size: 14px;
   }
+  /* Search */
+  .toolbar .breadcrumb a {
+    color: black;
+    font-size: 16px;
+  }
+  .module-content {
+    padding: 0;
+  }
+  #field-giant-search {
+    padding: 5px 8px;
+    height: 36px;
+    font-size: 16px;
+  }
+  #field-giant-search ~ .input-group-btn  .btn {
+    padding: 5px 8px;
+  }
+  #dataset-map {
+    display: none;
+  }
+  .context-info .image img {
+    max-height: 200px;
+    height: auto;
+    max-width: 100%;
+    width: auto;
+  }
+  .primary .module-content > h1 {
+    display: none;
+  }
+  .social {
+    display: none;
+  }
+  .additional-info thead {
+    display: none;
+  }
+  .additional-info th,
+  .additional-info td {
+    display: block;
+    width: 100%;
+  }
 }
