@@ -219,3 +219,43 @@ body > [role=main] .media-item {
 .media-item .img-responsive {
    display: inline-block;
 }
+
+@media (max-width: 768px) {
+  /* Home page */
+  .masthead .container nav .nav-pills {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -1px 10px -1px;
+  }
+  .masthead nav ul li {
+    flex: 1 1 50%;
+    margin: 0;
+  }
+  .masthead nav ul li a {
+    border: 1px solid #ddd;
+    margin: 1px;
+  }
+  .homepage .module-search {
+    margin: 0;
+  }
+  .homepage .module-search .module-content .heading {
+    font-size: 16px;
+  }
+  .search-form .search-input.search-giant input {
+    padding: 5px;
+  }
+  .homepage .media-grid {
+    margin: 1em 0 0;
+    padding: 5px 0 0 5px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .homepage .media-item {
+    max-width: none;
+    margin: 0 5px 5px 0px;
+    flex: 1 0 calc(50% - 10px);
+  }
+  .media-heading {
+    font-size: 14px;
+  }
+}
