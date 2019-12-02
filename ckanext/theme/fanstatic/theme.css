@@ -243,6 +243,10 @@ body > [role=main] .media-item {
   }
   .search-form .search-input.search-giant input {
     padding: 5px;
+    border-color: #6a8a14;
+  }
+  .homepage .module-search .module-content {
+    background: #95c11f;
   }
   .homepage .media-grid {
     margin: 1em 0 0;
@@ -257,6 +261,8 @@ body > [role=main] .media-item {
   }
   .media-heading {
     font-size: 14px;
+    letter-spacing: -1px;
+    margin: 0 -15px;
   }
   /* Search */
   .toolbar .breadcrumb a {
