@@ -295,6 +295,22 @@ body > [role=main] .media-item {
   #dataset-map {
     display: none;
   }
+  /* Dataset */
+  .dataset-item {
+    padding: 3em 0 0 0 !important;
+  }
+  .dataset-item-content.image {
+    max-height: 100px;
+    display: block;
+  }
+  .dataset-item-content.text {
+    width: 100%;
+  }
+  .dataset-item-content .dataset-heading {
+    width: calc(100% - 32px);
+    position: absolute;
+    top: 0;
+  }
   .context-info .image img {
     max-height: 200px;
     height: auto;
