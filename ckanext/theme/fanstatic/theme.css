@@ -74,6 +74,7 @@ body > [role=main] .media-item {
 }
 .masthead .nav li a {
   color: #0F4395;
+  font-size: 1.5rem;
 }
 .masthead .nav li.active a,
 .masthead .nav li a:hover {
