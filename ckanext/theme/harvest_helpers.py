@@ -461,7 +461,7 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
         pass
     if harvest_config.get('compliant_tags', True) and not harvest_config.get('clean_tags', False):
         for tag in package_dict['tags']:
-            tag['name'] = sanitizeKeyword(tag['name'], strict=False)
+            tag['name'] = sanitize_keyword(tag['name'], strict=False)
 
     try:
         # try to get the GN uuid as id for the dataset
@@ -514,7 +514,7 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
 
     # catalog-specific work
     try:
-        fetchGeonetworkExtras(package_dict, data_dict, iso_values)
+        fetch_geonetwork_extras(package_dict, data_dict, iso_values)
     except:
         pass # probably not a geonetwork catalog then
 
@@ -523,11 +523,11 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
     package_dict['extras'] = extras_keys_dict.values()
 
 
-def fetchGeonetworkExtras(package_dict, data_dict, iso_values):
+def fetch_geonetwork_extras(package_dict, data_dict, iso_values):
     package_dict['inspire_url'] = _gn_csw_build_inspire_link(data_dict['harvest_object'].source, iso_values)
 
 
-def sanitizeKeyword(s, strict=True):
+def sanitize_keyword(s, strict=True):
     """
     Make string compatible for usage as CKAN keywords:
     keywords rules are not very clear. It seems at first it did not support anything out of lowercased characters and _-
