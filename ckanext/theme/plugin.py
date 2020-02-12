@@ -37,7 +37,7 @@ class ThemePlugin(plugins.SingletonPlugin):
         map.connect('ckanext_theme_organizations_index', '/organization?q=&sort=package_count+desc', action='index')
         return map
 
-    def after_map(selfself, map):
+    def after_map(self, map):
         return map
 
     # Iconfigurable
