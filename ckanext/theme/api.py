@@ -11,6 +11,22 @@ import template_helpers
 
 theme_api = Blueprint('theme_api', __name__)
 
+
+def discriminate_results(response_dict):
+    '''
+    If necessary, add more information to the result so that the user can make unambiguous choices
+    (ex. several communes can have the same name
+    '''
+    communes = (commune for commune in response_dict if commune['level'] == u'fr:commune')
+    for commune in communes:
+        try:
+            postcode = commune['keys'].get('postal')[0]
+            commune['name'] += ' ({})'.format(postcode)
+        except:
+            pass
+    return response_dict
+
+
 @theme_api.route('/theme-api/geoextent/name/autocomplete', endpoint='etalab_autocomplete_geog_entities')
 def etalab_autocomplete_geog_entities():
     '''Autocomplete service, using data.gouv.fr API to get a list of administrative entities'''
@@ -20,6 +36,7 @@ def etalab_autocomplete_geog_entities():
     response = requests.get(API_URI.format(q, limit))
     assert response.status_code == 200
     response_dict = response.json()
+    response_dict = discriminate_results(response_dict)
     resultSet = {
         u'ResultSet': {
             u'Result': response_dict
