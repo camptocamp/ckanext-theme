@@ -47,7 +47,7 @@
             </div>
           {% endblock %}
 
-          <div class="row wrapper{% block wrapper_class %}{% endblock %}{% if self.secondary()|trim == '' or c.action=='resource_read' %} no-nav{% endif %}">
+          <div class="row wrapper{% block wrapper_class %}{% endblock %}{% if self.secondary().striptags().strip().__len__() == 0 or c.action=='resource_read' %} no-nav{% endif %}">
             {#
             The pre_primary block can be used to add content to before the
             rendering of the main content columns of the page.
@@ -89,7 +89,7 @@
                 {% block primary_content %}
                   <article class="module">
                     {% block page_header %}
-                      <header class="module-content page-header">
+                      <header class="module-content page-header hidden-xs">
                         {% if self.content_action() | trim %}
                           <div class="content_action">
                             {% block content_action %}{% endblock %}
