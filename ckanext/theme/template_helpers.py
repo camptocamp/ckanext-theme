@@ -60,8 +60,13 @@ def thematics_list(field):
         :return:
         """
     # create a list of value/label entries to be used in the multiselect field in the dataset form
-    groups = toolkit.get_action('group_list')(data_dict={'all_fields': True})
-    return ({'value': x['name'], 'label': x['display_name']} for x in groups)
+    try:
+        groups = toolkit.get_action('group_list')(data_dict={'all_fields': True})
+        return ({'value': x['name'], 'label': x['display_name']} for x in groups)
+    except:
+        print("Error retrieving groups list")
+        return list()
+
 
 def get_helpers():
     '''Register the functions above as a template helper functions.
