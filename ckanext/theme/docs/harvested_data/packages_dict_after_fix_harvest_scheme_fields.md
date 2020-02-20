@@ -1,4 +1,4 @@
-##package_dict object, after passing through fix_harvest_scheme_fields 
+## package_dict object, after passing through fix_harvest_scheme_fields 
 
 *This document is a complement to [harvesting.md](../../harvesting.md)*
 
