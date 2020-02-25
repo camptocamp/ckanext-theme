@@ -2,6 +2,11 @@ h2 {
     font-size: 21px;
 }
 
+header nav {
+  position: static;
+  z-index: auto;
+}
+
 .wrapper {
     background: none;
     border: 0;
@@ -361,7 +366,6 @@ fieldset.checkboxes label input[type=checkbox] {
     background-color: transparent;
     -webkit-transform: none;
     transform: none;
-    z-index: 1;
     border: 0;
     margin: 0;
 }
