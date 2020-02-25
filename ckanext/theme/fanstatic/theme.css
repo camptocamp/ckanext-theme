@@ -21,24 +21,8 @@ header nav {
   width: 100%;
 }
 
-.dataset-heading {
-    border-bottom: dotted 1px #ddd;
-    padding-bottom: 8px;
-    font-size: 15px;
-}
-
 .dataset-list {
     clear: right;
-}
-
-.dataset-item {
-    border-bottom: none;
-    border-left: 2px solid #0072bc;
-    padding: 10px 10px !important;
-    margin-bottom: 35px;
-    border-radius: 3px;
-    background: #f9f9f9;
-    position: relative;
 }
 
 .dataset-item-content {
@@ -46,12 +30,6 @@ header nav {
     vertical-align: top;
 }
 
-.dataset-item-content .dataset-heading {
-    text-overflow:ellipsis;
-    overflow-x:hidden;
-    white-space:nowrap;
-    width: calc(100% - 50px);
-}
 
 .dataset-item-content.text {
     width: calc(100% - 145px);
@@ -400,7 +378,6 @@ fieldset.checkboxes label input[type=checkbox] {
 }
 
 .media-grid {
-    height: auto !important;
     justify-content: center;
     padding-top: 0;
 }
