@@ -413,3 +413,29 @@ fieldset.checkboxes label input[type=checkbox] {
     font-weight: bold;
     color: #9f0017;
 }
+
+footer {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  h2 {
+    font-size: 16px;
+  }
+  .show-filters {
+    position: absolute;
+    right: 0;
+    margin-top: -3.25em;
+  }
+  .header-home {
+    display: none;
+  }
+  .container .toolbar .breadcrumb a {
+    font-size: 14px;
+  }
+  #field-order-by {
+    padding: 0 3px;
+    height: 25px;
+    font-size: 13px;
+  }
+}
