@@ -13,7 +13,7 @@ informations collectées et notamment alimente les chamsp définis via l'extensi
 Le moissonnage passe donc par les étapes suivantes : 
 1. harvest/spatial récupèrent la liste des enregistrements via des requêtes CSW getRecords
 1. harvest/spatial récupèrent pour chaque enregistrement son contenu CSW, via une commande du type 
-https://www.geo2france.fr/geonetwork/srv/fre/csw-org-geo2france-opendata?OUTPUTFORMAT=application%2Fxml&SERVICE=CSW&OUTPUTSCHEMA=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&REQUEST=GetRecordById&VERSION=2.0.2&ID=urn:isogeo:metadata:uuid:Lensd530bd7e-f1bb-e211-9ab3-00199985cd89&ElementSetName=full
+`https://www.geo2france.fr/geonetwork/srv/fre/csw-org-geo2france-opendata?OUTPUTFORMAT=application%2Fxml&SERVICE=CSW&OUTPUTSCHEMA=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&REQUEST=GetRecordById&VERSION=2.0.2&ID=urn:isogeo:metadata:uuid:Lensd530bd7e-f1bb-e211-9ab3-00199985cd89&ElementSetName=full`
 1. Le document XML est parsé par l'extension `spatial` notamment dans https://github.com/ckan/ckanext-spatial/blob/master/ckanext/spatial/model/harvested_metadata.py
 et produit l'objet suivant [iso_values](docs/harvested_data/iso_values.md)
 1. La métadonnée produite à l'issue de cet traitement est fourni dans l'objet [package_dict](docs/harvested_data/package_dict.md).
