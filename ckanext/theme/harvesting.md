@@ -4,10 +4,10 @@ Le moissonnage des métadonnées est une action complexe. Particulièrement du f
 * harvest est l'extension de base
 * spatial ajoute la dimension géospatiale, avec un support ISO19139 en entrée, via CSW
 * scheming définit la structure des metadonnées dans CKAN. Donc il interagit en imposant aux métadonnées moissonnées 
-d'être conforme au schéma. Ce qui ne marche pas par défaut
+d'être conformes au schéma. Ce qui ne marche pas par défaut
 * theme (cette extension) qui met son grain de sel, via le fichier harvest_helpers.py et en particulier la fonction 
 `fix_harvest_scheme_fields`, pour assurer une compatibilité harvest/spatial/scheming. Elle intervient également sur les 
-informations collectées et notamment alimente les chamsp définis via l'extension scheming.
+informations collectées et notamment alimente les champs définis via l'extension scheming.
 
 ## Moissonnage pas à pas
 Le moissonnage passe donc par les étapes suivantes : 
@@ -16,8 +16,8 @@ Le moissonnage passe donc par les étapes suivantes :
 `https://www.geo2france.fr/geonetwork/srv/fre/csw-org-geo2france-opendata?OUTPUTFORMAT=application%2Fxml&SERVICE=CSW&OUTPUTSCHEMA=http%3A%2F%2Fwww.isotc211.org%2F2005%2Fgmd&REQUEST=GetRecordById&VERSION=2.0.2&ID=urn:isogeo:metadata:uuid:Lensd530bd7e-f1bb-e211-9ab3-00199985cd89&ElementSetName=full`
 1. Le document XML est parsé par l'extension `spatial` notamment dans https://github.com/ckan/ckanext-spatial/blob/master/ckanext/spatial/model/harvested_metadata.py
 et produit l'objet suivant [iso_values](docs/harvested_data/iso_values.md)
-1. La métadonnée produite à l'issue de cet traitement est fourni dans l'objet [package_dict](docs/harvested_data/package_dict.md).
-Cet objet ne contient pas, notamment, de valeurs pour les champs définis via l'extension scheming. Il n'est en fait pas compatible avec l'extension scheming, et en l'état, ne passera pa la validation : scheming attend que ses valeurs soient *à la racine de l'objet package_dict, et non dans les extras*
+1. La métadonnée produite à l'issue de ce traitement est fourni dans l'objet [package_dict](docs/harvested_data/package_dict.md).
+Cet objet ne contient pas, notamment, de valeurs pour les champs définis via l'extension scheming. Il n'est en fait pas compatible avec l'extension scheming, et en l'état, ne passera pas la validation : scheming attend que ses valeurs soient *à la racine de l'objet package_dict, et non dans les extras*
 1. D'où l'importance de passer via la fonction `fix_harvest_scheme_fields`de cette extension : elle corrige la structure des données de sorte que 
 le package passe la validation appliquée par l'extension scheming. Elle établit aussi une correspondance entre
 des valeurs fournies dans iso_values et des champs du schema étendu de données défini via l'extension scheming.
