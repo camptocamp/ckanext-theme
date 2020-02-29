@@ -2,6 +2,11 @@ h2 {
     font-size: 21px;
 }
 
+header nav {
+  position: static;
+  z-index: auto;
+}
+
 .wrapper {
     background: none;
     border: 0;
@@ -16,24 +21,8 @@ h2 {
   width: 100%;
 }
 
-.dataset-heading {
-    border-bottom: dotted 1px #ddd;
-    padding-bottom: 8px;
-    font-size: 15px;
-}
-
 .dataset-list {
     clear: right;
-}
-
-.dataset-item {
-    border-bottom: none;
-    border-left: 2px solid #0072bc;
-    padding: 10px 10px !important;
-    margin-bottom: 35px;
-    border-radius: 3px;
-    background: #f9f9f9;
-    position: relative;
 }
 
 .dataset-item-content {
@@ -41,12 +30,6 @@ h2 {
     vertical-align: top;
 }
 
-.dataset-item-content .dataset-heading {
-    text-overflow:ellipsis;
-    overflow-x:hidden;
-    white-space:nowrap;
-    width: calc(100% - 50px);
-}
 
 .dataset-item-content.text {
     width: calc(100% - 145px);
@@ -361,7 +344,6 @@ fieldset.checkboxes label input[type=checkbox] {
     background-color: transparent;
     -webkit-transform: none;
     transform: none;
-    z-index: 1;
     border: 0;
     margin: 0;
 }
@@ -396,7 +378,6 @@ fieldset.checkboxes label input[type=checkbox] {
 }
 
 .media-grid {
-    height: auto !important;
     justify-content: center;
     padding-top: 0;
 }
@@ -431,4 +412,30 @@ fieldset.checkboxes label input[type=checkbox] {
     font-size: large;
     font-weight: bold;
     color: #9f0017;
+}
+
+footer {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  h2 {
+    font-size: 16px;
+  }
+  .show-filters {
+    position: absolute;
+    right: 0;
+    margin-top: -3.25em;
+  }
+  .header-home {
+    display: none;
+  }
+  .container .toolbar .breadcrumb a {
+    font-size: 14px;
+  }
+  #field-order-by {
+    padding: 0 3px;
+    height: 25px;
+    font-size: 13px;
+  }
 }
