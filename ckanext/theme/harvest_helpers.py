@@ -507,7 +507,8 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
     if poc:
         # get organisation name if available, else individual name
         package_dict['author'] = poc.get('organisation-name', poc.get('individual-name', ''))
-        package_dict['author_email'] = poc.get('contact-info').get('email', '')
+        if type(poc.get('contact-info')) is dict:
+            package_dict['author_email'] = poc.get('contact-info').get('email', '')
 
     package_dict['dataset_modification_date'] = _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'revision')
     package_dict['dataset_publication_date'] = _get_sub(extras_keys_dict, 'dataset-reference-date', 'type', 'value', 'publication')
