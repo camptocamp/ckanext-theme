@@ -129,7 +129,10 @@ class ThemePlugin(plugins.SingletonPlugin):
         log.info('Working on dataset {}'.format(package_dict['name']))
         # fix harvested package to make it compatible with the scheming extension
         # & transform geonetwork metadata to make them available in the schema
-        harvest_helpers.fix_harvest_scheme_fields(package_dict, data_dict)
+        try:
+            harvest_helpers.fix_harvest_scheme_fields(package_dict, data_dict)
+        except Exception as e:
+            log.error('Error during improved harvesting of dataset {}. Raised exception {}'.format(package_dict['name'], e))
         return package_dict
 
     # ITemplateHelper
