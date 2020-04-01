@@ -68,7 +68,17 @@ class ThemePlugin(plugins.SingletonPlugin):
 
     # IPackageController
     def before_index(self, pkg_dict):
-        pkg_dict['datatype'] = loads(pkg_dict.get('datatype', '[]'))
+        # Depending on whether this is a first-time harvest or not, we might get either a list or a serialized json list
+        dt = pkg_dict.get('datatype', list())
+        if isinstance(dt, list):
+            pkg_dict['datatype'] = dt
+        else:
+            # should be serialized json
+            try:
+                pkg_dict['datatype'] = loads(dt)
+            except:
+                # set empty list if everything else fails
+                pkg_dict['datatype'] = list()
         return pkg_dict
 
     # IPackageController
