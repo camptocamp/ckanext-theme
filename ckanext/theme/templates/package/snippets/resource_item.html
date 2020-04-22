@@ -24,14 +24,14 @@
     {% if res.url and h.is_url(res.url) %}
       {% if res.format.lower() == 'wms' %}
           <li>
-            <a href="/mapfishapp/?owsurl={{ res.url }}&owstype=WMS&layername={{ res.name }}" class="resource-url-analytics" target="_blank">
+            <a href="/mapfishapp/?owsurl={{ res.url }}&owstype=WMSLayer&layername={{ res.name }}" class="resource-url-analytics" target="_blank">
                 <i class="fa fa-external-link"></i>
                 {{ _('View resource in map') }}
             </a>
           </li>
         {% elif res.format.lower() == 'wfs' %}
           <li>
-            <a href="/mapfishapp/?owsurl={{ res.url }}&owstype=WFS&layername={{ res.name }}" class="resource-url-analytics" target=_blank>
+            <a href="/mapfishapp/?owsurl={{ res.url }}&owstype=WFSLayer&layername={{ res.name }}" class="resource-url-analytics" target=_blank>
                 <i class="fa fa-external-link"></i>
                 {{ _('View resource in map') }}
             </a>
