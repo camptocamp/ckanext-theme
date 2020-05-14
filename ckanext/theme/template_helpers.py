@@ -68,6 +68,22 @@ def thematics_list(field):
         return list()
 
 
+def thematics():
+    """
+        :return: List of all thematics (groups)
+        """
+    # create a list of value/label entries to be used in the multiselect field in the dataset form
+    try:
+
+        user = toolkit.get_action('get_site_user')({'ignore_auth': True}, {})
+        context = {'user': user['name']}
+        groups = toolkit.get_action('group_list')(context, {'all_fields': True })
+        return groups
+    except:
+        print("Error retrieving groups list")
+        return list()
+
+
 def get_helpers():
     '''Register the functions above as a template helper functions.
 
@@ -79,5 +95,6 @@ def get_helpers():
         'theme_dict_list_or_dict_reduce': dict_list_or_dict_reduce,
         'theme_list_data_formats': list_data_formats,
         'theme_update_frequency_etalab_codelist' : update_frequency_etalab_codelist,
-        'theme_thematics_list' : thematics_list
+        'theme_thematics_list' : thematics_list,
+        'theme_thematics' : thematics
     }
