@@ -475,7 +475,13 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
             package_dict[field] = extras_keys_dict[field]['value']
             extras_keys_dict.pop(field, None)
 
-    #package_dict['id'] = package_dict['name']
+    # the metadata need an id, it is used during the updates to determine if this is an updated metadata or a new one
+    try:
+        # try to get the GN uuid as id for the dataset
+        package_dict['id'] = iso_values['guid']
+    except:
+        package_dict['id'] = package_dict['name']
+
     package_dict['license_id'] = 'other-at'
 
     # Sanitize the tags
