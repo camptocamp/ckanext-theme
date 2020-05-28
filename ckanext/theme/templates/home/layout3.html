@@ -3,151 +3,23 @@
     {% block search %} {% snippet 'home/snippets/search.html' %} {% endblock %}
     <div class="home-grid"></div>
     <ul class="media-grid">
+      {% for thm in h.theme_thematics() %}
       <li class="media-item">
         <img
-          src="{{root_path|default('/ckan')}}/geo2france/groups/amenagement.png"
-          alt="amenagement"
+          src="{{ thm.image_display_url }}"
+          alt="{{ thm.name }}"
           class="media-image img-responsive"
         />
-        <h3 class="media-heading">Aménagement</h3>
+        <h3 class="media-heading">{{ thm.display_name }}</h3>
         <a
-          href="{{root_path|default('/ckan')}}/dataset?groups=amenagement"
-          title="Afficher Aménagement"
+          href="{{ h.url_for('/dataset?groups=' + thm.name.encode('utf8')) }}"
+          title="Afficher {{ thm.display_name }}"
           class="media-view"
         >
-          <span>Afficher Aménagement</span>
+          <span>Afficher {{ thm.display_name }}</span>
         </a>
       </li>
-
-      <li class="media-item">
-        <img
-          src="{{root_path|default('/ckan')}}/geo2france/groups/limites-administratives.png"
-          alt="donnees-reference"
-          class="media-image img-responsive"
-        />
-        <h3 class="media-heading">Données de référence</h3>
-        <a
-          href="{{root_path|default('/ckan')}}/dataset?groups=donnees-reference"
-          title="Afficher Données de référence"
-          class="media-view"
-        >
-          <span>Afficher Données de référence</span>
-        </a>
-      </li>
-
-      <li class="media-item">
-        <img
-          src="{{root_path|default('/ckan')}}/geo2france/groups/economie.png"
-          alt="economie-emploi"
-          class="media-image img-responsive"
-        />
-        <h3 class="media-heading">Économie et emploi</h3>
-        <a
-          href="{{root_path|default('/ckan')}}/dataset?groups=economie-emploi"
-          title="Afficher Économie et emploi"
-          class="media-view"
-        >
-          <span>Afficher Économie et emploi</span>
-        </a>
-      </li>
-
-      <li class="media-item">
-        <img
-          src="{{root_path|default('/ckan')}}/geo2france/groups/formation.png"
-          alt="education-formation"
-          class="media-image img-responsive"
-        />
-        <h3 class="media-heading">Education et formation</h3>
-        <a
-          href="{{root_path|default('/ckan')}}/dataset?groups=education-formation"
-          title="Afficher Education et formation"
-          class="media-view"
-        >
-          <span>Afficher Education et formation</span>
-        </a>
-      </li>
-
-      <li class="media-item">
-        <img
-          src="{{root_path|default('/ckan')}}/geo2france/groups/environnement.png"
-          alt="environnement-risques-sante"
-          class="media-image img-responsive"
-        />
-        <h3 class="media-heading">Environnement, risques et santé</h3>
-        <a
-          href="{{root_path|default('/ckan')}}/dataset?groups=environnement-risques-sante"
-          title="Afficher Environnement, risques et santé"
-          class="media-view"
-        >
-          <span>Afficher Environnement, risques et santé</span>
-        </a>
-      </li>
-
-      <li class="media-item">
-        <img
-          src="{{root_path|default('/ckan')}}/geo2france/groups/administration.png"
-          alt="institutions-partenariats"
-          class="media-image img-responsive"
-        />
-        <h3 class="media-heading">Institutions et partenariats</h3>
-        <a
-          href="{{root_path|default('/ckan')}}/dataset?groups=institutions-partenariats"
-          title="Afficher Institutions et partenariats"
-          class="media-view"
-        >
-          <span>Afficher Institutions et partenariats</span>
-        </a>
-      </li>
-
-      <li class="clearfix js-hide"></li>
-
-      <li class="media-item">
-        <img
-          src="{{root_path|default('/ckan')}}/geo2france/groups/energie.png"
-          alt="reseaux-energies"
-          class="media-image img-responsive"
-        />
-        <h3 class="media-heading">Réseaux et énergies</h3>
-        <a
-          href="{{root_path|default('/ckan')}}/dataset?groups=reseaux-energies"
-          title="Afficher Réseaux et énergies"
-          class="media-view"
-        >
-          <span>Afficher Réseaux et énergies</span>
-        </a>
-      </li>
-
-      <li class="media-item">
-        <img
-          src="{{root_path|default('/ckan')}}/geo2france/groups/mobilite.png"
-          alt="transports-mobilites"
-          class="media-image img-responsive"
-        />
-        <h3 class="media-heading">Transports et mobilités</h3>
-        <a
-          href="{{root_path|default('/ckan')}}/dataset?groups=transports-mobilites"
-          title="Afficher Transports et mobilités"
-          class="media-view"
-        >
-          <span>Afficher Transports et mobilités</span>
-        </a>
-      </li>
-
-      <li class="media-item">
-        <img
-          src="{{root_path|default('/ckan')}}/geo2france/groups/culture.png"
-          alt="culture"
-          class="media-image img-responsive"
-        />
-        <h3 class="media-heading">Vie sociale et culturelle</h3>
-        <a
-          href="{{root_path|default('/ckan')}}/dataset?groups=culture"
-          title="Afficher Vie sociale et culturelle"
-          class="media-view"
-        >
-          <span>Afficher Vie sociale et culturelle</span>
-        </a>
-      </li>
+      {% endfor %}
       <li class="clearfix js-hide"></li>
     </ul>
   </div>
