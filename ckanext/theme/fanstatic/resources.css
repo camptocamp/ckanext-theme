@@ -5,7 +5,7 @@ Taken from https://github.com/ckan/ckanext-geoview/blob/master/ckanext/geoview/p
 }
 .format-label[data-format=wfs],
 .format-label[data-format*=wfs] {
-    background: url("../../../themegis-resources-sprite-icons.png") no-repeat 0 0;
+    background: url("../../../theme/img/gis-resources-sprite-icons.png") no-repeat 0 0;
     background-position: 0px -62px;
 }
 

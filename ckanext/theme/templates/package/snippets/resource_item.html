@@ -1,21 +1,52 @@
 {% ckan_extends %}
-      {% block resource_item_explore_links %}
-      <li>
-        <a href="{{ url }}">
-          {% if res.has_views %}
-            <i class="fa fa-bar-chart-o"></i>
-            {{ _('Preview') }}
-          {% else %}
-            <i class="fa fa-info-circle"></i>
-            {{ _('More information') }}
-          {% endif %}
-        </a>
-      </li>
-      {% if res.url and h.is_url(res.url) %}
-        {% if res.format.lower() == 'wms' %}<li>
+
+{% block resource_item_explore %}
+{% if not url_is_edit %}
+<div class="dropdown btn-group">
+  <a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+    <i class="fa fa-share"></i>
+    {{ _('Explore') }}
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    {% block resource_item_explore_links %}
+    <li>
+      <a href="{{ url }}">
+        {% if not is_activity_archive and res.has_views %}
+        <i class="fa fa-bar-chart-o"></i>
+        {{ _('Preview') }}
+        {% else %}
+        <i class="fa fa-info-circle"></i>
+        {{ _('More information') }}
+        {% endif %}
+      </a>
+    </li>
+    {% if res.url and h.is_url(res.url) %}
+      {% if res.format.lower() == 'wms' %}
+          <li>
             <a href="/mapfishapp/?owsurl={{ res.url }}&owstype=WMSLayer&layername={{ res.name }}" class="resource-url-analytics" target="_blank">
                 <i class="fa fa-external-link"></i>
                 {{ _('View resource in map') }}
+            </a>
+          </li>
+        {% elif res.format.lower() == 'wfs' %}
+          <li>
+            <a href="/mapfishapp/?owsurl={{ res.url }}&owstype=WFSLayer&layername={{ res.name }}" class="resource-url-analytics" target=_blank>
+                <i class="fa fa-external-link"></i>
+                {{ _('View resource in map') }}
+            </a>
+          </li>
+        {% elif res.format.lower() == 'geojson' %}
+          <li>
+            <a href="/mapfishapp/?file={{ res.url }}" class="resource-url-analytics" target="_blank">
+                <i class="fa fa-external-link"></i>
+                {{ _('View resource in map') }}
+            </a>
+          </li>
+          <li>
+            <a href="{{ res.url }}" class="resource-url-analytics" target="_blank">
+              <i class="fa fa-arrow-circle-o-down"></i>
+              {{ _('Download') }}
             </a>
           </li>
         {% else %}
