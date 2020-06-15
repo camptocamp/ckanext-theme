@@ -23,12 +23,9 @@
     padding-left: 20px;
 }
 .dataset-item-content .dataset-heading {
-  position: absolute;
-  top: .5em;
   text-overflow:ellipsis;
   overflow-x:hidden;
   white-space:nowrap;
-  width: calc(100% - 32px);
 }
 /*** Image dataset  ***/
 .dataset-item-content.image {

@@ -31,10 +31,6 @@ header nav {
 }
 
 
-.dataset-item-content.text {
-    width: calc(100% - 145px);
-    padding-left: 20px;
-}
 
 .filters .nav-facet {
     flex-flow: column nowrap;
@@ -83,12 +79,7 @@ header nav {
     white-space: nowrap;
     margin-left: auto;
     margin-right: auto;
-}
-.dataset-item-content.image:before {
-    content: "";
     display: inline-block;
-    height: 100%;
-    vertical-align: middle;
 }
 .dataset-item-content.image img.dataset-thematic {
     /* clip-path: inset(0px 0px 130px 0px); */
