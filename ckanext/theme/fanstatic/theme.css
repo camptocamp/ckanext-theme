@@ -49,8 +49,8 @@ header nav {
 
 
 .secondary .nav-facet .nav-item a:hover {
-    background-color: #0072bc26;
-    color: #0072bc;
+    background-color: #45a2de26;
+    color: #45a2de;
     font-weight: bold;
     font-style: italic;
 }
@@ -98,14 +98,14 @@ header nav {
     background-color: #FF6660;
 }
 .label[data-format=donnees-geographiques] {
-    background-color: #0072bc;
+    background-color: #45a2de;
 }
 .label[data-format=donnees-intelligentes] {
     background-color: #FFBA13;
 }
 
 .dataset-format a {
-    background: #0072bc !important;
+    background: #45a2de !important;
 }
 
 
@@ -198,7 +198,7 @@ header nav {
     font-size: 1.2rem;
 }
 .btn:hover, .btn:focus {
-    background-color: #0072bc;
+    background-color: #45a2de;
     color: white;
     border: 0;
 }
@@ -213,7 +213,7 @@ header nav {
 }
 
 .module-heading .action:hover {
-    color: #0072bc;
+    color: #45a2de;
 }
 .module-narrow .nav-item a {
     display: flex;
@@ -224,7 +224,7 @@ header nav {
     /*! float: left; */
 }
 .filters .badge {
-    background-color: #0072bc;
+    background-color: #45a2de;
     font-style: normal;
     line-height: 1em;
     font-size: 1em;
