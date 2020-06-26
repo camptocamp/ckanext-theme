@@ -362,10 +362,22 @@ fieldset.checkboxes label input[type=checkbox] {
     padding: 10px 15px;
 }
 
+.resource-item {
+  display: flex;
+  flex-direction: row;
+}
+@media (max-width: 768px) {
+  .resource-item {
+    flex-direction: column;
+  }
+}
 .resource-item .heading {
     display: flex;
     align-items: center;
     height: 35px;
+}
+.resource-title {
+  flex: 1;
 }
 
 .media-grid {
