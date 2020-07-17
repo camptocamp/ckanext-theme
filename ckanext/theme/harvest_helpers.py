@@ -463,11 +463,11 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
         for tag in package_dict['tags']:
             tag['name'] = sanitize_keyword(tag['name'], strict=False)
 
-    try:
-        # try to get the GN uuid as id for the dataset
-        package_dict['id'] = iso_values['guid']
-    except:
-        pass
+    # try:
+    #     # try to get the GN uuid as id for the dataset
+    #     package_dict['id'] = iso_values['guid']
+    # except:
+    #     pass
     package_dict['description'] = package_dict['notes']
     package_dict['thumbnail'] = _get_value(extras_keys_dict, 'graphic-preview-file', '')
     frequency = _get_value(extras_keys_dict, 'frequency-of-update', 'unknown')
@@ -488,7 +488,7 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
     # get publisher poc, and if not available, fall-back to global poc
     try:
         publisher_poc = _get_poc(iso_values, "publisher")
-        package_dict['publisher'] = poc.get('organisation-name', poc.get('individual-name', ''))
+        package_dict['publisher'] = publisher_poc.get('organisation-name', publisher_poc.get('individual-name', ''))
     except:
         package_dict['publisher'] = package_dict.get('contactPoint','')
 
