@@ -1,78 +1,68 @@
-{% ckan_extends %}
+{% set url_action = 'resource_edit' if url_is_edit and can_edit else 'resource_read' %}
+{% set url = h.url_for(controller='package', action=url_action, id=pkg.name, resource_id=res.id) %}
 
-{% block resource_item_explore %}
-{% if not url_is_edit %}
-<div class="dropdown btn-group">
-  <a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-    <i class="fa fa-share"></i>
-    {{ _('Explore') }}
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu">
-    {% block resource_item_explore_links %}
-    <li>
-      <a href="{{ url }}">
-        {% if not is_activity_archive and res.has_views %}
-        <i class="fa fa-bar-chart-o"></i>
-        {{ _('Preview') }}
-        {% else %}
-        <i class="fa fa-info-circle"></i>
-        {{ _('More information') }}
-        {% endif %}
+<li class="resource-item" data-id="{{ res.id }}">
+  {% block resource_item_title %}
+    <div class="resource-title">
+      <a class="heading" href="{{ url }}" title="{{ res.name or res.description }}">
+        {{ h.resource_display_name(res) | truncate(50) }}<span class="format-label" property="dc:format" data-format="{{ res.format.lower() or 'data' }}">{{ h.get_translated(res, 'format') }}</span>
+        {{ h.popular('views', res.tracking_summary.total, min=10) }}
       </a>
-    </li>
-    {% if res.url and h.is_url(res.url) %}
-      {% if res.format.lower() == 'wms' %}
-          <li>
-            <a href="/mapfishapp/?owsurl={{ res.url }}&owstype=WMSLayer&layername={{ res.name }}" class="resource-url-analytics" target="_blank">
-                <i class="fa fa-external-link"></i>
-                {{ _('View resource in map') }}
-            </a>
-          </li>
-        {% elif res.format.lower() == 'wfs' %}
-          <li>
-            <a href="/mapfishapp/?owsurl={{ res.url }}&owstype=WFSLayer&layername={{ res.name }}" class="resource-url-analytics" target=_blank>
-                <i class="fa fa-external-link"></i>
-                {{ _('View resource in map') }}
-            </a>
-          </li>
-        {% elif res.format.lower() == 'geojson' %}
-          <li>
-            <a href="/mapfishapp/?file={{ res.url }}" class="resource-url-analytics" target="_blank">
-                <i class="fa fa-external-link"></i>
-                {{ _('View resource in map') }}
-            </a>
-          </li>
-          <li>
-            <a href="{{ res.url }}" class="resource-url-analytics" target="_blank">
-              <i class="fa fa-arrow-circle-o-down"></i>
-              {{ _('Download') }}
-            </a>
-          </li>
-        {% else %}
-          <li>
-            <a href="{{ res.url }}" class="resource-url-analytics" target="_blank">
-              {% if res.has_views or res.url_type == 'upload' %}
-                <i class="fa fa-arrow-circle-o-down"></i>
-                {{ _('Download') }}
-              {% else %}
-                <i class="fa fa-external-link"></i>
-                {{ _('Go to resource') }}
-              {% endif %}
-            </a>
-          </li>
-        {% endif %}
-      {% endif %}
-      {% if can_edit %}
-      <li>
-        <a href="{{ h.url_for(controller='package', action='resource_edit', id=pkg.name, resource_id=res.id) }}">
-          <i class="fa fa-pencil-square-o"></i>
-          {{ _('Edit') }}
-        </a>
-      </li>
-      {% endif %}
+      {% block resource_item_description %}
+        <p class="description">
+          {% if res.description %}
+            {{ h.markdown_extract(h.get_translated(res, 'description'), extract_length=80) }}
+          {% endif %}
+        </p>
       {% endblock %}
-  </ul>
-</div>
-{% endif %}
-{% endblock %}
+    </div>
+  {% endblock %}
+  {% block resource_item_explore %}
+  {% if not url_is_edit %}
+    <div class="resource-item-actions">
+      {% block resource_item_explore_links %}
+        <a href="{{ url }}" class="btn btn-primary" title="{{ _('More information') }}">
+          {% if not is_activity_archive and res.has_views %}
+            <i class="fa fa-fw fa-bar-chart-o" title="{{ _('Preview') }}"></i>
+          {% else %}
+            <i class="fa fa-fw fa-eye"></i>
+          {% endif %}
+        </a>
+      {% if res.url and h.is_url(res.url) %}
+        {% if res.format.lower() == 'wms' %}
+            <a href="/mapfishapp/?owsurl={{ res.url }}&owstype=WMSLayer&layername={{ res.name }}" class="resource-url-analytics btn btn-primary" target="_blank" title="{{ _('View resource in map') }}">
+              <i class="fa fa-fw fa-external-link"></i>
+            </a>
+          {% elif res.format.lower() == 'wfs' %}
+            <a href="/mapfishapp/?owsurl={{ res.url }}&owstype=WFSLayer&layername={{ res.name }}" class="resource-url-analytics btn btn-primary" target=_blank title="{{ _('View resource in map') }}">
+              <i class="fa fa-fw fa-external-link"></i>
+            </a>
+          {% elif res.format.lower() == 'geojson' %}
+            <a href="/mapfishapp/?file={{ res.url }}" class="resource-url-analytics btn btn-primary" target="_blank" title="{{ _('View resource in map') }}">
+              <i class="fa fa-fw fa-external-link"></i>
+            </a>
+            <a href="{{ res.url }}" class="resource-url-analytics btn btn-primary" target="_blank" title="{{ _('Download') }}">
+              <i class="fa fa-fw fa-arrow-circle-o-down"></i>
+            </a>
+          {% else %}
+            {% if res.has_views or res.url_type == 'upload' %}
+              <a href="{{ res.url }}" class="resource-url-analytics btn btn-primary" target="_blank" title="{{ _('Download') }}">
+                <i class="fa fa-fw fa-arrow-circle-o-down"></i>
+              </a>
+            {% else %}
+              <a href="{{ res.url }}" class="resource-url-analytics btn btn-primary" target="_blank" title="{{ _('Go to resource') }}">
+                <i class="fa fa-fw fa-external-link"></i>
+              </a>
+            {% endif %}
+          {% endif %}
+        {% endif %}
+        {% if can_edit %}
+          <a href="{{ h.url_for(controller='package', action='resource_edit', id=pkg.name, resource_id=res.id) }}" class="btn btn-primary" title="{{ _('Edit') }}">
+            <i class="fa fa-fw fa-pencil-square-o"></i>
+          </a>
+        {% endif %}
+        {% endblock %}
+    </div>
+  {% endif %}
+  {% endblock %}
+</li>
