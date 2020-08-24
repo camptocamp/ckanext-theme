@@ -140,3 +140,6 @@ msgstr "Semestrielle"
 
 msgid "annual"
 msgstr "Annuelle"
+
+msgid "View resource in map"
+msgstr "Afficher sur la carte"
