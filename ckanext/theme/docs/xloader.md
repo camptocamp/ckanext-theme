@@ -1,6 +1,9 @@
 # xloader : charger des données dans le datastore
 
 Doc de référence xloader : https://github.com/ckan/ckanext-xloader
+Voir aussi : 
+ * la doc de référence du datastore : https://docs.ckan.org/en/2.8/maintaining/datastore.html
+ * la doc complémentaire [datastore](datastore.md)
 
 ## Types de fichiers pris en charge
 xloader ne prend en charge que les fichiers tabulaires :   

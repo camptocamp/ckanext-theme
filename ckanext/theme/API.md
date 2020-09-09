@@ -61,5 +61,5 @@ Documentation officielle :
  * xloader : https://github.com/ckan/ckanext-xloader
  
 Nous proposons ici un complément de documentation : 
- * [datastore](docs/datastore/datastore.md)
+ * [datastore](docs/datastore.md)
  * [xloader](docs/xloader.md)
