@@ -253,3 +253,5 @@ Pour déclarer *a posteriori* les bons types de données, vous pouvez appliquer 
 }
 ```
 
+Si la donnée a été chargée via l'interface web, il faut rajouter `"force": "True"` (les données sont marquées comme 
+'read-only').
