@@ -45,13 +45,13 @@
               <i class="fa fa-fw fa-arrow-circle-o-down"></i>
             </a>
           {% else %}
-            {% if res.has_views or res.url_type == 'upload' %}
+            {% if res.has_views or res.data_type == 'file' %}
               <a href="{{ res.url }}" class="resource-url-analytics btn btn-primary" target="_blank" title="{{ _('Download') }}">
                 <i class="fa fa-fw fa-arrow-circle-o-down"></i>
               </a>
             {% else %}
               <a href="{{ res.url }}" class="resource-url-analytics btn btn-primary" target="_blank" title="{{ _('Go to resource') }}">
-                <i class="fa fa-fw fa-external-link"></i>
+                <i class="fa fa-fw fa-arrow-circle-o-down"></i>
               </a>
             {% endif %}
           {% endif %}
