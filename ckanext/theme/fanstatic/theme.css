@@ -421,6 +421,10 @@ fieldset.checkboxes label input[type=checkbox] {
     color: #9f0017;
 }
 
+.breadcrumb::before {
+    background: none;
+}
+
 footer {
   text-align: center;
 }
@@ -440,6 +444,7 @@ footer {
   .container .toolbar .breadcrumb a {
     font-size: 14px;
   }
+
   #field-order-by {
     padding: 0 3px;
     height: 25px;

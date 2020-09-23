@@ -21,40 +21,25 @@
   {% if not url_is_edit %}
     <div class="resource-item-actions">
       {% block resource_item_explore_links %}
-        <a href="{{ url }}" class="btn btn-primary" title="{{ _('More information') }}">
-          {% if not is_activity_archive and res.has_views %}
-            <i class="fa fa-fw fa-bar-chart-o" title="{{ _('Preview') }}"></i>
-          {% else %}
-            <i class="fa fa-fw fa-eye"></i>
-          {% endif %}
-        </a>
-      {% if res.url and h.is_url(res.url) %}
-        {% if res.format.lower() == 'wms' %}
-            <a href="/mapfishapp/?owsurl={{ res.url }}&owstype=WMSLayer&layername={{ res.name }}" class="resource-url-analytics btn btn-primary" target="_blank" title="{{ _('View resource in map') }}">
-              <i class="fa fa-fw fa-external-link"></i>
-            </a>
-          {% elif res.format.lower() == 'wfs' %}
-            <a href="/mapfishapp/?owsurl={{ res.url }}&owstype=WFSLayer&layername={{ res.name }}" class="resource-url-analytics btn btn-primary" target=_blank title="{{ _('View resource in map') }}">
-              <i class="fa fa-fw fa-external-link"></i>
-            </a>
-          {% elif res.format.lower() == 'geojson' %}
-            <a href="/mapfishapp/?file={{ res.url }}" class="resource-url-analytics btn btn-primary" target="_blank" title="{{ _('View resource in map') }}">
-              <i class="fa fa-fw fa-external-link"></i>
-            </a>
-            <a href="{{ res.url }}" class="resource-url-analytics btn btn-primary" target="_blank" title="{{ _('Download') }}">
-              <i class="fa fa-fw fa-arrow-circle-o-down"></i>
-            </a>
-          {% else %}
-            {% if res.has_views or res.data_type == 'file' %}
-              <a href="{{ res.url }}" class="resource-url-analytics btn btn-primary" target="_blank" title="{{ _('Download') }}">
-                <i class="fa fa-fw fa-arrow-circle-o-down"></i>
-              </a>
+         <a href="{{ url }}" class="btn btn-primary" title="{{ _('More information') }}">
+            {% if not is_activity_archive and res.has_views %}
+              {% if h.theme_is_geo_service(res) %}
+                <i class="fa fa-fw fa-map-marker" title="{{ _('Preview') }}"></i>
+              {% else %}
+                <i class="fa fa-fw fa-bar-chart-o" title="{{ _('Preview') }}"></i>
+              {% endif %}
             {% else %}
-              <a href="{{ res.url }}" class="resource-url-analytics btn btn-primary" target="_blank" title="{{ _('Go to resource') }}">
-                <i class="fa fa-fw fa-arrow-circle-o-down"></i>
-              </a>
+              <i class="fa fa-fw fa-info-circle"></i>
             {% endif %}
-          {% endif %}
+         </a>
+        {% if res.data_type == 'file' or res.data_type == 'upload' %}
+          <a href="{{ res.url }}" class="resource-url-analytics btn btn-primary" target="_blank" title="{{ _('Download') }}">
+            <i class="fa fa-fw fa-arrow-circle-o-down"></i>
+          </a>
+        {% elif not h.theme_is_geo_service(res) %}
+          <a href="{{ res.url }}" class="resource-url-analytics btn btn-primary" target="_blank" title="{{ _('Go to resource') }}">
+            <i class="fa fa-fw fa-external-link"></i>
+          </a>
         {% endif %}
         {% if can_edit %}
           <a href="{{ h.url_for(controller='package', action='resource_edit', id=pkg.name, resource_id=res.id) }}" class="btn btn-primary" title="{{ _('Edit') }}">

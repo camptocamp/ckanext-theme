@@ -414,12 +414,34 @@ def _guess_resource_datatype(resource, default='other'):
 
 
 def _guess_resource_format(resource):
-    for f in protocol_format_correspondance:
-        if resource['resource_locator_protocol'].startswith(f[0]):
-            return f[1]
-    if resource['url'].endswith('geojson'):
-        return 'application/geojson'
-    return ''
+    """
+    Make format compatible with ckan views (e.g. application/json is not supported, should be `json`)
+    :param resource:
+    :return: string: format as supported by CKAN, i.e. json, pdf, csv, wms, etc
+    """
+    format = resource.get('format', '') or ''
+
+    # Try to get it from resource_locator_protocol string
+    if not format:
+        for f in protocol_format_correspondance:
+            if resource['resource_locator_protocol'].startswith(f[0]):
+                format = f[1]
+
+    # Try to get it from resource_locator_protocol string
+    if not format:
+        resource_url_lower = resource['url'].lower()
+        if resource_url_lower.endswith('csv') or 'ext=csv' in resource_url_lower:
+            format = 'csv'
+        elif resource_url_lower.endswith('geojson') or 'ext=geojson' in resource_url_lower:
+            format = 'geojson'
+        elif resource_url_lower.endswith('json') or 'ext=json' in resource_url_lower:
+            format = 'json'
+        elif resource_url_lower.endswith('pdf') or 'ext=pdf' in resource_url_lower:
+            format = 'pdf'
+
+    # remove trailing 'application/' MIME expression in case it is present
+    format = format.lower().replace('application/', '')
+    return format
 
 
 def _fix_resource(resource):
@@ -430,8 +452,13 @@ def _fix_resource(resource):
     :param resource:
     :return:
     """
-    if 'format' not in resource or not resource['format']:
-        resource['format'] = _guess_resource_format(resource)
+    resource['format'] = _guess_resource_format(resource)
+
+    # fix resource name
+    res_name = resource.get('name', '')
+    if not res_name or res_name == 'Unnamed resource':
+        resource['name'] = resource.get('description', '')
+
     if 'data_type' not in resource or resource['data_type'] == '':
         resource['data_type'] = _guess_resource_datatype(resource)
     if 'description' not in resource or resource['description'] == '':
