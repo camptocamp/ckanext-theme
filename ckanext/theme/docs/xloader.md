@@ -32,6 +32,9 @@ Name,Position
 Les fichiers supportés sont chargés dans le datastore à la création de la ressource. Vous pouvez la recharger via 
 l'onglet `Datastore`. Si le résultat du chargement ne s'affiche pas, rechargez la page.
 
+_**Note**_ : le chargement échouera avec une erreur 404 si la donnée n'est pas marquée en accès public. En cas d'accès 
+privé, xloader semble incapable de récupérer le contenu du fichier.
+
 ### Changer le type des champs 
 Par défaut, tous les champs sont considérés comme des champs texte. On peut changer ultérieurement le type des champs 
 (numérique, date) : 
