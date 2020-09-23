@@ -68,6 +68,32 @@ def thematics_list(field):
         return list()
 
 
+def ows_to_geoview_url(resource):
+    """
+    Tries to produce a suitable URL pattern as used by geoview plugin, from more common OWS URL
+    see https://github.com/ckan/ckanext-geoview#openlayers-viewer
+    :param url:
+    :return: string [url]#[layername]
+    """
+    url = resource.get('url', '')
+    # Append layername if it seems suitable
+
+    format = resource.get('format', '') or ''
+    name_might_be_layername = resource['name'] and ' ' not in resource['name']
+    if url \
+            and name_might_be_layername \
+            and format.lower() in ['wms', 'wfs']:
+        url = url + '#' + resource['name']
+    return url
+
+
+def is_geo_service(resource):
+    f = resource.get('format', '') or ''
+    if f.lower() in ['wms', 'wfs', 'wcs']:
+        return True
+    return False
+
+
 def get_helpers():
     '''Register the functions above as a template helper functions.
 
@@ -79,5 +105,7 @@ def get_helpers():
         'theme_dict_list_or_dict_reduce': dict_list_or_dict_reduce,
         'theme_list_data_formats': list_data_formats,
         'theme_update_frequency_etalab_codelist' : update_frequency_etalab_codelist,
-        'theme_thematics_list' : thematics_list
+        'theme_thematics_list' : thematics_list,
+        'theme_ows_to_geoview_url' : ows_to_geoview_url,
+        'theme_is_geo_service': is_geo_service
     }
