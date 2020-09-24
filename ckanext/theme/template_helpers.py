@@ -89,7 +89,7 @@ def ows_to_geoview_url(resource):
 
 def is_geo_service(resource):
     f = resource.get('format', '') or ''
-    if f.lower() in ['wms', 'wfs', 'wcs']:
+    if f.lower() in ['wms', 'wfs', 'wcs', 'geojson']:
         return True
     return False
 
