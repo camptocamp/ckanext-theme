@@ -319,6 +319,10 @@ h1 {
     clear: both;
 }
 
+aside .resources {
+    display:none;
+}
+
 .resources .nav {
     flex-flow: column;
 }
