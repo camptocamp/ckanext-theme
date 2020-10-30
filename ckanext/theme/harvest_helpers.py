@@ -263,7 +263,6 @@ def _gn_csw_build_inspire_link(harvester_source, iso_values):
         #TODO: check if the url is valid and if not try other ways, like for instance the unique-resource-identifier value
         # or try other patterns matching catalogs other than geonetwork
         try:
-            return url
             if urllib.urlopen(url).getcode() == 200:
                 return url
         except:
@@ -273,7 +272,6 @@ def _gn_csw_build_inspire_link(harvester_source, iso_values):
         try:
             if urllib.urlopen(url).getcode() == 200:
                 url = iso_values.get('unique-resource-identifier')
-                return url
                 if urllib.urlopen(url).getcode() == 200:
                     return url
         except:
@@ -387,12 +385,34 @@ def _guess_resource_datatype(resource, default='other'):
 
 
 def _guess_resource_format(resource):
-    for f in protocol_format_correspondance:
-        if resource['resource_locator_protocol'].startswith(f[0]):
-            return f[1]
-    if resource['url'].endswith('geojson'):
-        return 'application/geojson'
-    return ''
+    """
+    Make format compatible with ckan views (e.g. application/json is not supported, should be `json`)
+    :param resource:
+    :return: string: format as supported by CKAN, i.e. json, pdf, csv, wms, etc
+    """
+    format = resource.get('format', '') or ''
+
+    # Try to get it from resource_locator_protocol string
+    if not format:
+        for f in protocol_format_correspondance:
+            if resource['resource_locator_protocol'].startswith(f[0]):
+                format = f[1]
+
+    # Try to get it from resource_locator_protocol string
+    if not format:
+        resource_url_lower = resource['url'].lower()
+        if resource_url_lower.endswith('csv') or 'ext=csv' in resource_url_lower:
+            format = 'csv'
+        elif resource_url_lower.endswith('geojson') or 'ext=geojson' in resource_url_lower:
+            format = 'geojson'
+        elif resource_url_lower.endswith('json') or 'ext=json' in resource_url_lower:
+            format = 'json'
+        elif resource_url_lower.endswith('pdf') or 'ext=pdf' in resource_url_lower:
+            format = 'pdf'
+
+    # remove trailing 'application/' MIME expression in case it is present
+    format = format.lower().replace('application/', '')
+    return format
 
 
 def _fix_resource(resource):
@@ -403,8 +423,13 @@ def _fix_resource(resource):
     :param resource:
     :return:
     """
-    if 'format' not in resource or not resource['format']:
-        resource['format'] = _guess_resource_format(resource)
+    resource['format'] = _guess_resource_format(resource)
+
+    # fix resource name
+    res_name = resource.get('name', '')
+    if not res_name or res_name == 'Unnamed resource':
+        resource['name'] = resource.get('description', '')
+
     if 'data_type' not in resource or resource['data_type'] == '':
         resource['data_type'] = _guess_resource_datatype(resource)
     if 'description' not in resource or resource['description'] == '':
@@ -463,11 +488,6 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
         for tag in package_dict['tags']:
             tag['name'] = sanitize_keyword(tag['name'], strict=False)
 
-    # try:
-    #     # try to get the GN uuid as id for the dataset
-    #     package_dict['id'] = iso_values['guid']
-    # except:
-    #     pass
     package_dict['description'] = package_dict['notes']
     package_dict['thumbnail'] = _get_value(extras_keys_dict, 'graphic-preview-file', '')
     frequency = _get_value(extras_keys_dict, 'frequency-of-update', 'unknown')
