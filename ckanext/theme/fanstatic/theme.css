@@ -122,6 +122,24 @@ body > [role=main] .media-item {
     padding-left: 0;
 }
 
+
+.resource-item {
+  display: flex;
+  flex-direction: row;
+}
+@media (max-width: 768px) {
+  .resource-item {
+    flex-direction: column;
+  }
+}
+.resource-item .heading {
+    display: flex;
+    align-items: center;
+    height: 35px;
+}
+.resource-title {
+  flex: 1;
+}
 /*** Image dataset  ***/
 .dataset-item-content.image {
     height: 140px;
@@ -172,6 +190,28 @@ body > [role=main] .media-item {
   border-bottom: 2px solid rgb(15, 67, 149);
 }
 
+
+.btn-primary {
+    color: white;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+.btn:hover, .btn:focus {
+    background-color: #449d44;
+    border-color: #398439;
+}
+
+.resource-list .btn:after {
+    display: none;
+}
+
+.resource-list .btn-xs {
+    padding: 1px 5px;
+    text-transform: none;
+    font-weight: normal;
+    font-size: 85%;
+}
 
 /*/*** Tag tracking_summary - Ressources ***/*/
 /*.label.label-tracking {*/
