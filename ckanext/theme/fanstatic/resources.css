@@ -57,3 +57,14 @@ Taken from https://github.com/ckan/ckanext-geoview/blob/master/ckanext/geoview/p
 .label[data-format=arcgis_rest] {
     background-color: #5c3ee0;
 }
+
+/* Override geoview styles */
+#data-preview .ol-viewport .layer-switcher .layer-list .panel {
+    height: 300px;
+    overflow: scroll;
+    background-color: rgba(40,40,40, 0.8);
+}
+.ol-viewport .layer-switcher .header,
+.ol-viewport .layer-switcher .header .baseLayerSelector select {
+    background-color: rgba(40,40,40, 0.8);
+}
