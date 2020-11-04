@@ -53,26 +53,11 @@ def update_frequency_etalab_codelist(field):
     return ({ 'value': x['eta_code'], 'label': x['label_fr'] } for x in update_frequencies)
 
 
-def thematics_list(field):
-    """
-        Provides a choices list of thematics (groups) values
-        Used in scheming config ckan_dataset.json.
-        :return:
-        """
-    # create a list of value/label entries to be used in the multiselect field in the dataset form
-    try:
-        groups = toolkit.get_action('group_list')(data_dict={'all_fields': True})
-        return ({'value': x['name'], 'label': x['display_name']} for x in groups)
-    except:
-        print("Error retrieving groups list")
-        return list()
-
-
 def thematics():
     """
         :return: List of all thematics (groups)
         """
-    # create a list of value/label entries to be used in the multiselect field in the dataset form
+    # create a list of groups (thematics)
     try:
 
         user = toolkit.get_action('get_site_user')({'ignore_auth': True}, {})
@@ -82,6 +67,17 @@ def thematics():
     except:
         print("Error retrieving groups list")
         return list()
+
+
+def thematics_list_kv(field):
+    """
+        Provides a choices list of thematics (groups) values
+        Used in scheming config ckan_dataset.json.
+        :return:
+        """
+    # create a list of value/label entries to be used in the multiselect field in the dataset form
+    groups = thematics()
+    return ({'value': x['name'], 'label': x['display_name']} for x in groups)
 
 
 def ows_to_geoview_url(resource):
@@ -121,7 +117,7 @@ def get_helpers():
         'theme_dict_list_or_dict_reduce': dict_list_or_dict_reduce,
         'theme_list_data_formats': list_data_formats,
         'theme_update_frequency_etalab_codelist' : update_frequency_etalab_codelist,
-        'theme_thematics_list' : thematics_list,
+        'theme_thematics_list_kv' : thematics_list_kv,
         'theme_thematics' : thematics,
         'theme_ows_to_geoview_url': ows_to_geoview_url,
         'theme_is_geo_service': is_geo_service
