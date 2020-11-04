@@ -41,7 +41,7 @@
             "label": "Thématiques",
             "help_text": "Choisissez une ou plusieurs thématiques en maintenant la touche CTRL enfoncée",
             "preset": "multiple_select",
-            "choices_helper": "theme_thematics_list",
+            "choices_helper": "theme_thematics_list_kv",
             "select_size" : 12
         },
         {
