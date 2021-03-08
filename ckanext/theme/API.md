@@ -29,7 +29,7 @@ Les thématiques sont un cas un peu particulier. Elles utilisent les _groupes CK
 Cependant, on ne les définira pas via le champ `groups`, qui renverrait une erreur _Forbidden_. On les définira via le 
 champ `themes` défini dans  [ckan_dataset.json](scheming/ckan_dataset_json).
 
-Un exemple fontionnel est fourni dans le fichier 
+Un exemple fonctionnel est fourni dans le fichier
 [create_package_example.py](scripts/snippets/api/create_package_example.py)
 
 ## Codelists

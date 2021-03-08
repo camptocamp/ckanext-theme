@@ -421,19 +421,20 @@ def _fix_resource(resource):
     This fixes the missing fields, trying to fill them with relevant information when possible.
     The fixes are applied in-place in the resource object
     :param resource:
-    :return:
+    :return: boolean: True if resource is considered valid (if there is a name or a description that can stand as a name)
     """
     resource['format'] = _guess_resource_format(resource)
 
     # fix resource name
     res_name = resource.get('name', '')
-    if not res_name or res_name == 'Unnamed resource':
-        resource['name'] = resource.get('description', '')
-
-    if 'data_type' not in resource or resource['data_type'] == '':
-        resource['data_type'] = _guess_resource_datatype(resource)
+    is_valid = ( res_name and res_name != 'Unnamed resource') or resource.get('description') != ''
     if 'description' not in resource or resource['description'] == '':
         resource['description'] = u'Non renseigné'
+    if not res_name or res_name == 'Unnamed resource':
+        resource['name'] = resource.get('description')
+    if 'data_type' not in resource or resource['data_type'] == '':
+        resource['data_type'] = _guess_resource_datatype(resource)
+    return is_valid
 
 
 def fix_harvest_scheme_fields(package_dict, data_dict):
@@ -493,7 +494,9 @@ def fix_harvest_scheme_fields(package_dict, data_dict):
     frequency = _get_value(extras_keys_dict, 'frequency-of-update', 'unknown')
     package_dict['accrualPeriodicity'] = _update_frequency_iso_to_eta(frequency)
     for resource in package_dict['resources']:
-        _fix_resource(resource)
+        valid = _fix_resource(resource)
+        if not valid:
+            package_dict['resources'].remove(resource)
 
     # Compute values not present as-is in csw
     package_dict['hyperlink'] = _gn_csw_build_inspire_link(data_dict['harvest_object'].source, iso_values)
